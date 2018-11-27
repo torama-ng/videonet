@@ -1,0 +1,28 @@
+{
+  "requires": true,
+  "lockfileVersion": 1,
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "bootstrap": "^4.1.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4"
+  },
+  "name": "videonet",
+  "description": "Internal Educational Video Portal",
+  "version": "1.0.0",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/torama-ng/videonet.git"
+  },
+  "author": "Team at Torama Technology Hub",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/torama-ng/videonet/issues"
+  },
+  "homepage": "https://github.com/torama-ng/videonet#readme"
+}
