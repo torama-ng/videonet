@@ -2,15 +2,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const fs = require('fs');
-const dirwalk = require('./walk.js');
+const walk = require('./walk.js');
 
 // test dirwalk
 const mydir = __dirname + '/videos';
-dirwalk(mydir, function(err, results) {
-    if (err) throw err;
-    console.log(results);
-  });
+var videoFiles = [];
 
+myFiles = walk.walkSync(mydir);
+console.log(myFiles[0])
 const app = express();
 const port = process.env.PORT || 3000;
 
