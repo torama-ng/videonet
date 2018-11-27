@@ -4,3 +4,10 @@ LESSON 0:
 2. The videos director will contain subfolders such as node, express, angular, php, python, javascript, odoo, ejs, reactjs, mongodb
 3. In each of those folders will contain useful video files in mp4.
 4. The app will display them for use using a mobile-friendly bootstrap library
+
+INSTALL
+npm install express --save
+npm install nodemon -g
+npm install ejs --save
+nodemon server.js
+http://localhost:3000
