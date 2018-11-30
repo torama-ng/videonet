@@ -11,6 +11,7 @@ var usersRouter = require('./routes/users');
 var videosRouter = require('./routes/videos');
 var odooRouter = require('./routes/odoo');
 var pythonRouter = require('./routes/python');
+var javaRouter = require('./routes/java');
 
 var app = express();
 
@@ -32,6 +33,7 @@ app.use('/users', usersRouter);
 app.use('/videos', videosRouter);
 app.use('/odoo', odooRouter);
 app.use('/python', pythonRouter);
+app.use('/java', javaRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

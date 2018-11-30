@@ -1,21 +1,8 @@
 <%- include('header'); -%>
 <%- include('navbar'); -%>
-<h1><%= videoTitle %></h1>
+<h1> Welcome to TORAMA video Portal</h1>
+<h2> Your Location is  ....</h2>
 
-<p> # of Videos <%= videoFiles.length %> </p>
-<% for (k=0;k<videoFiles.length;k=k+4) { %>
+<div><p>  click menu corresponding to video of your interest. </p>  <br /> Enjoy</div>
 
-    <div class="row">
-        <% for (i=k; i<k+4; i++) { %>
-            <% if (videoFiles[i]) {el = videoFiles[i]; %>
-                <div class="col">
-                    <p> <%= el.substr(0,15) %></p>
-                    <video width="200" height="200" controls src="<%= el %>" 
-                        type="video/mp4"> 
-                    </video>
-                </div>
-            <% }%>
-        <%}%>
-    </div>
-<% } %>
 <%- include('footer'); -%>
