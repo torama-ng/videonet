@@ -10,6 +10,9 @@ npm install express-generator -g
 npm install express-ejs-layouts --save
 express --view=ejs <name_of_app>
 
+Video Folders
+folders under /videos should be odoo, python, javascript,css,express, nodejs,expressjs,html,bash,java
+
 To run:
 npm start
 
@@ -22,4 +25,4 @@ mp4 File Listing
 walk.js has a function walkSync that lists files in a given folder returning an array. The views loops the array to display the videos.
 
 TODO
-In future lessons, user management and search capabilities and better aesthetics will be introduced.
+In future lessons, styling (css, flexbox), user management and search capabilities  will be introduced.

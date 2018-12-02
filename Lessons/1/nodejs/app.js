@@ -12,6 +12,11 @@ var videosRouter = require('./routes/videos');
 var odooRouter = require('./routes/odoo');
 var pythonRouter = require('./routes/python');
 var javaRouter = require('./routes/java');
+var javascriptRouter = require('./routes/javascript');
+var bashRouter = require('./routes/bash');
+var htmlRouter = require('./routes/html');
+var linuxRouter = require('./routes/linux');
+var nodejsRouter = require('./routes/nodejs');
 
 var app = express();
 
@@ -34,6 +39,11 @@ app.use('/videos', videosRouter);
 app.use('/odoo', odooRouter);
 app.use('/python', pythonRouter);
 app.use('/java', javaRouter);
+app.use('/javascript', javascriptRouter);
+app.use('/bash', bashRouter);
+app.use('/html', htmlRouter);
+app.use('/nodejs', nodejsRouter);
+app.use('/linux', linuxRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
