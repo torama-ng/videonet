@@ -9,10 +9,11 @@
         <% for (i=k; i<k+4; i++) { %>
             <% if (videoFiles[i]) {el = videoFiles[i]; %>
                 <div class="col">
-                    <p> <%= el.substr(0,15) %></p>
+                    
                     <video width="200" height="200" controls src="<%= el %>" 
                         type="video/mp4"> 
                     </video>
+                    <p> <%= ((decodeURI(el).slice(0,-4)).substr(0,28)) %></p>
                 </div>
             <% }%>
         <%}%>
