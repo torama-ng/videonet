@@ -1,0 +1,1 @@
+Added search form and sidebar to project
