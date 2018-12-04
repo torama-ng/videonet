@@ -6,20 +6,20 @@ var logger = require('morgan');
 const walk = require('./walk.js');
 
 
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var videosRouter = require('./routes/videos');
 var odooRouter = require('./routes/odoo');
 var pythonRouter = require('./routes/python');
 var javaRouter = require('./routes/java');
+var javascriptRouter = require('./routes/javascript');
+var bashRouter = require('./routes/bash');
+var htmlRouter = require('./routes/html');
+var linuxRouter = require('./routes/linux');
+var nodejsRouter = require('./routes/nodejs');
+var djangoRouter = require('./routes/django');
 
 var app = express();
-//port = process.env.PORT || 5000;
-//app.listen(port);
-
-app.use(express.static(__dirname + '/public'));
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -40,6 +40,12 @@ app.use('/videos', videosRouter);
 app.use('/odoo', odooRouter);
 app.use('/python', pythonRouter);
 app.use('/java', javaRouter);
+app.use('/javascript', javascriptRouter);
+app.use('/bash', bashRouter);
+app.use('/html', htmlRouter);
+app.use('/nodejs', nodejsRouter);
+app.use('/linux', linuxRouter);
+app.use('/django', djangoRouter); 
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -56,6 +62,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
 
 module.exports = app;

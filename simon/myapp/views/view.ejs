@@ -1,10 +1,5 @@
 <%- include('header'); -%>
 <%- include('navbar'); -%>
-
-
-
-
-
 <h1><%= videoTitle %></h1>
 
 <p> # of Videos <%= videoFiles.length %> </p>
@@ -15,12 +10,10 @@
             <% if (videoFiles[i]) {el = videoFiles[i]; %>
                 <div class="col">
                     
-                    <video width="270" height="200" controls src="<%= el %>" 
+                    <video width="250" height="200" controls src="<%= el %>" 
                         type="video/mp4"> 
                     </video>
-               
-                    <p> <%=  (decodeURI(el).slice(0,-4)).substr(0,28) %></p>
-                    
+                    <p> <%= ((decodeURI(el).slice(0,-4)).substr(0,28)) %></p>
                 </div>
             <% }%>
         <%}%>
