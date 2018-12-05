@@ -4,6 +4,7 @@ const walk = require('../walk.js');
 console.log(__dirname);
 var walkSync = [];
 walkSync = walk.walkSync('videos/odoo');
+recom = walk.recom('videos/odoo');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

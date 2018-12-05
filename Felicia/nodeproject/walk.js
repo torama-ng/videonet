@@ -22,8 +22,17 @@ var walkSync = function(dir, filelist) {
   return filelist;
 };
 
+
+var recom = function(dir,filelist) {
+    var fs = fs || require('fs'),
+         files = fs.readdirSync(dir);
+    if (files) return files;
+    else {return []}
+       
+}
+
 // export object containing list of directories
-module.exports = {walkSync};
+module.exports = {walkSync,recom};
 // test it out on home directory
 // dirwalk(process.env.HOME, function(err, results) {
  // if (err) throw err;
