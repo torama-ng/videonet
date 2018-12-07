@@ -36,7 +36,7 @@ app.use(express.static(path.join(__dirname, 'videos')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/videos', videosRouter);
-app.use('/odoo', odooRouter);
+app.use('/odoo', odooRouter);  
 app.use('/python', pythonRouter);
 app.use('/java', javaRouter);
 app.use('/javascript', javascriptRouter);
