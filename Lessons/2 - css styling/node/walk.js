@@ -25,7 +25,7 @@ var walkSync = function(dir, filelist) {
       // populate array
       filelist.push(encodeURI(file));
     }
-   
+  
   });
   return filelist;
 };
