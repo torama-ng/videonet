@@ -2,16 +2,15 @@ var express = require('express');
 var router = express.Router();
 const walk = require('../walk.js');
 console.log(__dirname);
+
 var walkSync = [];
-walkSync = walk.walkSync('videos/odoo');
-recom = walk.recom('videos/odoo');
+walkSync = walk.walkSync('videos');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('view', { 
-    videoTitle: 'Odoo Videos',
+  res.render('videos', { videoTitle: 'Video Files',
     videoFiles: walkSync,
-    videoDir: 'Odoo'
+    videoDir: 'videos'
 
   });
 });
