@@ -4,20 +4,25 @@ var fs = require('fs');
 var path = require('path');
  
 // List all files in a directory in Node.js recursively in a synchronous fashion
-var walkSync = function(dir, filelist) {
-  var fs = fs || require('fs'),
-      files = fs.readdirSync(dir);
-  filelist = filelist || [];
-  files.forEach(function(file) {
-    if (fs.statSync(dir +'/' +file).isDirectory()) {
-      // filelist = walkSync(dir + '/'+ file + '/', filelist);
-      // do nothin
-      ;
-    }
-    else {
-      // filelist.push(dir+'/'+file);
-      filelist.push(encodeURI(file));
-    }
+const mkdirSync = function (dirPath) {
+  try {
+    fs.mkdirSync(dirPath)
+  } catch (err) {
+    if (err.code !== 'EEXIST') throw err
+  }
+}
+
+var walkSync = function (dir, filelist) {
+  filelist = [];
+  const fullPath = path.join(__dirname, dir);
+  mkdirSync(fullPath);
+  fs.readdir(dir, (err, files) => {
+    if (err) throw err;
+    files.forEach(file => {
+      if (!fs.statSync(dir + "/" + file).isDirectory()) {
+        filelist.push(encodeURI(file));
+      }
+    });
   });
   return filelist;
 };
