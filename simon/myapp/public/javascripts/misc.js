@@ -22,3 +22,13 @@ function checkTime(i) {
     if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
     return i;
 }
+
+(function () {
+  var mainContent = document.querySelector('#wrapper'),
+    icon = document.querySelector('#menu-toggle');
+
+  icon.addEventListener('click', function (e) {
+    mainContent.classList.toggle('toggled');
+    e.preventDefault();
+  })
+})();

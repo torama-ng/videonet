@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const walk = require('./walk.js');
+let bodyParser = require ('body-parser');
 
 
 
@@ -53,6 +54,17 @@ app.use('/django', djangoRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+let urlencodedParser = bodyParser.urlencoded({extended:false})
+
+// get value from search box
+app.get('/process_get',  function(req,res){
+  //prepare output
+  response = {
+    searchbox:req.query.searchbox};
+  console.log(response);
+  res.end(JSON.stringify(response));
+})
 
 // error handler
 app.use(function(err, req, res, next) {
