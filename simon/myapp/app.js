@@ -24,13 +24,27 @@ var djangoRouter = require('./routes/django');
 
 var app = express();
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+
+// middleware to parse the post data
+app.use(express.json());
+app.use(express.urlencoded());
+
+// get value from search box
+app.post('/process_get',  function(req,res){
+  //prepare output
+  console.log('form submittes');
+ console.log(req.body.searchbox);
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'videos')));
@@ -57,14 +71,7 @@ app.use(function(req, res, next) {
 
 let urlencodedParser = bodyParser.urlencoded({extended:false})
 
-// get value from search box
-app.get('/process_get',  function(req,res){
-  //prepare output
-  response = {
-    searchbox:req.query.searchbox};
-  console.log(response);
-  res.end(JSON.stringify(response));
-})
+
 
 // error handler
 app.use(function(err, req, res, next) {
@@ -76,6 +83,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 
 module.exports = app;
