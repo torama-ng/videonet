@@ -35,7 +35,8 @@ app.use(express.urlencoded());
 app.post('/process_get',  function(req,res){
   //prepare output
   console.log('form submittes');
- console.log(req.body.searchbox);
+  let input = req.body.searchbox;
+ console.log(input);
 });
 
 
