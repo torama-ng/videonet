@@ -19,6 +19,9 @@ video {
   grid-gap: 15px;
 }
 
+main {
+  margin-bottom: auto;
+}
 
 #wrapper {
   padding-left: 0;

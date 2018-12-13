@@ -5,28 +5,21 @@
 
   <div id="page-content-wrapper">
     <main role="main" class="container align-items-center text-center pt-3 pb-2 my-5">
-      <h1 class="mt-4">
-        {{pagetitle}}
+      <h1 class="mt-1">
+        {{pageTitle}}
       </h1>
 
-      {{#if error}}
-      <p class="display-4">{{error}}</p>
-      {{else}}
+
       <p class="lead">
-        Your search result for {{searchInput}} from {{videoDir}}
+        Your search result for '{{searchInput}}' from {{videoDir}}
       </p>
-      {{/if}}
 
 
-
-      <div class="container">
-        <div id="listVideo">
-          {{#each searchResult}}
-          <video controls src="{{path}}" type="video/mp4">
-          </video>
-          <p>{{title}}</p>
-          {{/each}}
-        </div>
+      <div id="listVideo">
+        {{#each searchResult}}
+        <video controls src="{{path}}" type="video/mp4">
+        </video>
+        {{/each}}
       </div>
 
     </main>
