@@ -13,15 +13,10 @@
       </p>
 
 
-      <div class="row">
+      <div id="listVideo">
         {{#each videoFiles}}
-        <div class="col-3">
-
-          <video controls src="{{this}}" type="video/mp4">
-          </video>
-
-          <p>{{this}}</p>
-        </div>
+        <video controls src="{{this}}" type="video/mp4">
+        </video>
         {{/each}}
       </div>
     </main>

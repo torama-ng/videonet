@@ -11,9 +11,7 @@ router.get('/', function (req, res, next) {
   res.render('view', {
     videoTitle: 'Python Videos',
     videoFiles: walkSync,
-    noFiles: nof,
     videoDir: 'Python'
-
   });
 });
 
