@@ -27,14 +27,22 @@ function checkTime(i) {
 
 function openNav() {
 document.getElementById("mySidebar").style.width = "250px";
-document.getElementById("main").style.marginLeft = "250px";
+// document.getElementById("main").style.marginLeft = "250px";
 }
 
 function closeNav() {
 document.getElementById("mySidebar").style.width = "0";
-document.getElementById("main").style.marginLeft= "0";
+// document.getElementById("main").style.marginLeft= "0";
 }
 
+$(document).ready(jFunction);
+
+function jFunction(){
+  $('.jumbotron').click(function() {
+    console.log("I am in jumbo click");
+    closeNav();
+  });
+}
 
 // SEARCH MENU
 
