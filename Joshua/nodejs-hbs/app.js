@@ -1,31 +1,68 @@
-var createError = require('http-errors');
-var express = require('express');
-var hbs = require('hbs');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var bodyparser = require('body-parser');
-var logger = require('morgan');
-const walk = require('./walk.js');
+const createError = require('http-errors');
+const express = require('express');
+const hbs = require('hbs');
+const path = require('path');
+const fs = require('fs');
+const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
+const bodyparser = require('body-parser');
+const logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var videosRouter = require('./routes/videosearch');
-var odooRouter = require('./routes/odoo');
-var pythonRouter = require('./routes/python');
-var javaRouter = require('./routes/java');
-var javascriptRouter = require('./routes/javascript');
-var bashRouter = require('./routes/bash');
-var htmlRouter = require('./routes/html');
-var linuxRouter = require('./routes/linux');
-var nodejsRouter = require('./routes/nodejs');
+// loading routes
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const videosRouter = require('./routes/videos');
+const odooRouter = require('./routes/odoo');
+const pythonRouter = require('./routes/python');
+const javaRouter = require('./routes/java');
+const javascriptRouter = require('./routes/javascript');
+const bashRouter = require('./routes/bash');
+const htmlRouter = require('./routes/html');
+const linuxRouter = require('./routes/linux');
+const nodejsRouter = require('./routes/nodejs');
+const searchRouter = require('./routes/search');
 
-var app = express();
+// DB config
+const db = require("./config/database");
 
-hbs.registerPartials(__dirname + '/views/partials');
+const app = express();
+
+//connecting to the database
+mongoose.connect(db.mongoURI, {
+    useNewUrlParser: true
+  })
+  .then(() => {
+    console.log('Vidoenet Database connected!')
+  })
+  .catch(err => console.log(err));
+
+// load videos model
+require("./models/Videos");
+var Videos = mongoose.model("videos");
+
+// getting json data file and saving to mongoDB
+fs.readFile('./videos.json', function (err, data) {
+  if (err) throw err;
+
+  let videoList = JSON.parse(data);
+  var videoArray = videoList.videos;
+
+  videoArray.forEach(video => {
+    Videos.collection.findOneAndUpdate(video, {
+      $set: video
+    }, {
+      upsert: true
+    })
+  });
+
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+
+// setting handlebars partials
+hbs.registerPartials(__dirname + '/views/partials');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -36,8 +73,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'videos')));
 
-var searchSync = [];
-searchSync = walk.searchSync('videos');
 
 // some middleware options for bodyparser
 app.use(bodyparser.json());
@@ -45,8 +80,8 @@ app.use(bodyparser.urlencoded({
   extended: false
 }));
 
-// Walk Dir
 
+// Walk Dir
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/videos', videosRouter);
@@ -58,18 +93,7 @@ app.use('/bash', bashRouter);
 app.use('/html', htmlRouter);
 app.use('/nodejs', nodejsRouter);
 app.use('/linux', linuxRouter);
-
-// search input
-app.get('/search', (req, res) => {
-  var input = req.query.searchInput;
-  console.log(input);
-  res.render('videosearch', {
-    pageTitle: 'Video Files',
-    searchInput: input,
-    searchList: searchSync,
-    videoDir: 'videos'
-  });
-});
+app.use('/search', searchRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

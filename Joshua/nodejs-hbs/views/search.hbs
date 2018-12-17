@@ -1,0 +1,31 @@
+{{> navbar}}
+
+<div id="wrapper">
+  {{> sidenav}}
+
+  <div id="page-content-wrapper">
+    <main role="main" class="container align-items-center text-center pt-3 pb-2 my-5">
+      <h1 class="mt-1">
+        {{pageTitle}}
+      </h1>
+
+
+      <p class="lead">
+        Your search result for '{{searchInput}}' from {{videoDir}}
+      </p>
+
+
+      <div id="listVideo">
+        {{#each searchResult}}
+        <video controls src="{{path}}" type="video/mp4">
+        </video>
+        {{/each}}
+      </div>
+
+    </main>
+
+  </div> <!--  end of page content wrapper div -->
+
+  {{> footer}}
+
+</div> <!--  end of wrapper div -->

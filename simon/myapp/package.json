@@ -6,12 +6,15 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
     "chalk": "^2.4.1",
     "cookie-parser": "*",
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
     "express": "^4.16.4",
+    "express-validator": "^5.3.0",
     "http-errors": "~1.6.2",
+    "mongodb": "^3.1.10",
     "morgan": "~1.9.0"
   }
 }

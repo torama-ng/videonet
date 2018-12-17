@@ -1,0 +1,33 @@
+.jumbotron jumbotron-fluid {
+    padding:5px;
+}
+#jumbo-head {
+    /* background-image: url('/images/tor-digital2.png');*/
+    background-repeat: repeat;
+    background-position: center top;
+    background-attachment: fixed;
+    background-size: 25%;
+    background-color: red; 
+    color:yellow; 
+    opacity: 0.4;
+    margin-top:3px;
+    border-radius: 10px;
+    border: 1px dashed grey;
+    padding:5px;
+  }
+  
+#jumbo-video{
+    height:50%;
+    width:100%;
+    opacity: 0.8;
+}
+  
+.container  {
+    padding: 0px;
+    margin-left: 30%;
+    border: 0px;
+
+}
+.welcome2 {
+    color:white;
+}

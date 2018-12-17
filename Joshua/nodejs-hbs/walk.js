@@ -1,7 +1,6 @@
-// walk through given path to return list of files per folder
-
 const fs = require("fs");
 const path = require("path");
+
 
 // mkdir if not exits
 const mkdirSync = function (dirPath) {
@@ -12,7 +11,8 @@ const mkdirSync = function (dirPath) {
   }
 }
 
-var walkSync = function (dir, filelist) {
+// walk through given path to return list of files per folder
+let walkSync = function (dir, filelist) {
   filelist = [];
   const fullPath = path.join(__dirname, dir);
   mkdirSync(fullPath);
@@ -28,24 +28,27 @@ var walkSync = function (dir, filelist) {
 };
 
 // List all files in videos directory after search
-var searchSync = function (dir, searchlist) {
-  searchlist = [];
+let videoSync = function (dir, videoList) {
+  videoList = [];
   fs.readdir(dir, (err, files) => {
     if (err) throw err;
     files.forEach(folder => {
       fs.readdir(dir + "/" + folder, (err, files) => {
         if (err) throw err;
         files.forEach(video => {
-          searchlist.push(folder + '/' + video);
+          videoList.push({
+            path: folder + '/' + video,
+            title: video,
+            category: folder
+          });
         });
       })
     });
   });
-  return searchlist;
+  return videoList;
 };
 
-// export object containing list of directories
 module.exports = {
   walkSync,
-  searchSync
+  videoSync
 };

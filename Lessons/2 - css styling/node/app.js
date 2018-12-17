@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const walk = require('./walk.js');
+
 
 
 var indexRouter = require('./routes/index');
@@ -21,8 +21,7 @@ var vueRouter = require('./routes/vue');
 var angularRouter = require('./routes/angular');
 var ejsRouter = require('./routes/ejs');
 var handlebarsRouter = require('./routes/handlebars');
-
-
+var uploadRouter = require('./routes/upload');
 var app = express();
 
 // view engine setup
@@ -53,7 +52,7 @@ app.use('/vue', vueRouter);
 app.use('/angular', angularRouter);
 app.use('/ejs', ejsRouter);
 app.use('/handlebars', handlebarsRouter);
-
+app.use('/upload', uploadRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

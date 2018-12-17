@@ -1,8 +1,9 @@
 // walk through given path to return list of files per folder
 
-var fs = require('fs');
-var path = require('path');
+const fs = require("fs");
+const path = require("path");
 
+// mkdir if not exits
 const mkdirSync = function (dirPath) {
   try {
     fs.mkdirSync(dirPath)
@@ -11,30 +12,40 @@ const mkdirSync = function (dirPath) {
   }
 }
 
-// List all files in a directory in Node.js recursively in a synchronous fashion
-var walkSync = function(dir, filelist) {
- 
-  var fullPath = path.join(__dirname, dir);
-  
+var walkSync = function (dir, filelist) {
+  filelist = [];
+  const fullPath = path.join(__dirname, dir);
   mkdirSync(fullPath);
-
-  files = fs.readdirSync(dir);
-  filelist = filelist || [];
-  files.forEach(function(file) {
-    if (!fs.statSync(dir +'/' +file).isDirectory()) {
-      // populate array
-      filelist.push(encodeURI(file));
-    }
-  
+  fs.readdir(dir, (err, files) => {
+    if (err) throw err;
+    files.forEach(file => {
+      if (!fs.statSync(dir + "/" + file).isDirectory()) {
+        filelist.push(encodeURI(file));
+      }
+    });
   });
   return filelist;
 };
 
+// List all files in videos directory after search
+var searchSync = function (dir, searchlist) {
+  searchlist = [];
+  fs.readdir(dir, (err, files) => {
+    if (err) throw err;
+    files.forEach(folder => {
+      fs.readdir(dir + "/" + folder, (err, files) => {
+        if (err) throw err;
+        files.forEach(video => {
+          searchlist.push(folder + '/' + video);
+        });
+      })
+    });
+  });
+  return searchlist;
+};
 
 // export object containing list of directories
-module.exports = {walkSync};
-// test it out on home directory
-// dirwalk(process.env.HOME, function(err, results) {
- // if (err) throw err;
- // console.log(results);
-//});
+module.exports = {
+  walkSync,
+  searchSync
+};
