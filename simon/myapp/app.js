@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+let expressValidator = require('express-validator');
+let mongo = require('mongodb').MongoClient;
 const walk = require('./walk.js');
 let bodyParser = require ('body-parser');
 
