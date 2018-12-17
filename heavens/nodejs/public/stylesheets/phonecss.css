@@ -119,17 +119,22 @@ label {
     .new3{background:#999; grid-area:three; border-radius: 5px;}
     .new4{background:#666; grid-area:four;overflow: scroll; border-radius: 5px;}
     .main-video{
+        
         background:#111; 
-         
+        display:flex;
         border-radius: 5px;
+        
     }
     .video-col {
         background:yellow;
         border-radius: 1px;
-        padding: 1px;
+        padding: 2px;
+        margin:10px;
+        align-items: center;
+        
         flex-wrap: wrap;
         
-        height: 250px;
+       
         flex-basis: 21%;
         
     
