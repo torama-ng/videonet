@@ -1,8 +1,69 @@
-<%- include('header'); -%>
-<%- include('navbar'); -%>
-<h1> Welcome to TORAMA video Portal</h1>
-<h2> Your Location is  ....</h2>
+<html>
+<head>
+    <script src="../javascripts/siderbar.js"></script>
+   <link rel="stylesheet" href="../stylesheets/phonecss.css"/>
+</head>
+<body>
+    
+    <div id="main" class="container">
+         <div class="item new11">
+         <div class="nav">
+                 <div class="logo">
+                     <img class="logo" src="/images/logo.png">
+                 </div>
+                 <label for="toggle" id="micon">&#9776</label> 
+                 <input type="checkbox" id="toggle">
+                 <div class="menu"id="sidebar">
+                     <a href="#" id="menu-icon"></a>
+                     <a href="#">Home</a>
+                     <a href="#">Services</a>
+                     <a href="#">About</a>
+                     <a href="#">Contact us</a>
+                 </div>
+                 </div>
+         </div>
+         <div class="item new1">
+                <div class="logo">
+                        <img class="logo" src="logo.png">
+                    </div>
+            <div id="mySidebar" class="sidebar">
+                
+                <a href="javascript:void(0)"> </a>
+                <a class="nav-link" href="/bash">Bash Programming</a>
+                <a class="nav-link" href="/html">HTML</a>
+                <a class="nav-link" href="/linux">Linux</a>
+                <a class="nav-link" href="/javascript">javascript</a>
+                <a class="nav-link" href="/nodejs">Nodejs</a>
+                <a class="nav-link" href="/odoo">Odoo</a>
+                <a class="nav-link" href="/python">Python</a>
+                <a class="nav-link" href="/java">Java</a>
+            </div>
+             <button class="openbtn" onclick="openNav()">☰ </button>  <br />
+            
+         </div>
+         <div class="item new2"></div>
+         <div class="item new3"></div>
+         <div class="item new4"></div>
+        <div class="main-video">
+            <h1> <%= videoTitle %> </h1>
+            <p> Number of videos <%=videoFiles.length %> </p>
+            <% videoFiles.forEach( function (file) { %>
+                <div class="video-col">
+                    <video controls src="<%= file %>" 
+                        type ="video/mp4">
+                    </video>  
+                </div>
 
-<div><p>  click menu corresponding to video of your interest. </p>  <br /></div>
-<br />
-<%- include('footer'); -%>
+            <% }) %>
+        </div>
+            
+        <div class="footer"> </div> 
+         
+    </div>
+    
+    </body>
+
+
+
+
+</html>
