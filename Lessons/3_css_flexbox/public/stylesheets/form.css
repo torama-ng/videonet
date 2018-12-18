@@ -1,0 +1,58 @@
+form.upload {
+    
+    
+}
+
+form.upload input[type=file] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid white;
+    border-radius: 10px;  
+    width: 30%;
+    height:50px;
+    
+    opacity: 0.9;
+    text-transform: capitalize;
+}
+
+form.upload input[type=submit] {
+  padding: 10px;
+  
+  font-size: 17px;
+  border: 1px solid white;
+  border-radius: 10px;
+  width: 15%;
+  height:50px;
+  
+  color: red;
+  opacity:0.8;
+  text-transform: uppercase;
+}
+
+form.upload button {
+    float: right;
+    width: 20%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+}
+
+form.upload button:hover {
+    background: #0b7dda;
+}
+
+form.upload::after {
+    content: "";
+    clear: both;
+    display: grid;
+}
+
+#upload-form {
+    background-color: beige;
+    
+
+}

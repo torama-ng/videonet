@@ -3,7 +3,7 @@
 var fs = require('fs');
 var path = require('path');
  
-// List all files in a directory in Node.js recursively in a synchronous fashion
+
 const mkdirSync = function (dirPath) {
   try {
     fs.mkdirSync(dirPath)
@@ -11,7 +11,7 @@ const mkdirSync = function (dirPath) {
     if (err.code !== 'EEXIST') throw err
   }
 }
-
+// List all files in a directory in Node.js recursively in a synchronous fashion 
 var walkSync = function (dir, filelist) {
   filelist = [];
   const fullPath = path.join(__dirname, dir);
@@ -26,6 +26,7 @@ var walkSync = function (dir, filelist) {
   });
   return filelist;
 };
+
 
 // export object containing list of directories
 module.exports = {walkSync};
