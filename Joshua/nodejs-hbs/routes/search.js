@@ -8,7 +8,7 @@ router.get("/", (req, res) => {
     input,
     videos;
 
-  input = req.query.searchInput;
+  input = req.query.searchInput.toLowerCase();
   videos = videosJson.videos;
 
   videos.forEach(video => {

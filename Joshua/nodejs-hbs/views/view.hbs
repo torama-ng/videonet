@@ -12,11 +12,13 @@
         # of Videos {{videoFiles.length}}
       </p>
 
-
       <div id="listVideo">
         {{#each videoFiles}}
-        <video controls src="{{this}}" type="video/mp4">
-        </video>
+        <figure>
+          <video controls src="{{this}}" type="video/mp4">
+          </video>
+          <figcaption>{{this}}</figcaption>
+        </figure>
         {{/each}}
       </div>
     </main>

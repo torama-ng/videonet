@@ -17,8 +17,11 @@
 
       <div id="listVideo">
         {{#each searchResult}}
-        <video controls src="{{path}}" type="video/mp4">
-        </video>
+        <figure>
+          <video controls src="{{path}}" type="video/mp4">
+          </video>
+          <figcaption>{{title}}</figcaption>
+        </figure>
         {{/each}}
       </div>
 
