@@ -46,11 +46,11 @@ router.post('/',function(req,res){
     let url = "mongodb://localhost:27017/toramaUserLogin";
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
-        var dbo = db.db("toramaUserLogi");
+        var database = db.db("toramaUserLogi");
         let myData = req.body;
-        dbo.collection("userDetails").insertOne(myData, function(err, res) {
+        database.collection("userDetails").insertOne(myData, function(err, res) {
           if (err) throw err;
-          console.log("1 document inserted");
+          console.log("1 user datails inserted to mongodb");
           db.close();
         });
       });
