@@ -4,7 +4,6 @@ const walk = require('../walk.js');
 var walkSync = [];
 
 walkSync = walk.walkSync('videos/python');
-nof = walkSync.length;
 
 /* GET home page. */
 router.get('/', function (req, res, next) {

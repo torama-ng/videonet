@@ -5,22 +5,23 @@
 
   <div id="page-content-wrapper">
     <main role="main" class="container align-items-center text-center pt-3 pb-2 my-5">
-      <h1 class="mt-4">
-        {{pagetitle}}
-      </h1>
       <p class="lead">
         {{videoDir}} Library <br>
         # of Videos {{videoList.length}}
       </p>
 
+      <section>
+        <div id="listVideo">
+          {{#each videoList}}
+          <figure>
+            <video controls src="{{path}}" type="video/mp4">
+            </video>
+            <figcation> {{title}}</figcaption>
+          </figure>
+          {{/each}}
+        </div>
+      </section>
 
-      <div id="listVideo">
-        {{#each videoList}}
-        <video controls src="{{path}}" type="video/mp4">
-        </video>
-        {{!-- <p>{{title}}</p> --}}
-        {{/each}}
-      </div>
 
     </main>
 
