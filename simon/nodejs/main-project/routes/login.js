@@ -24,25 +24,40 @@ router.get('/', function(req, res,next) {
         let dbo = db.db('userDB');
 
         let collection = dbo.collection('userDetails');
+    
 
         collection.find({}).toArray(function(err,result){
-                if(err) throw err;
+                if(err) throw "error whille inserting data: "+err;
 
                 else if(result.length){
-                   // console.log(result);
+                    console.log(result);
                 }
         });
+       
         db.close();
-
     })
     res.render( 'registerview');
   
 });
 
 router.post('/',function(req,res){
-    console.log(req.body);
-   res.send('registration successful');
-})
+    let MongoClient = mongodb.MongoClient;
+
+    let url = "mongodb://localhost:27017/toramaUserLogin";
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var database = db.db("toramaUserLogi");
+        let myData = req.body;
+        database.collection("userDetails").insertOne(myData, function(err, res) {
+          if (err) throw err;
+          console.log("1 user datails inserted to mongodb");
+          db.close();
+        });
+      });
+    //console.log(myData);
+   res.render('registerview');
+});
+
 
 
 
