@@ -3,14 +3,14 @@
 <div id="wrapper">
   {{> sidenav}}
 
-  <div id="page-content-wrapper">
-    <main role="main" class="container align-items-center text-center pt-3 pb-2 my-5">
+  {{!-- <div id="page-content-wrapper"> --}}
+    <div class="container align-items-center text-center pt-5 pb-2 my-5">
       <p class="lead">
         {{videoDir}} Library <br>
         # of Videos {{videoList.length}}
       </p>
 
-      <section>
+      <main>
         <div id="listVideo">
           {{#each videoList}}
           <figure>
@@ -20,12 +20,11 @@
           </figure>
           {{/each}}
         </div>
-      </section>
+      </main>
 
+    </div>
 
-    </main>
-
-  </div> <!--  end of page content wrapper div -->
+    {{!-- </div> <!--  end of page content wrapper div --> --}}
 
   {{> footer}}
 

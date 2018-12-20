@@ -54,6 +54,8 @@ fs.readFile('./videos.json', function (err, data) {
   let videoList = JSON.parse(data);
   var videoArray = videoList.videos;
 
+  Videos.collection.deleteMany({});
+
   videoArray.forEach(video => {
     Videos.collection.findOneAndUpdate(video, {
       $set: video
@@ -107,10 +109,10 @@ app.use(flash());
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash("success_msg");
   res.locals.error_msg = req.flash("error_msg");
+  res.locals.error = req.flash("error");
   res.locals.user = req.user || null;
   next();
 });
-
 
 
 // using Routes

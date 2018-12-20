@@ -25,7 +25,7 @@ var upload = multer({
 // check file upload type
 function checkFileType(file, cb) {
   // allowed extensions
-  const filetypes = /mp4/;
+  const filetypes = /mp4|png|jpeg|jpg/;
 
   // checking the ext
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
@@ -48,17 +48,17 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   upload(req, res, (err) => {
     if (err) {
-      res.render('/upload', {
+      res.render('upload', {
         msg: err
       });
     } else {
       console.log(req.file);
       if (req.file == undefined) {
-        res.render('/', {
+        res.render('upload', {
           msg: 'error: No file selected!'
         })
       } else {
-        res.render('/', {
+        res.render('upload', {
           msg: 'File upload successful!',
           file: `uploads/${req.file.filename}`
         })
