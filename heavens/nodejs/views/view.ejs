@@ -1,23 +1,19 @@
 <%- include('header'); -%>
 <%- include('navbar'); -%>
+<div>
 <h1><%= videoTitle %></h1>
 
 <p> # of Videos <%= videoFiles.length %> </p>
-<!-- <% for (k=0;k<videoFiles.length;k=k+4) { %> -->
+</div>
+    <div class="video-row" >
+       <% videoFiles.forEach ( function(file) { %> 
+           <div class="vido-col">
+               <video  controls src="<%= file %>" type="video/mp4"> 
+               </video>
+               <div><p> <%= ((decodeURI(file).slice(0,-4)).substr(0,35)) %></p></div>
+           </div>
 
-    <div id ="videodiv" >
-        <% for (i=k; i<k+4; i++) { %>
-            <% if (videoFiles[i]) {el = videoFiles[i]; %>
-                <div class="col-3">
-                    <video  controls src="<%= el %>" 
-                        type="video/mp4"> 
-                    </video>
-                    <p> <%= ((decodeURI(el).slice(0,-4)).substr(0,28)) %></p>
-                </div>
-            <% }%>
-        <%}%>
+       <%}) %>
     </div>
 
-    
-<!-- <% } %> -->
 <%- include('footer'); -%>

@@ -7,6 +7,7 @@ var logger = require('morgan');
 
 
 var indexRouter = require('./routes/index');
+var usermgtRouter = require('./routes/usermgt');
 var usersRouter = require('./routes/users');
 var videosRouter = require('./routes/videos');
 var odooRouter = require('./routes/odoo');
@@ -53,6 +54,7 @@ app.use('/angular', angularRouter);
 app.use('/ejs', ejsRouter);
 app.use('/handlebars', handlebarsRouter);
 app.use('/upload', uploadRouter);
+app.use('/usermgt', usermgtRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
