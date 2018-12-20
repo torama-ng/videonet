@@ -13,28 +13,28 @@ p#torama {
 }
 
 .video-row {
-
   display: flex;
   
   flex-direction: row;
   flex-flow:  wrap; 
-  justify-content: space-between;  
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;  
 }
 
 .video-col  {
-  flex-basis: 23%;
+  flex-basis: 24%;
   box-sizing: border-box; 
   margin: 2px;
-  padding: 5px;
+  padding: 1px;
   border-radius: 10px;
-  border: 1 bold #d2002e;;
+  border: 1 bold #d2002e;
   background-color: #ffcc01;
-  
 }
 
 .video-col video  {
   width: 100%;
-  
+  border-radius: 10px;
 }
 
 .video-name {
@@ -43,18 +43,19 @@ p#torama {
 
 @media screen and (max-width: 1200px) {
   .video-col {
-    flex-basis: 40%;
+    flex-basis: 31%;
   }
 }
-
+@media screen and (max-width: 800px) {
+  .video-col {
+    flex-basis: 48%;
+  }
+}
 @media screen and (max-width: 600px) {
   .video-col {
-    flex-basis: 90%;
+    flex-basis: 95%;
   }
 }
-
-
-
 
 .topnav {
   overflow: hidden;
