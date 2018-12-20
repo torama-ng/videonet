@@ -20,3 +20,11 @@ Updates
 2. Added a all videos category, user can now check all videos in the directories.
 3. Recommended video can be shown to user once page is opened to he/she.
 4. uploading of files to our directory
+
+videos
+1. w3school tutorials : https://www.w3schools.com/nodejs/nodejs_mongodb_create_db.asp
+\
+2. mongodb tutorial edurika : Node.js and MongoDB using MongoJS, Part 1
+https://www.youtube.com/watch?v=j0mUoe8eghc  
+
+
