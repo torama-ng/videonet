@@ -1,0 +1,25 @@
+{{> navbar}}
+
+<div id="wrapper">
+  {{> sidenav}}
+
+  {{!-- <div id="page-content-wrapper"> --}}
+    <div class="container align-items-center text-center pt-5 pb-2 my-5">
+      <p class="alert">{{msg}}</p>
+
+      <div class="col-md-6 mx-auto">
+        <h3 class="text-center display-4 my-4">File Uploads</h3>
+
+        <form class="card card-body" action="/upload" method="POST" enctype="multipart/form-data">
+          <input name="videotitle" type="text" class="mb-2" placeholder=" Video title" required />
+          <input name="name" type="text" class="mb-2" placeholder=" Author name" required />
+          <input name="filename" type="file" class="mb-2">
+          <input type="submit" class="btn btn-primary btn-inline-block">
+        </form>
+      </div>
+    </div>
+    {{!-- </div> <!--  end of page content wrapper div --> --}}
+
+  {{> footer}}
+
+</div> <!--  end of wrapper div -->

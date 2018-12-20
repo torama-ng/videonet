@@ -5,9 +5,19 @@
     <img src="/images/logo.png" alt="logo" style="width:40px;">
   </a>
 
+  {{#if user}}
   <form action="/search" method="get" class="form-inline mt-2 mt-md-0 ml-auto d-none d-lg-block d-xl-block">
     <input name="searchInput" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
       required>
     <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
   </form>
+  <a class="btn btn-sm btn-light my-sm-0 mx-2" href="/users/logout">Log out</a>
+
+  {{else}}
+  <nav class="nav ml-auto">
+    <a class="btn btn-sm btn-light mx-2" href="/users/login">Login</a>
+    <a class="btn btn-sm btn-light mx-2" href="/users/register">Register</a>
+  </nav>
+  {{/if}}
+
 </nav>

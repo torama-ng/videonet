@@ -8,11 +8,11 @@
     e.preventDefault();
   })
 
-  pageContent.addEventListener('click', (e) => {
-    if (mainContent.classList.contains('toggled')) {
-      mainContent.classList.toggle('toggled');
-    }
-    e.preventDefault();
-  })
+  // pageContent.addEventListener('click', (e) => {
+  //   if (mainContent.classList.contains('toggled')) {
+  //     mainContent.classList.toggle('toggled');
+  //   }
+  //   e.preventDefault();
+  // })
 
 })();

@@ -1,11 +1,17 @@
-<!--  Nav bar -->
-
 Implemented Fixed Navigation bar at the top.
-
-<!-- Side Nav bar -->
 
 Added side menu with slide in toggle effect.
 
-<!-- Search Icon -->
+Added search to the nav bar.
 
-Added search to the nav bar
+search functionality working with local json database.
+
+a copy of the database also saved on mongodb.
+
+Added login and registration routes and layout.
+
+search is hidden until user is logged in.
+
+upload function running perfectly.
+
+login and registration working now.

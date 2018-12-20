@@ -1,31 +1,38 @@
-const createError = require('http-errors');
-const express = require('express');
-const hbs = require('hbs');
-const path = require('path');
-const fs = require('fs');
-const mongoose = require('mongoose');
-const cookieParser = require('cookie-parser');
-const bodyparser = require('body-parser');
-const logger = require('morgan');
+const createError = require('http-errors'),
+  express = require('express'),
+  hbs = require('hbs'),
+  path = require('path'),
+  fs = require('fs'),
+  flash = require('connect-flash'),
+  cookieParser = require('cookie-parser'),
+  bodyparser = require('body-parser'),
+  logger = require('morgan'),
+  session = require('express-session'),
+  passport = require('passport'),
+  mongoose = require('mongoose');
 
 // loading routes
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-const videosRouter = require('./routes/videos');
-const odooRouter = require('./routes/odoo');
-const pythonRouter = require('./routes/python');
-const javaRouter = require('./routes/java');
-const javascriptRouter = require('./routes/javascript');
-const bashRouter = require('./routes/bash');
-const htmlRouter = require('./routes/html');
-const linuxRouter = require('./routes/linux');
-const nodejsRouter = require('./routes/nodejs');
-const searchRouter = require('./routes/search');
+const indexRouter = require('./routes/index'),
+  usersRouter = require('./routes/users'),
+  videosRouter = require('./routes/videos'),
+  odooRouter = require('./routes/odoo'),
+  pythonRouter = require('./routes/python'),
+  javaRouter = require('./routes/java'),
+  javascriptRouter = require('./routes/javascript'),
+  bashRouter = require('./routes/bash'),
+  htmlRouter = require('./routes/html'),
+  linuxRouter = require('./routes/linux'),
+  nodejsRouter = require('./routes/nodejs'),
+  searchRouter = require('./routes/search'),
+  uploadRouter = require('./routes/upload');
+
+const app = express();
 
 // DB config
 const db = require("./config/database");
 
-const app = express();
+// Passport config
+require("./config/passport")(passport);
 
 //connecting to the database
 mongoose.connect(db.mongoURI, {
@@ -46,6 +53,8 @@ fs.readFile('./videos.json', function (err, data) {
 
   let videoList = JSON.parse(data);
   var videoArray = videoList.videos;
+
+  Videos.collection.deleteMany({});
 
   videoArray.forEach(video => {
     Videos.collection.findOneAndUpdate(video, {
@@ -81,7 +90,32 @@ app.use(bodyparser.urlencoded({
 }));
 
 
-// Walk Dir
+// Express session middleware
+app.use(
+  session({
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true
+  })
+);
+
+// passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(flash());
+
+//Global variables
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash("success_msg");
+  res.locals.error_msg = req.flash("error_msg");
+  res.locals.error = req.flash("error");
+  res.locals.user = req.user || null;
+  next();
+});
+
+
+// using Routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/videos', videosRouter);
@@ -94,6 +128,8 @@ app.use('/html', htmlRouter);
 app.use('/nodejs', nodejsRouter);
 app.use('/linux', linuxRouter);
 app.use('/search', searchRouter);
+app.use('/upload', uploadRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

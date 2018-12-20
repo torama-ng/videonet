@@ -3,8 +3,8 @@
 <div id="wrapper">
   {{> sidenav}}
 
-  <div id="page-content-wrapper">
-    <main role="main" class="container align-items-center text-center pt-3 pb-2 my-5">
+  {{!-- <div id="page-content-wrapper"> --}}
+    <div class="container align-items-center text-center pt-5 pb-2 my-5">
       <h1 class="mt-4">
         {{videoTitle}}
       </h1>
@@ -12,16 +12,19 @@
         # of Videos {{videoFiles.length}}
       </p>
 
-
       <div id="listVideo">
         {{#each videoFiles}}
-        <video controls src="{{this}}" type="video/mp4">
-        </video>
+        <figure>
+          <video controls src="{{this}}" type="video/mp4">
+          </video>
+          <figcaption>{{this}}</figcaption>
+        </figure>
         {{/each}}
       </div>
-    </main>
 
-  </div> <!--  end of page content wrapper div -->
+    </div>
+
+    {{!-- </div> <!--  end of page content wrapper div --> --}}
 
   {{> footer}}
 
