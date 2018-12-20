@@ -11,13 +11,13 @@
       required>
     <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
   </form>
-  <button class="btn btn-primary"><a class="nav-link" href="/users/logout">LogOut</a> </button>
+  <a class="btn btn-sm btn-light my-sm-0 mx-2" href="/users/logout">Log out</a>
 
   {{else}}
-  <nav class="nav ml-auto"></nav>
-  <a class="nav-link" href="/users/login">Login</a>
-  <a class="nav-link" href="/users/register">Register</a>
-</nav>
-{{/if}}
+  <nav class="nav ml-auto">
+    <a class="btn btn-sm btn-light mx-2" href="/users/login">Login</a>
+    <a class="btn btn-sm btn-light mx-2" href="/users/register">Register</a>
+  </nav>
+  {{/if}}
 
 </nav>

@@ -59,7 +59,7 @@ video {
   grid-column-gap: 5px;
 }
 
-#page-content-wrapper {
+/* #page-content-wrapper {
   width: 100%;
   position: absolute;
   padding: 15px;
@@ -68,13 +68,13 @@ video {
 #wrapper.toggled #page-content-wrapper {
   position: absolute;
   margin-right: -250px;
-}
+} */
 
 /* Sidebar Styles */
 
 .sidebar-nav {
   position: absolute;
-  top: 10%;
+  top: 3%;
   width: 250px;
   margin: 0;
   padding: 0;
@@ -133,7 +133,7 @@ video {
     width: 200px;
   }
 
-  #page-content-wrapper {
+  /* #page-content-wrapper {
     padding: 20px;
     position: relative;
   }
@@ -141,5 +141,5 @@ video {
   #wrapper.toggled #page-content-wrapper {
     position: relative;
     margin-right: 0;
-  }
+  } */
 }
