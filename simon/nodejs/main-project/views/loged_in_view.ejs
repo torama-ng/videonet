@@ -1,0 +1,13 @@
+<%- include('header'); -%>
+<%- include('navbar'); -%>
+
+
+
+<d<div class="conntainer">
+
+        <% if(result.length) { %>
+        <h6 style="font:18px Arial;color: rgb(34, 0, 128)">Welcome Back <%= file %></h6>
+        <% } else{ %>
+            <h1 style="font:18px Arial;color: rgb(243, 29, 29)"> <%= error %></h1>
+            <% } %>
+    </div>
