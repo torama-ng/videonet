@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+
+  <div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <a class="nav-link" href="/upload">Upload Files</a>
+    <a class="nav-link" href="/randomvideos">Random Videos</a>
+    <a class="nav-link" href="/bash">Bash Programming</a>
+    <a class="nav-link" href="/html">HTML</a>
+    <a class="nav-link" href="/linux">Linux</a>
+    <a class="nav-link" href="/javascript">javascript</a>
+    <a class="nav-link" href="/nodejs">Nodejs</a>
+    <a class="nav-link" href="/odoo">Odoo</a>
+    <a class="nav-link" href="/python">Python</a>
+    <a class="nav-link" href="/java">Java</a>
+  </div>
+
+  <button class="openbtn" onclick="openNav()">☰ </button> <br />
+
+
+  <!-- Brand/logo -->
+  <a class="navbar-brand" href="/">
+    <img src="/images/torlogo.png" alt="logo" style="width:40px;">
+  </a> <br />
+
+
+  <form class="form-inline mt-2 mt-md-0 ml-auto" method="POST" action="/searchedvideos">
+    <input  class="form-control mr-sm-2" type="text" name="input_text" placeholder="Search" aria-label="Search">
+    <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="btnSubmit" value="Search" />
+
+  </form> <br />
+
+
+
+  <a class="nav-link" href="/login" style="color:white">Login</a>
+
+  <div class="upload_container">
+    <form class="form-inline mt-2 mt-md-0 ml-auto" method="post" action="/uploadfiles" enctype="multipart/form-data">
+      <input id="files_picker" class="btn btn-outline-success my-2 my-sm-0" type="file" name="filename" aria-label="Pick file">
+      <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="btnSubmit" value="Upload" />
+  
+    </form> 
+  
+
+  </div>
+
+
+</nav>
