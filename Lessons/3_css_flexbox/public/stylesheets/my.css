@@ -17,24 +17,16 @@ p#torama {
   
   flex-direction: row;
   flex-flow:  wrap; 
-<<<<<<< HEAD
-  justify-content: flex-start;  
-=======
   justify-content: flex-start;
   align-items: center;
   height: 100%;  
->>>>>>> f8ea43f5c57a102fe196a00c6f0b5dd4aa502a18
 }
 
 .video-col  {
   flex-basis: 24%;
   box-sizing: border-box; 
-<<<<<<< HEAD
   margin: 3px;
-=======
-  margin: 2px;
   padding: 1px;
->>>>>>> f8ea43f5c57a102fe196a00c6f0b5dd4aa502a18
   border-radius: 10px;
   border: 1 bold #d2002e;
   background-color: #ffcc01;
