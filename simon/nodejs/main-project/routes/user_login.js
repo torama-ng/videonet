@@ -13,9 +13,7 @@ let app = express();
 app.use(bodyParser.urlencoded({extended:true}));
 
 router.get('/', function(req, res,next) {
-    res.render( 'reg_form_view', {
-        message : 'please login your credentials '
-    });
+    res.render( 'loged_in_view');
   
 });
 
@@ -79,10 +77,6 @@ router.post('/',function(req,res){
       });
    
     
-   
-
-
-
 
 
 module.exports = router;

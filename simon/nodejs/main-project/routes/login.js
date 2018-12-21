@@ -46,7 +46,8 @@ router.post('/',function(req,res){
         });
       });
    
-   res.render('registerview');
+   res.render('reg_complete_view');
+   console.log(" this is from login.js with reg_complete_view");
 });
 
 

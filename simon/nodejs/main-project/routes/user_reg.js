@@ -9,12 +9,11 @@ const router = express.Router();
 //  implementation of mongoDB
 let mongodb = require('mongodb');
 
-let app = express();
 
-app.use(bodyParser.urlencoded({extended:true}));
 
 router.get('/', function(req, res,next) {
-    res.render( 'reg_form_view', {
+    console.log('okay ..............');
+    res.render( 'registerview', {
         message : 'please login your credentials '
     });
   
@@ -24,7 +23,7 @@ router.get('/', function(req, res,next) {
 
 router.post('/',function(req,res){
 
-    let user_name= req.body.user_name;
+    let login_name= req.body.user_name;
         let user_email= req.body.user_email;
         let user_number= req.body.number;
         let user_password= req.body.user_password;
@@ -35,17 +34,17 @@ router.post('/',function(req,res){
         
     let MongoClient = mongodb.MongoClient;
 
-    let url = "mongodb://localhost:27017/users_database";
+    let url = "mongodb://localhost:27017/simon_data";
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
 
         // specify the database to use
-        let  database = db.db("users_database");
+        let  database = db.db("simon_data");
         
       
 
         // passing user object 
-        let user_object = {name :user_name, email : user_email, number : user_number, user_password : encrypted_data};
+        let user_object = {name :login_name, email : user_email, number : user_number, user_password : encrypted_data};
         
         // create a collection if ! exist, and insert data.
         database.collection("user_details").insertOne(user_object, function(err, res) {
@@ -53,7 +52,12 @@ router.post('/',function(req,res){
           if (err) throw err;
 
           // log stored object
-          console.log(user_object);
+          console.log(res);
+          res.render('reg_complete_view',{
+              user_name : user_name
+
+          });
+          console.log(" this is from user_reg.js with reg_complete_view");
         
           // log result if no error
           console.log("1 user datails inserted to mongodb");
@@ -61,10 +65,8 @@ router.post('/',function(req,res){
         });
       });
    
-      // render registration message, page and username
-   res.render('reg_complete_view', {
-    user_name :user_name ,
-   });
+      
+  
    
 });
 
