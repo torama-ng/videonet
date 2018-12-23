@@ -8,25 +8,63 @@
   
   <h1></h1>
 
-  
- 
-  
-  <label for="name">Name:</label>
-  <input type="text" id="name" name="user_name"><br/>
-  
-  <label for="mail">Email:</label>
-  <input type="email" id="mail" name="user_email"><br/>
+  <div class="login-wrap">
+    <div class="login-html">
+      <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+      <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+      <div class="login-form">
+        <div class="sign-in-htm">
+          <div class="group">
+            <label for="user" class="label">Email</label>
+            <input id="user" type="email" name="user_email" class="input">
+          </div>
+          <div class="group">
+            <label for="pass" class="label">Password</label>
+            <input id="pass" type="password" name="user_password" class="input" data-type="password">
+          </div>
+          <div class="group">
+            <input id="check" type="checkbox" class="check" checked>
+            <label for="check"><span class="icon"></span> Keep me Signed in</label>
+          </div>
+          <div class="group">
+            <input type="submit" class="button" value="Sign In">
+          </div>
+          <div class="hr"></div>
+          <div class="foot-lnk">
+            <a href="#forgot">Forgot Password?</a>
+          </div>
+        </div>
+      </form>
 
-  <label for="mail">Number:</label>
-  <input type="number" id="number" name="number"><br/>
-  
-  <label for="password">Password:</label>
-  <input type="password" id="password" name="user_password"><br/>
-
-  
- 
-  
-  <button type="submit">Register</button>
+      <form action="/user_reg" method="POST"></form>
+        <div class="sign-up-htm">
+          <div class="group">
+            <label for="user" class="label">Username</label>
+            <input id="user" type="text" name="user_name" class="input">
+          </div>
+          <div class="group">
+            <label for="pass" class="label">Password</label>
+            <input id="pass" type="password" class="input" name="user_password" data-type="password">
+          </div>
+          <div class="group">
+            <label for="pass" class="label">Number</label>
+            <input id="pass" type="number" class="input" name="number">
+          </div>
+          <div class="group">
+            <label for="pass" class="label">Email Address</label>
+            <input id="pass" type="email" name="user_email" class="input">
+          </div>
+          <div class="group">
+            <input type="submit" class="button" value="Sign Up">
+          </div>
+          <div class="hr"></div>
+          <div class="foot-lnk">
+            <label for="tab-1">Already Member?</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   
 </form>
 

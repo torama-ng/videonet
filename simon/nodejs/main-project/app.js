@@ -29,6 +29,7 @@ var searchedVids = require('./routes/searchedVideos');
 var allVideos = require('./routes/randomVideos');
 var uploadFiles = require('./routes/uploadFiles');
 var userLogin  =  require('./routes/login');
+var user_reg  =  require('./routes/user_reg');
 
 
 var app = express();
@@ -67,6 +68,7 @@ app.use('/searchedVideos', searchedVids);
 app.use('/randomVideos', allVideos);
 app.use('/uploadFiles', uploadFiles);
 app.use('/login', userLogin);
+app.use('/user_reg', user_reg);
 
 
 
