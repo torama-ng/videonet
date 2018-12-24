@@ -4,18 +4,16 @@ const walk = require('../walk.js');
 console.log(__dirname);
 
 var walkSync = [];
-walkSync = walk.walkSync('bash');
+walkSync = walk.walkSync('bootstrap');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('view', { 
-    videoTitle: 'Bash Videos',
+    videoTitle: 'Bootstap Videos',
     videoFiles: walkSync,
-    videoDir: 'Bash'
+    videoDir: 'Bootstrap'
 
   });
 });
-
-
 
 module.exports = router;

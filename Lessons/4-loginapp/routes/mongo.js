@@ -4,18 +4,16 @@ const walk = require('../walk.js');
 console.log(__dirname);
 
 var walkSync = [];
-walkSync = walk.walkSync('bash');
+walkSync = walk.walkSync('mongo');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('view', { 
-    videoTitle: 'Bash Videos',
+    videoTitle: 'Mongo Videos',
     videoFiles: walkSync,
-    videoDir: 'Bash'
+    videoDir: 'Mongo'
 
   });
 });
-
-
 
 module.exports = router;
