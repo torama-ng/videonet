@@ -1,5 +1,4 @@
 const express = require('express');
-let busboy = require('connect-busboy');
 const bodyParser = require('body-parser');
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr('myTotalySecretKey');
@@ -14,9 +13,12 @@ let app = express();
 app.use(bodyParser.urlencoded({extended:true}));
 
 router.get('/', function(req, res,next) {
-    res.render( 'registerview');
+    res.render( 'login_view');
   
 });
+
+
+
 
 router.post('/',function(req,res){
     let MongoClient = mongodb.MongoClient;
