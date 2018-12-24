@@ -24,7 +24,12 @@ var app = express();
 
 // View Engine
 app.set('views', path.join(__dirname, 'views'));
-app.engine('hbs', exphbs({extname:'hbs',layoutsDir:__dirname+'/views/layouts/',defaultLayout:'layout2'}));
+app.engine('hbs', exphbs({
+    extname:'hbs',
+    layoutsDir:__dirname+'/views/layouts/',
+    defaultLayout:'layout'
+  }));
+  
 app.set('view engine', 'hbs');
 
 // BodyParser Middleware

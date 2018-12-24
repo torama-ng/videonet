@@ -4,7 +4,7 @@ const walk = require('../walk.js');
 console.log(__dirname);
 var walkSync = [];
 walkSync = walk.walkSync('nodejs');
-
+ 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('view', { 
@@ -14,7 +14,5 @@ router.get('/', function(req, res, next) {
 
   });
 });
-
-
 
 module.exports = router;
