@@ -27,7 +27,7 @@ var walkSync = function (dir, filelist) {
         ufile = encodeURI(file)
         url1 = path.join(dir, ufile);
        
-        filelist.push(url1);
+        filelist.push(ufile);
         // console.log(`filelist content is  ${filelist}`); 
        
       }

@@ -17,7 +17,7 @@ var db = mongoose.connection;
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var node = require('./routes/nodejs');
+var nodejs = require('./routes/nodejs');
 var javascript = require('./routes/javascript');
 var html = require('./routes/html');
 var usermgt = require('./routes/usermgt');
@@ -99,18 +99,18 @@ app.use(function (req, res, next) {
 // Routes
 app.use('/', routes);
 app.use('/users', users);
-app.use('/node', node);
+app.use('/nodejs', nodejs);
 app.use('/javascript', javascript);
 app.use('/html', html);
 app.use('/css', css);
 app.use('/bootstrap', bootstrap);
-app.use('/usrmgt', usermgt);
-app.use('/mongo', mongod);
+app.use('/usermgt', usermgt);
+app.use('/mongod', mongod);
 app.use('/react', react);
 app.use('/angular', angular);
 app.use('/vue', vue);
 app.use('/linux', linux);
-
+app.use('/bash', bash);
 
 
 
