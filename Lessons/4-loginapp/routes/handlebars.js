@@ -4,7 +4,7 @@ const walk = require('../walk.js');
 console.log(__dirname);
 
 var walkSync = [];
-walkSync = walk.walkSync('videos/handlebars');
+walkSync = walk.walkSync('handlebars');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

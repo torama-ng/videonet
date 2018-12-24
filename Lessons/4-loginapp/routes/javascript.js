@@ -3,7 +3,7 @@ var router = express.Router();
 const walk = require('../walk.js');
 console.log(__dirname);
 var walkSync = [];
-walkSync = walk.walkSync('videos/javascript');
+walkSync = walk.walkSync('javascript');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

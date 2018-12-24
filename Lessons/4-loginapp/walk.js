@@ -12,41 +12,30 @@ const mkdirSync = function (dirPath) {
   }
 }
 mkdirSync('./videos');
-
 mkdirSync('./videos/upload');
-
 var walkSync = function (dir, filelist) {
   filelist = [];
   const fullPath = path.join(__dirname, 'videos',dir);
   mkdirSync(fullPath);
   const vdir = path.join('videos', dir);
-  
   fs.readdir(vdir, (err, files) => {
     if (err) throw err;
     files.forEach(file => {
-      if (!fs.statSync(vdir + "/" + file).isDirectory()) {
-        filelist.push(encodeURI(  dir + '/'+ file));
+      filePath = path.join(vdir,file);
+      
+      if (!fs.statSync(filePath).isDirectory()) {
+        ufile = encodeURI(file)
+        url1 = path.join(dir, ufile);
+       
+        filelist.push(ufile);
+        // console.log(`filelist content is  ${filelist}`); 
+       
       }
     });
+   
   });
+   
   return filelist;
-};
-
-// List all files in videos directory after search
-var searchSync = function (dir, searchlist) {
-  searchlist = [];
-  fs.readdir(dir, (err, files) => {
-    if (err) throw err;
-    files.forEach(folder => {
-      fs.readdir(dir + "/" + folder, (err, files) => {
-        if (err) throw err;
-        files.forEach(video => {
-          searchlist.push(video);
-        });
-      })
-    });
-  });
-  return searchlist;
 };
 
 // export object containing list of directories
