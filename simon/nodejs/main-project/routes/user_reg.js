@@ -20,22 +20,7 @@ router.get('/', function(req, res,next) {
   
 })
 
- router.post('/',[
-    // username must be an email
-    check("user_email", "Invalid email").isEmail(),
-
-    // password must be at least 5 chars long
-    check("user_password", "invalid password ").isLength({ min: 5 }).
-    custom((value,{req, loc, path}) => {
-        if (value !== req.body.confirmPassword) {
-            // trow error if passwords do not match
-            throw new Error("Passwords don't match");
-  
-        } else {
-            return value;
-        }
-    })
-  ], function(req , res , next){
+ router.post('/', function(req , res , next){
     const errors = validationResult(req);
 // getting user details 
     let username= req.body.user_name;
@@ -67,6 +52,7 @@ router.get('/', function(req, res,next) {
             if (err){
                 return console.log(err);
             }
+            console.log(user_object);
             console.log("1 user datails inserted to mongodb");
             db.close();
 
