@@ -112,11 +112,6 @@ app.use('/vue', vue);
 app.use('/linux', linux);
 app.use('/bash', bash);
 
-
-
-
-
-
 // Set Port
 app.set('port', (process.env.PORT || 3100));
 

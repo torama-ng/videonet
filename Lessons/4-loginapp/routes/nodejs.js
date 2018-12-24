@@ -7,12 +7,19 @@ walkSync = walk.walkSync('nodejs');
  
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  
   res.render('view', { 
     videoTitle: 'Nodejs Videos',
     videoFiles: walkSync,
     videoDir: 'Nodejs'
 
   });
+  
 });
+
+
+
+
+
 
 module.exports = router;
