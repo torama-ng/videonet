@@ -24,7 +24,7 @@ router.post('/',function(req,res){
     let url = "mongodb://localhost:27017/users_database";
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
-        var database = db.db("users_database");
+        let database = db.db("users_database");
         let user_name= req.body.user_name;
         let user_email= req.body.user_email;
         let user_number= req.body.number;
