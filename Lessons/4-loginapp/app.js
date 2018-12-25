@@ -18,6 +18,7 @@ var db = mongoose.connection;
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var nodejs = require('./routes/nodejs');
+var mongoroute = require('./routes/mongoroute');
 var javascript = require('./routes/javascript');
 var html = require('./routes/html');
 var usermgt = require('./routes/usermgt');
@@ -28,7 +29,7 @@ const react = require('./routes/react');
 const vue = require('./routes/vue');
 const angular = require('./routes/angular');
 const bash = require('./routes/bash');
-const mongod = require('./routes/mongo');
+
 
 // Init App
 var app = express();
@@ -101,22 +102,22 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/nodejs', nodejs);
 app.use('/javascript', javascript);
+app.use('/mongoroute', mongoroute);
 app.use('/html', html);
 app.use('/css', css);
 app.use('/bootstrap', bootstrap);
 app.use('/usermgt', usermgt);
-app.use('/mongod', mongod);
 app.use('/react', react);
 app.use('/angular', angular);
 app.use('/vue', vue);
 app.use('/linux', linux);
 app.use('/bash', bash);
 
-// Set Port
+/* Set Port
 app.set('port', (process.env.PORT || 3100));
 
 app.listen(app.get('port'), function(){
 	console.log('Server started on port '+app.get('port'));
 });
-
+*/
 module.exports = app;

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const walk = require('../walk.js');
-console.log(__dirname);
+console.log(__dirname + '/javascript');
 var walkSync = [];
 walkSync = walk.walkSync('javascript');
 
