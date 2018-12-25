@@ -3,20 +3,19 @@ var router = express.Router();
 const walk = require('../walk.js');
 
 var walkSync = [];
-walkSync = walk.walkSync('linux');
- 
+walkSync = walk.walkSync('mongoroute');
+
 /* GET home page. */
-router.get('/', ensureAuthenticated,function(req, res, next) {
-  
+router.get('/', ensureAuthenticated, function(req, res, next) {
   res.render('view', { 
-    videoTitle: 'Linux Videos',
+    videoTitle: 'Mongo Videos',
     videoFiles: walkSync,
-    videoDir: 'Linux'
+    videoDir: 'Mongo'
 
   });
-  
 });
 
+// Ensure Authenticated
 function ensureAuthenticated(req, res, next){
 	if(req.isAuthenticated()){
 		return next();
@@ -25,5 +24,6 @@ function ensureAuthenticated(req, res, next){
 		res.redirect('/users/login');
 	}
 }
+
 
 module.exports = router;

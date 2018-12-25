@@ -8,7 +8,7 @@ var walkJson = {};
 // const navClicked = 
 // join nav menu to videos folder
 // videosDir = "videos/" + navClicked
-walkJson = walk.walkJson('videos/vue');
+walkJson = walk.walkJson('vue');
 const videoTitle = walkJson.dir + " " + "Videos"
 
 /* GET home page. */
