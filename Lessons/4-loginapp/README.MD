@@ -29,11 +29,14 @@ css
 3. Where necessary, We want to use bootstrap here
 
 Routes
-Routes are setup in ./routers.js and included in app.js Each route gets a .js file in routes folder which calles views/view.ejs
+Routes are setup in routes directory  and included in app.js. This needs to change so routes are accessed with query-param or better way. DRY -> Dont Repeat Yourself. Most content of route files is similar.
+
+Handlebars Helper:
+This is weird, forcing us to require two handlebars - one express-handlebars and one handlebars with handle hbs.  Custom Handlebar helper defined in app.js. Is that the right time. THat file can get very big.
 
 mp4 File Listing
 walk.js has a function walkSync that lists files in a given folder returning an array. The views loops the array to display the videos.
-We need to include recursive directory search
+*** We need to include recursive directory search
 
 RESOURCES
 1. https://youtu.be/yfoY53QXEnI - CSS Crash Course For Absolute Beginners
@@ -45,4 +48,8 @@ RESOURCES
 
 mongodb://tor1:<dbpassword>@ds117109.mlab.com:17109/tordb1
 mlab.com/torama/T0rM...o
+
 TODO
+1. reCaptcha on registration
+2. If logged out, refreshing a route should provide login form without exiting route
+3.

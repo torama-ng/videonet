@@ -47,7 +47,7 @@ app.engine('hbs', exphbs({
 app.set('view engine', 'hbs');
 
 // Handlebars helpers
-hbs.registerHelper('formatme', function(txt) {
+hbs.registerHelper('formatMe', function(txt) {
   txt = path.basename(txt,'.mp4');
   txt =  decodeURI(txt) ;
   return txt.substring(0, 45);
