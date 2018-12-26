@@ -1,12 +1,11 @@
 var express = require('express');
 var router = express.Router();
-const walk = require('../walk.js');
-
 var walkSync = [];
-walkSync = walk.walkSync('nodejs');
  
 /* GET home page. */
 router.get('/', ensureAuthenticated,function(req, res, next) {
+  const walk = require('../walk.js');
+  walkSync = walk.walkSync('nodejs');
   
   res.render('view', { 
     videoTitle: 'Nodejs Videos',
