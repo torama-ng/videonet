@@ -9,7 +9,6 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var fileUpload = require('express-fileupload');
 var formidable = require('formidable');
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var videosRouter = require('./routes/videos');
@@ -26,6 +25,9 @@ var allVideos = require('./routes/randomVideos');
 var uploadFiles = require('./routes/uploadFiles');
 var userLogin  =  require('./routes/login');
 var user_reg  =  require('./routes/user_reg');
+//const hbs = require('hbs');
+
+
 
 
 var app = express();
@@ -33,6 +35,13 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+// setting  partials
+//hbs.registerPartials(__dirname + '/views/partials');
+
+
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'ejs');
 
 app.use(bodyParser({defer:true}));
 app.use(bodyParser.json());
@@ -65,6 +74,7 @@ app.use('/randomVideos', allVideos);
 app.use('/uploadFiles', uploadFiles);
 app.use('/login', userLogin);
 app.use('/user_reg', user_reg);
+
 
 
 
