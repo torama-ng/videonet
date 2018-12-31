@@ -59,7 +59,7 @@ router.post('/',function(req,res){
 
                     if (decrypted_pass === user_password){
                         res.render('loggedin_view',{
-                           // name : user_email
+                            name : user_email
                         })
 
                     }else{

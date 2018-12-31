@@ -64,7 +64,7 @@ router.get('/', function(req, res,next) {
 
       });
       res.render('reg_complete_view' , {
-      
+        username : username 
       });
     })
 
