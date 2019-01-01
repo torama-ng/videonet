@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
+const walk = require('../walk.js');
+
 var walkSync = [];
+walkSync = walk.walkSync('mongod');
 
 /* GET home page. */
 router.get('/', ensureAuthenticated, function(req, res, next) {
-  const walk = require('../walk.js');
-  walkSync = walk.walkSync('mongod');
-
   res.render('view', { 
     videoTitle: 'Mongo Videos',
     videoFiles: walkSync,
