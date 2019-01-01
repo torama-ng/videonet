@@ -9,7 +9,6 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var fileUpload = require('express-fileupload');
 var formidable = require('formidable');
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var videosRouter = require('./routes/videos');
@@ -26,6 +25,9 @@ var allVideos = require('./routes/randomVideos');
 var uploadFiles = require('./routes/uploadFiles');
 var userLogin  =  require('./routes/login');
 var user_reg  =  require('./routes/user_reg');
+//const hbs = require('hbs');
+
+
 
 
 var app = express();
@@ -34,18 +36,24 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+
+
 app.use(bodyParser({defer:true}));
 app.use(bodyParser.json());
-//app.use(fileUpload());
-//app.use(cors());
-//app.use(busboy());
 
-app.use(logger('dev'));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'videos')));
+
+// global validator
+app.use(function(req, res, next){
+  res.locals.errors = null;
+  next();
+
+});
 
 // Walk Dir
 
@@ -65,6 +73,7 @@ app.use('/randomVideos', allVideos);
 app.use('/uploadFiles', uploadFiles);
 app.use('/login', userLogin);
 app.use('/user_reg', user_reg);
+
 
 
 
