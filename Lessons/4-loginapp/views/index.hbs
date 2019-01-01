@@ -3,10 +3,12 @@
 
 
 <p>Welcome  {{{user.username}}}</p>
+<!--
 <div class="d-flex justify-content-start tcontainer">
+
     <div class="section create col-lg-3 bg-dark">Create
         
-        <form method="POST" action="/create" >
+        <form method="POST" action="/create"  enctype="multipart/form-data">
             <div class="form-group">
                 <label for="name" class="text-white">Name of Video</label>
                 <input type="text" class="form-control" id="name" name="name" aria-describedby="textlHelp" 
@@ -51,12 +53,12 @@
                     <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
                 </div>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" 
-                       name="filename" id="filename" aria-describedby="inputGroupFileAddon01">
+                    <input type="file"  
+                       name="filename" id="filename" >
                     <label class="custom-file-label" for="filename">Choose file</label>
                 </div>
             </div>
-            <button type="button" class="btn btn-link">Create Record</button>
+	    <input type="submit" value="submit" class="btn btn-primary btn-block">
             
         </form>
     </div>
@@ -64,6 +66,6 @@
     <div class="section update col-lg-3 bg-danger">Update</div>
     <div class="section delete col-lg-3 bg-success">Delete</div>
 </div>
-
+-->
 
 
