@@ -26,6 +26,11 @@ const mkdirSync = function (dirPath) {
     }
 }
 
+
+//Make the dir if not exists
+mkdirSync("profile_pics/user_images/");
+
+
 router.use(fileUpload());
 
 router.get('/', function (req, response, next) {
@@ -58,8 +63,7 @@ router.post('/', (req, res, next) => {
         var profilepic = req.files.file, filename = profilepic.name;
         console.log(username + ", " + password);
 
-        //Make the dir if not exists
-        mkdirSync("profile_pics/user_images/");
+       
         var userImage = "user_images/" + filename;
 
         mongo_client.connect(url, (error, db) => {

@@ -9,7 +9,7 @@ router.use(session({secret:"_ajjvnjjcbvhbhvLiveNow",resave:false,saveUninitializ
 
 //var walkSync = walk.walkSync('videos');
 //const walker = require('../sqlwalker');
-const allVideos = require('../randomFilePicker');
+const allVideos = require('../randomfilepicker');
 var videosSync = [];
 
 // mkdir if not exits
