@@ -1,6 +1,28 @@
 <%- include('header'); -%>
 <%- include('navbar'); -%>
-<div>
+
+<div class="container-fluid">
+    <div class="row">
+
+<div class="d-flex flex-wrap justify-content-around col-sm p-0 categoryvid bg-warning mb-1 ml-1">
+        <!-- <div class=" title-area bg-white flex-grow-1" >
+                <h6> <%= videoTitle %> </h6> 
+               <p> Number of videos <%=videoFiles.length %> </p>
+               </div>  -->
+    <% videoFiles.forEach( function (file) { %>
+        <div>
+            <video class="col-sm p-0 m-1 video-view flex-grow-1 " controls src="<%= file %>" 
+                type ="video/mp4">
+            </video>  
+        </div>   
+    <% }) %>
+    
+</div>
+</div>
+</div>
+
+
+<!-- <div>
 <h1><%= videoTitle %></h1>
 
 <p> # of Videos <%= videoFiles.length %> </p>
@@ -14,6 +36,6 @@
            </div>
 
        <%}) %>
-    </div>
+    </div> -->
 
 <%- include('footer'); -%>

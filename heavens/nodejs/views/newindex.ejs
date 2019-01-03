@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+     <link rel="stylesheet" href="../stylesheets/layout.css">
+     
+    <title>Torama Layout</title>
+  </head>
+  <body class="bg-dark">
+    <!--layout starts-->
+        <!--header-->
+ <div class="container-fluid myh  bg-dark  ">
+  <div class="row ">
+      <nav  class=" col navbar navbar-dark bg-dark py-2 navbar-expand-sm fixed-top">
+          <div class="logo">
+              <img class="logo" src="../images/logo.png">
+            </div> 
+            <a href="#" class="navbar-brand text-uppercase" >&lt;/&gt;Torama </a>
+      
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarlinks"> <span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navbarlinks">
+          <ul class="navbar-nav ">
+            <li class="nav-item">    
+                  <a href="#"  class="nav-link active">Home</a>
+            </li>
+            <li  class="nav-item">    
+              <a href="#"  class="nav-link">Trending</a>
+            </li>
+            <li class="nav-item dropdown">    
+              <a href="#"  class="nav-link dropdown-toggle" data-toggle="dropdown">Category <span class="caret"></span></a>
+              <ul class="dropdown-menu bg-dark">
+                <li class="mx-2"><a href="/java">Java</a></li>
+                <li class="mx-2"><a href="/nodejs">Node js</a></li>
+                <li class="mx-2"><a href="/javascript">JavaScript</a></li>
+                <li class="mx-2"><a href="/python">Python</a></li>
+              </ul>
+            </li>    
+      </div>
+      </nav>
+ </div>
+ </div>
+    <div class="container-fluid bg-dark " >
+      <div class=" row border border-danger justify-content-between">
+          <div class="col-sm-9 ml-0 pr-0 ">
+            <!--carousal-->
+            <div class="col carousel bg-warning"></div>
+            
+            <!--new videos-->
+            <div class="col text-white">New videos</div>
+           
+            <div class="col d-flex my-1 p-0 newvideo">
+               <div class="col newvideo bg-warning "></div>
+               <div class="col newvideo bg-warning ml-1"></div>
+               <div class="col newvideo bg-warning ml-1"></div>
+               <div class="col newvideo bg-warning ml-1"></div>
+            </div>
+            
+            <div class="col text-white">Category videos</div>
+            <!-- categoryvideos-->
+            <div class="container-fluid">
+              <div class="row pr-0">
+            <!-- <div class="col p-0 categoryvid"></div> -->
+              <div class="col-sm p-0 categoryvid bg-warning mb-1 ml-1">
+                    <% videoFiles.forEach( function (file) { %>
+                            <video class="video-col" controls src="<%= file %>" 
+                                type ="video/mp4">
+                            </video>  
+                    <% }) %>
+                    <div class="title-area bg-white" >
+                        <h5> <%= videoTitle %> </h5> 
+                       <p> Number of videos <%=videoFiles.length %> </p>
+                       </div> 
+              </div>
+              <div class="col-sm categoryvid bg-warning ml-1 mb-1 "></div>
+              <div class="col-sm categoryvid bg-warning ml-1 mb-1"></div>
+              <div class="col categoryvid bg-warning ml-1 mb-1"></div>
+        </div>
+        </div>
+        </div>
+          <div class="col-sm-2 p-0 bg-dark mr-2 ">
+            <div class="col playlist bg-warning "></div>
+           <!-- recent-->
+            <div class="col text-white">Recent</div>
+            <div class="col recent mt-1 bg-warning "></div>    
+          </div>
+      </div>
+    </div>
+
+      <div class="col mt-1 myhf bg-dark ">
+         <p class="text-white text-center">Torama Inovation hub</p>
+      </div>
+      
+  <!--layout ends-->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  </body>
+</html>

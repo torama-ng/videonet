@@ -6,8 +6,8 @@ var walkSync = walk.walkSync('videos');
 console.log(__dirname);
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', {
-    videoTitle: 'Torama Video Portal (index)',
+  res.render('newindex', {
+    videoTitle: 'Torama Videos',
     lessonNumber: 'Lesson 1',
     videoDir: 'Root (videos)',
     videoFiles: walkSync
