@@ -4,6 +4,15 @@ var fileUpload = require('express-fileupload');
 //var multer = require('multer');
 //var fsExtra = require('fs-extra');
 
+// mkdir if not exits
+const mkdirSync = function (dirPath) {
+    try {
+        fs.mkdirSync(dirPath)
+    } catch (err) {
+        if (err.code !== 'EEXIST') throw err
+    }
+}
+
 const router = express.Router();
 const fs = require('fs');
 
@@ -28,6 +37,9 @@ router.post('/',function(req,res){
     console.log(req.files);
       var file = req.files.filename,
        filename = file.name;
+
+       mkdirSync('videos/upload/');
+       
       file.mv('videos/upload/' + filename,(error)=>{
           if(error){
               res.render('error',{

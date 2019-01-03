@@ -19,10 +19,27 @@ body {
   }
 
   .jumbotron input{
+    width: 40%;
     padding:10px;
     border:dimgray solid 1px; 
     margin: 5px;
+    margin-top: 10px;
+    border-radius: 6px;
+  }
 
+  .all_container{
+    position: relative;
+    border-radius: 0.6rem;
+    border:dimgray solid 1px; 
+    text-align: center;
+    margin-top: 10%;
+    padding: 0.6rem;
+  }
+
+  .footer_container{
+   position: relative;
+   margin-top: 10%;
+    text-align: center;
   }
 
   input[type="submit"]:hover {
