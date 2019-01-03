@@ -9,17 +9,22 @@ var flash = require('connect-flash');
 var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-// var mongo = require('mongodb');
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://tor1:T0rDBpass@ds117109.mlab.com:17109/tordb1');
-var db = mongoose.connection;
+// Connect to DB
+const db = require('./config/keys').mongoURI;
 
+mongoose
+.connect(db,{ useNewUrlParser: true})
+.then (() => console.log('connected to MongoDB'))
+.catch(err => console.log(err));
 
+const videoRoutes = require('./routes/videoroutes');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var nodejs = require('./routes/nodejs');
 var mongod = require('./routes/mongod');
+var uploadv = require('./routes/uploadv');
 var javascript = require('./routes/javascript');
 var html = require('./routes/html');
 var usermgt = require('./routes/usermgt');
@@ -29,9 +34,7 @@ const linux = require('./routes/linux');
 const react = require('./routes/react');
 const vue = require('./routes/vue');
 const angular = require('./routes/angular');
-const bash = require('./routes/bash');
-
- 
+const bash = require('./routes/bash'); 
 
 // Init App
 var app = express();
@@ -108,11 +111,13 @@ app.use(function (req, res, next) {
 });
 
 // Routes
+app.use('/api/videos',videoRoutes);
 app.use('/', routes);
 app.use('/users', users);
 app.use('/nodejs', nodejs);
 app.use('/javascript', javascript);
 app.use('/mongod', mongod);
+app.use('/uploadv', uploadv);
 app.use('/html', html);
 app.use('/css', css);
 app.use('/bootstrap', bootstrap);

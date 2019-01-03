@@ -1,2 +1,71 @@
- <h2 class="page-header">Dashboard</h2>
-<p>Welcome to your dashboard</p>  
+ <h2 class="page-header">{{user.name}} Dashboard</h2>
+<p>Welcome to your dashboard</p> 
+
+
+<p>Welcome  {{{user.username}}}</p>
+<!--
+<div class="d-flex justify-content-start tcontainer">
+
+    <div class="section create col-lg-3 bg-dark">Create
+        
+        <form method="POST" action="/create"  enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="name" class="text-white">Name of Video</label>
+                <input type="text" class="form-control" id="name" name="name" aria-describedby="textlHelp" 
+                    placeholder="Enter name of Video">
+                <small id="textlHelp" class="form-text text-white">Name you want shown in description</small>
+            </div>
+            <div class="form-group">
+                <label for="author" class="text-white">Author</label>
+                <input type="text" class="form-control" id="author" name="author" aria-describedby="textlHelp" 
+                    placeholder="Enter Author">
+                <small id="textlHelp" class="form-text text-white">Original Author of Video</small>
+            </div>
+            <div class="form-group">
+                <label for="authorlink" class="text-white">Author Link</label>
+                <input type="text" class="form-control" id="authorlink" name="authorlink" aria-describedby="textlHelp" 
+                    placeholder="Enter Author Link">
+                <small id="textlHelp" class="form-text text-white">URL of Original Author of Video</small>
+            </div>
+            <div class="form-group">
+                <label for="description" class="text-white">Description</label>
+                <input type="text" class="form-control" id="description" name="description" aria-describedby="textlHelp" 
+                    placeholder="Enter Description">
+                <small id="textlHelp" class="form-text text-white">Summary of Video</small>
+            </div>
+            
+            <div class="form-group">
+                <div class="form-control-prepend">
+                    <label class="form-text text-light" 
+                        for="categorySelect1">Category</label>
+                </div>
+                            
+                <select class="form-control" id="categorySelect1" name="category">
+                    <option selected>Choose...</option>
+                    <option value="1">Node js</option>
+                    <option value="2">Mongo</option>
+                    <option value="3">Javascript</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                </div>
+                <div class="custom-file">
+                    <input type="file"  
+                       name="filename" id="filename" >
+                    <label class="custom-file-label" for="filename">Choose file</label>
+                </div>
+            </div>
+	    <input type="submit" value="submit" class="btn btn-primary btn-block">
+            
+        </form>
+    </div>
+    <div class="section read col-lg-3 bg-secondary" >Read</div>
+    <div class="section update col-lg-3 bg-danger">Update</div>
+    <div class="section delete col-lg-3 bg-success">Delete</div>
+</div>
+-->
+
+

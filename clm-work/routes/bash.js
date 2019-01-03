@@ -11,10 +11,8 @@ router.get('/', function(req, res, next) {
     videoTitle: 'Bash Videos',
     videoFiles: walkSync,
     videoDir: 'Bash'
-
   });
 });
-
 
 
 module.exports = router;

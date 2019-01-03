@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+//var session = require('express-session');
 
 //The below libraries are used for file collection
 //var busboy = require('connect-busboy');
@@ -52,8 +53,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'videos')));
+app.use(express.static(path.join(__dirname, 'profile_pics')));
 
-// Walk Dir
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -74,7 +76,7 @@ app.use('/user_registration_mongo', user_reg_mongo);
 app.use('/login', login);
 
 app.use('/', function(req, res) {
-  res.sendFile(path.join(__dirname + '/index.html'))
+  res.sendFile(path.join(__dirname + '/index.html'));
 });
 
 // catch 404 and forward to error handler
