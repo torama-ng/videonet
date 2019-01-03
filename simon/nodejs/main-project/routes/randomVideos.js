@@ -20,9 +20,6 @@ var url = videosSync[1];
 });
 
 
-router.post('/',(req,response,next)=>{
 
-    res.send('You just posted now !!');
-});
 
 module.exports = router;

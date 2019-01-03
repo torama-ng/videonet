@@ -3,7 +3,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-//The below libraries are used for file collection
 var busboy = require('connect-busboy');
 var bodyParser = require('body-parser');
 var cors = require('cors');
@@ -25,12 +24,17 @@ var allVideos = require('./routes/randomVideos');
 var uploadFiles = require('./routes/uploadFiles');
 var userLogin  =  require('./routes/login');
 var user_reg  =  require('./routes/user_reg');
-//const hbs = require('hbs');
+const expressValidator = require('express-validator');
+const expressSession = require('express-session');
+const ejsLint = require('ejs-lint');
+
 
 
 
 
 var app = express();
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -40,6 +44,9 @@ app.set('view engine', 'ejs');
 
 app.use(bodyParser({defer:true}));
 app.use(bodyParser.json());
+app.use(expressValidator());
+app.use(expressSession({secret : 'max', saveUninitialized : false, resave: false}));
+
 
 
 app.use(express.json());
@@ -77,8 +84,10 @@ app.use('/user_reg', user_reg);
 
 
 
-app.use('/', function(req, res) {
-   res.sendFile(path.join(__dirname + '/index.html'));
+
+
+app.use('*', function(req, res) {
+   res.sendFile(path.join(__dirname + '/error.html'));
 
 });
 

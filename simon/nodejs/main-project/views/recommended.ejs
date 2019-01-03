@@ -2,7 +2,7 @@
 <%- include('navbar'); -%>
 
 
-<h1 style= "color: darkgreen; font-size:18xp;"> Welcome To Torama Tech </h1>
+<h1 style= "color: rgb(64, 36, 226); font-size:18xp;"><%= name %>  Welcome To Torama Tech </h1>
 
 <p><%= videoTitle %></p>
 
@@ -13,20 +13,20 @@
     type="video/mp4"> 
 </video>
 
-<p> <%= recommended%></p>
+<p> <%= ((decodeURI(recommended).slice(0,-4)).substr(5,35)) %></p>
 
 <p style="font-size:12px;color:black;font-style:normal"> All Videos - watch now</p>
 
-<% for (k=0;k<videoFiles.length;k=k+4) { %>
+<% for (k=0;k<20;k=k+4) { %>
     <div id="rec-body" class="row">
         <% for (i=k; i<k+4; i++) { %>
-            <% if (videoFiles[i]) {el = videoFiles[i]; %>
+            <% if (videoFiles[i]) {el = videoFiles[i]  ; %>
                 <div class="col">
                     
-                    <video style="max-height:50%;max-width:107%;height:200px;" controls src="<%= el %>" 
+                    <video width="320" height="200" controls src="<%= el %>" 
                         type="video/mp4"> 
                     </video>
-                    <p> <%= ((decodeURI(el).slice(0,-4)).substr(0,28)) %></p>
+                    <p> <%= ((decodeURI(el).slice(0,-4)).substr(5,35)) %></p>
                 </div>
             <% }%>
         <%}%>
