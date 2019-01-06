@@ -1,19 +1,27 @@
 var express = require('express');
 var router = express.Router();
-const walk = require('../walk.js');
-console.log(__dirname);
-
 var walkSync = [];
-walkSync = walk.walkSync('handlebars');
-
+ 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/',ensureAuthenticated, function(req, res, next) {
+  const walk = require('../walk.js');
+  walkSync = walk.walkSync('handlebars');
+  
   res.render('view', { 
-    videoTitle: 'Handlebars Videos',
+    videoTitle: 'handlebars Videos',
     videoFiles: walkSync,
     videoDir: 'Handlebars'
 
   });
 });
+
+function ensureAuthenticated(req, res, next){
+	if(req.isAuthenticated()){
+		return next();
+	} else {
+		req.flash('error_msg','You are not logged in');
+		res.redirect('/users/login');
+	}
+}
 
 module.exports = router;

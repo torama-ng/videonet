@@ -1,0 +1,50 @@
+.mycol{
+    border: 1px solid gold;
+    min-height: vh;
+}
+.carousel{
+    min-height: 45vh;
+    border: 1px solid yellow;
+}
+
+.newvideo{
+    min-height: 25vh;
+    border: 1px solid yellow;
+}
+.categoryvid{
+    min-height: 50vh;
+    border: 1px solid yellow;
+}
+.foo{
+    margin-top: 300px!important;
+}
+
+
+.logo{
+    color: red;
+}
+
+.myhf{
+    border: 1px solid yellow;
+    min-height: 15vh;   
+}
+.myh{
+    border: 2px solid grey;
+    min-height: 10vh;   
+}
+
+.text-white{
+    text-align: center;
+}
+
+.playlist{
+    min-height: 50vh;
+    border: 1px solid yellow;
+}
+.recent{
+    min-height: 50vh;
+    border: 1px solid yellow;
+    
+}
+.logo{height: 30px; width: 40px;}
+.margin{margin-top: 90px;}

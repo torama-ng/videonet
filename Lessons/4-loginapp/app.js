@@ -20,16 +20,17 @@ mongoose
 .catch(err => console.log(err));
 
 const videoRoutes = require('./routes/videoroutes');
-var routes = require('./routes/index');
-var users = require('./routes/users');
-var nodejs = require('./routes/nodejs');
-var mongod = require('./routes/mongod');
-var uploadv = require('./routes/uploadv');
-var javascript = require('./routes/javascript');
-var html = require('./routes/html');
-var usermgt = require('./routes/usermgt');
-var css = require('./routes/css');
-var bootstrap = require('./routes/bootstrap');
+const routes = require('./routes/index');
+const users = require('./routes/users');
+const nodejs = require('./routes/nodejs');
+const mongod = require('./routes/mongod');
+const uploadv = require('./routes/uploadv');
+const javascript = require('./routes/javascript');
+const html = require('./routes/html');
+const usermgt = require('./routes/usermgt');
+const css = require('./routes/css');
+const bootstrap = require('./routes/bootstrap');
+const handlebars = require('./routes/handlebars');
 const linux = require('./routes/linux');
 const react = require('./routes/react');
 const vue = require('./routes/vue');
@@ -53,7 +54,8 @@ app.set('view engine', 'hbs');
 hbs.registerHelper('formatMe', function(txt) {
   txt = path.basename(txt,'.mp4');
   txt =  decodeURI(txt) ;
-  return txt.substring(0, 45);
+  return txt;
+  // return txt.substring(0, 45);
 
 });
 
@@ -121,6 +123,7 @@ app.use('/uploadv', uploadv);
 app.use('/html', html);
 app.use('/css', css);
 app.use('/bootstrap', bootstrap);
+app.use('/handlebars', handlebars);
 app.use('/usermgt', usermgt);
 app.use('/react', react);
 app.use('/angular', angular);
