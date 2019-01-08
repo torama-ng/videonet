@@ -1,0 +1,22 @@
+{{> header}}
+{{> navbar}}
+
+
+<h1>{{ videoTitle }}</h1>
+<h2>{{ videoDir }}</h2>
+<div class="well">
+    <p> # of Videos {{ videoFiles.length }}</p>
+</div>
+
+<div class="video_container">
+    {{#each videoFiles}}
+
+
+
+    <video class="vid_class" style="max-height:100%;max-width:25%;" controls src="{{url}}" type="video/mp4">
+    </video>
+
+
+    {{/each}}
+</div>
+{{> footer}}
