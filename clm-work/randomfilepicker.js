@@ -20,7 +20,7 @@ fs.readdir(dir,function(error, files){
         videoFiles.forEach(video =>{
         //if (!fs.statSync(fileElements+'/'+video).isDirectory()) {
            //File list is not a directory, so we push to our list
-            fileList.push(encodeURI(fileElements +'/' + video));
+            fileList.push({url:encodeURI(fileElements +'/' + video),name:fileElements});
         //  }
 
         });

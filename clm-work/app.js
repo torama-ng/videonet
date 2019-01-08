@@ -1,51 +1,30 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+var hbs = require('hbs');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-//var session = require('express-session');
 
-//The below libraries are used for file collection
-//var busboy = require('connect-busboy');
-//var bodyParser = require('body-parser');
-//var cors = require('cors');
-//var fileUpload = require('express-fileupload');
-//var formidable = require('formidable');
+
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var videosRouter = require('./routes/videos');
-var odooRouter = require('./routes/odoo');
-var pythonRouter = require('./routes/python');
-var javaRouter = require('./routes/java');
-var javascriptRouter = require('./routes/javascript');
-var bashRouter = require('./routes/bash');
-var htmlRouter = require('./routes/html');
-var linuxRouter = require('./routes/linux');
-var nodejsRouter = require('./routes/nodejs');
-var searchedVids = require('./routes/searchedvideos');
-var allVideos = require('./routes/randomvideos');
-var uploadFiles = require('./routes/uploadfiles');
-var user_reg = require('./routes/user_registration');
-var login = require('./routes/login');
-var user_reg_mongo = require('./routes/user_registration_mongo');
-
+var user = require('./routes/user');
+var categories = require('./routes/categories');
+var randomvideos = require('./routes/randomvideos');
+var searchedvideos = require('./routes/searchedvideos');
+var uploadfiles = require('./routes/uploadfiles');
+var videos = require('./routes/videos');
 
 var app = express();
 
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.set('view engine', 'hbs');
 
-//app.use(bodyParser({defer:true}));
-//app.use(bodyParser.json());
-/*The reson we were not getting our file is cos we told our app to use file in 2 modules
-You should just use it in the module we want to colect our info
-
-*/
-//app.use(fileUpload());
-//app.use(cors());
-//app.use(busboy());
+// setting handlebars partials
+hbs.registerPartials(__dirname + '/views/partials');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -55,29 +34,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'videos')));
 app.use(express.static(path.join(__dirname, 'profile_pics')));
 
-
-
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/videos', videosRouter);
-app.use('/odoo', odooRouter);
-app.use('/python', pythonRouter);
-app.use('/java', javaRouter);
-app.use('/javascript', javascriptRouter);
-app.use('/bash', bashRouter);
-app.use('/html', htmlRouter);
-app.use('/nodejs', nodejsRouter);
-app.use('/linux', linuxRouter);
-app.use('/searchedvideos', searchedVids);
-app.use('/randomvideos', allVideos);
-app.use('/uploadfiles', uploadFiles);
-app.use('/user_registration', user_reg);
-app.use('/user_registration_mongo', user_reg_mongo);
-app.use('/login', login);
+app.use('/categories',categories);
+app.use('/user',user);
+app.use('/randomvideos', randomvideos);
+app.use('/searchedvideos', searchedvideos);
+app.use('/uploadfiles', uploadfiles);
+//app.use('/user_registration_mongo', user_registration_mongo);
+app.use('/videos', videos);
 
-app.use('/', function(req, res) {
-  res.sendFile(path.join(__dirname + '/index.html'));
-});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

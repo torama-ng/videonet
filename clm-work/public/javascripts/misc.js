@@ -77,8 +77,8 @@ function searchVideos() {
   else{
     alert('Type please');
   }
-  
 }
+
 
 module.exports = Logger;
 
