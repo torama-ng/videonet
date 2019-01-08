@@ -44,7 +44,7 @@ router.post('/',function(req,res){
           if(error){
               res.render('error',{
                   error:error,
-                  message:'No directory s such.'
+                  message:'No such directory.'
               })
           }
           else{

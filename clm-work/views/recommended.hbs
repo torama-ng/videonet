@@ -1,0 +1,65 @@
+{{> header}}
+{{> navbar}}
+
+
+{{#if checker}}
+
+<h1 style="color: darkgreen; font-size:18xp;"> Welcome To Torama Tech {{ user.name}} </h1>
+
+
+<p>{{videoTitle}} </p>
+
+
+<p> Recommended for you </p>
+
+<video id="rec-video" style="max-width:100%;height:auto;" controls src=" {{recommended.url}}" type="video/mp4">
+</video>
+
+<p> {{recommended.url}}</p>
+
+<p style="font-size:12px;color:black;font-style:normal"> All Videos - watch now</p>
+
+
+<div class="video_container">
+    {{#each videoFiles}}
+
+    <video class="vid_class" style="max-height:100%;max-width:25%;" controls src="{{url}}" type="video/mp4">
+    </video>
+
+    {{/each}}
+</div>
+
+{{else}}
+
+
+<h1 style="color: darkgreen; font-size:18xp;"> Welcome To Torama Tech </h1>
+
+<p>{{videoTitle}} </p>
+
+
+<p> Recommended for you </p>
+
+<video id="rec-video" style="max-width:100%;height:auto;" controls src=" {{recommended.url}}" type="video/mp4">
+</video>
+
+<p> {{recommended.url}}</p>
+
+<p style="font-size:12px;color:black;font-style:normal"> All Videos - watch now</p>
+
+<div class="video_container">
+    {{#each videoFiles}}
+
+
+
+    <video class="vid_class" style="max-height:100%;max-width:25%;" controls src="{{url}}" type="video/mp4">
+    </video>
+
+
+
+    {{/each}}
+</div>
+{{/if}}
+
+
+
+{{> footer}}

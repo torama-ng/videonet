@@ -1,9 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const videosJson = require("../videos.json");
+const {
+  ensureAuthenticated
+} = require('../config/auth');
 
 // search input
-router.get("/", (req, res) => {
+router.get("/", ensureAuthenticated, (req, res) => {
   var result = [],
     input,
     videos;

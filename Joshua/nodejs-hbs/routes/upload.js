@@ -3,6 +3,9 @@ const router = express.Router();
 const path = require('path');
 const walk = require('../walk.js');
 const multer = require('multer');
+const {
+  ensureAuthenticated
+} = require('../config/auth');
 
 var walkSync = [];
 walkSync = walk.walkSync('videos/uploads');
@@ -41,11 +44,11 @@ function checkFileType(file, cb) {
 }
 
 
-router.get('/', (req, res) => {
+router.get('/', ensureAuthenticated, (req, res) => {
   res.render('upload');
 });
 
-router.post('/', (req, res) => {
+router.post('/', ensureAuthenticated, (req, res) => {
   upload(req, res, (err) => {
     if (err) {
       res.render('upload', {

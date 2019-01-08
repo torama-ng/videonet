@@ -10,7 +10,7 @@ videosSync = allVideos.findVideos('videos');
 
 router.get('/',(req,res,next)=>{
 var url = videosSync[1];
-    res.render('recommended',{
+    res.render('home',{
         videoTitle: 'All Videos',
         videoFiles: videosSync,
         videoDir: 'All Videos',

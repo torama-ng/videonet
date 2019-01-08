@@ -18,7 +18,8 @@ router.use(fileUpload());
 router.get('/',function(req,response,next){
 
     response.render('uploadView',{
-        uploadText: 'Upload a file'
+        uploadText: 'Upload a file',
+        name : ' '
     })
 });
 

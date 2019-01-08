@@ -4,9 +4,12 @@ const walk = require('../walk.js');
 
 var walkSync = [];
 walkSync = walk.walkSync('videos/html');
+const {
+  ensureAuthenticated
+} = require('../config/auth');
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/', ensureAuthenticated, function (req, res, next) {
   res.render('view', {
     videoTitle: 'HTML Videos',
     videoFiles: walkSync,

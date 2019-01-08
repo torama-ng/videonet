@@ -6,4 +6,7 @@ const VideoSchema = mongoose.Schema({
   category: String
 });
 
-mongoose.model('videos', VideoSchema);
+const Videos = mongoose.model('videos', VideoSchema);
+
+
+module.exports = Videos;
