@@ -4,15 +4,13 @@ const bodyParser = require('body-parser');
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr('myTotalySecretKey');
 const router = express.Router();
+const mongoose = require('mongoose');
 const express_validator = require('express-validator');
+const Users = require('../models/users_model');
 
 
-
-//  implementation of mongoDB
-let mongodb = require('mongodb');
 
 let app = express();
-
 
 
 //app.use(express.json());
@@ -30,8 +28,18 @@ router.get('/', function(req, res,next) {
 })
 
 
+
+
  router.post('/', function(req , res , next){
-     // check form validation
+     /// show user details
+     console.log(req.body.password);
+     // password to object
+     let pass = req.body.user_password;
+  
+     // hash users password
+     const encrypted_data = cryptr.encrypt(pass);
+   
+     // check form validation if errors
   req.checkBody('user_name', 'username is required.').notEmpty();
   req.checkBody('user_email', ' Enter a valid email.').isEmail();
   req.checkBody('user_country', 'country is required.').notEmpty();
@@ -46,53 +54,37 @@ router.get('/', function(req, res,next) {
 
 
   }else{
-      /// getting user details
-      console.log(req.body.password);
-    let pass = req.body.user_password;
-    console.log(pass);
-    const encrypted_data = cryptr.encrypt(pass);
-     let user_obj = {
-         username : req.body.user_name,
-         email : req.body.user_email,
-         country : req.body.user_country,
-         password : encrypted_data
-  
-  }
+     
+    // register user here
+    let username = req.body.user_name;
+    let email = req.body.user_email;
+    let country = req.body.user_country;
+    let password = req.body.user_password;
+
+    let newUser = new Users();
+    newUser.username = username;
+    newUser.password = password;
+    newUser.email = email;
+    newUser.country = country;
+    newUser.save(function(error, docs){
+        if(error){
+            console.log('error saving data :'+ error);
+        }
+        console.log('user data saved....');
+        res.redirect('/');
+        
+    })
+      
+
+       
+
 
       // const decryptedString = cryptr.decrypt(encryptedString);
 
-      let MongoClient = mongodb.MongoClient;
 
-      let url = "mongodb://localhost:27017/simon_data";
- 
-      MongoClient.connect(url, function(err, db) {
-          if (err) {
-              return console.log(err);
-          }
-
-  
-          // specify the database to use
-          let  database = db.db("simon_data");
-          
-        
-           // create a collection if ! exist, and insert data.
-        database.collection("user_details").insertOne(user_obj, function(err, res) {
-            // if error  ..... throw error
-            if (err){
-                return console.log(err);
-            }
-            console.log(user_obj);
-            console.log("1 user datails inserted to mongodb");
-            db.close();
-        
-            /*------------------------*////
- });
- res.render('reg_complete_view' , {
-    
-  });
       
      
-    });
+    
 }})
       
   

@@ -1,0 +1,21 @@
+
+
+
+    <div class = "grid">
+            <div class = "title"> {{title}}</div>
+           
+         
+                
+      <div id="listVideo">
+        {{#each videoFiles}}
+        <figure>
+          <video controls src="{{this}}" type="video/mp4">
+          </video>
+          <figcaption>{{this}}</figcaption>
+        </figure>
+        {{/each}}
+      </div>
+             
+                 <p> # of Videos {{videoFiles.length}} </p>
+
+    
