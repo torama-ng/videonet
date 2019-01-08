@@ -26,7 +26,9 @@ const indexRouter = require('./routes/index'),
   searchRouter = require('./routes/search'),
   uploadRouter = require('./routes/upload');
 
+
 const app = express();
+
 
 // DB config
 const db = require("./config/database");
@@ -44,8 +46,7 @@ mongoose.connect(db.mongoURI, {
   .catch(err => console.log(err));
 
 // load videos model
-require("./models/Videos");
-var Videos = mongoose.model("videos");
+const Videos = require("./models/Videos");
 
 // getting json data file and saving to mongoDB
 fs.readFile('./videos.json', function (err, data) {
@@ -105,6 +106,7 @@ app.use(passport.session());
 
 app.use(flash());
 
+
 //Global variables
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash("success_msg");
@@ -146,5 +148,6 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;
