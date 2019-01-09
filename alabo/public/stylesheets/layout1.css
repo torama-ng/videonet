@@ -1,0 +1,101 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+.banner-text {
+    text-align: center;
+    font-weight: 300;
+    color: aliceblue;
+    background: url(/images/nav.jpg)center/cover fixed no-repeat;
+}
+
+.banner-text h2 {
+    margin-top: -30px;
+}
+
+.video-title {
+    text-align: center;
+    background: rgba(0, 0, 0 0.7);
+}
+
+.mycol {
+    border: 2px solid gold;
+    min-height: vh;
+}
+
+.carousel {
+    min-height: 45vh;
+    border: 2px solid red;
+}
+
+.newvideo {
+    min-height: 25vh;
+    border: 2px solid red;
+}
+
+.categoryvid {
+    min-height: 40vh;
+    border: 2px solid red;
+}
+
+.myhf {
+    border: 2px solid red;
+    min-height: 15vh;
+}
+
+.myh {
+    border: 2px solid grey;
+    min-height: 10vh;
+}
+
+.playlist {
+    min-height: 50vh;
+    border: 2px solid red;
+}
+
+.recent {
+    min-height: 50vh;
+    border: 2px solid red;
+}
+
+.logo {
+    height: 30px;
+    width: 40px;
+}
+
+.margin {
+    margin-top: 90px;
+}
+
+.title-area {
+    color: black;
+    font-size: 10px;
+    padding: 0px;
+}
+
+.video-col {
+    background: yellow;
+    border-radius: 1px;
+    width: 220px;
+    height: 200px;
+    padding: 0px;
+    margin: 1px;
+}
+
+.active {
+    background-color: rgb(252, 236, 8);
+    color: white;
+}
+
+.video-view {
+    background: yellow;
+    border-radius: 2px;
+    width: 280px;
+    height: 200px;
+    padding: 0px;
+    margin: 1px;
+}
