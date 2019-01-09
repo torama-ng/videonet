@@ -14,7 +14,8 @@ var url = videosSync[1];
         videoTitle: 'All Videos',
         videoFiles: videosSync,
         videoDir: 'All Videos',
-        recommended: url
+        recommended: url,
+        name : ''
     });
 
 });

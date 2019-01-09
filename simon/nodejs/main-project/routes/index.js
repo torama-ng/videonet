@@ -29,9 +29,26 @@ videosSync = allVideos.findVideos('videos');
 
 /* GET home page. */
 router.get('/', function(req, res, next){
+ // check if user already , then redirect back to home page
+  if(req.session.user){
+  
+    useremail = req.session.user.email;
+   
+    console.log(' you are already logged in as :'+ useremail);
+    res.render('home', {
+        
+            videoTitle: 'Torama Video Portal (index)',
+            lessonNumber: 'Lesson 1',
+            videoDir: 'Root (videos)',
+            videoFiles: videosSync,
+            recommended: videosSync[3],
+              name : "welcome back : "+useremail
+    });
+
+}else{ 
   res.render('login_view' ,{
     userObj: req.user || null	
-  });
+  }); }
 });
 
 router.post('/',function(req,res, next){
