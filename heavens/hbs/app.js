@@ -7,8 +7,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var nodeRouter = require('./routes/node');
+var usersRouter = require('./routes/playarea');
+var nodeRouter = require('./routes/nodejs');
+var pythonRouter = require('./routes/python');
+var javaRouter = require('./routes/java');
 
 var app = express();
 
@@ -17,30 +19,36 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.engine('hbs', exphbs({
   extname:'hbs',
-  layoutsDir:__dirname+'/views/',
+  layoutsDir:__dirname+'/views',
   defaultLayout:'layout'
 }));
 
-
 app.set('view engine', 'hbs');
 
-// Handlebars helpers
+// Handlebars helpers converting decodeduri to a parmalink
 hbs.registerHelper('formatMe', function(txt) {
   txt = path.basename(txt,'.mp4');
-  txt =  decodeURI(txt) ;
-  return txt.substring(0, 45);
+  txt =  decodeURI(txt);
 
+  var result = '<a href="/playarea ">' + txt.substring(0, 45) + '</a>';
+  return  new hbs.SafeString(result);
 });
+
+
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'videos')));
+
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/node',nodeRouter);
+app.use('/playarea', usersRouter);
+app.use('/nodejs',nodeRouter);
+app.use('/python',pythonRouter);
+app.use('/java',javaRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

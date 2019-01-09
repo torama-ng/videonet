@@ -3,18 +3,15 @@ var router = express.Router();
 const walk = require('../walk.js');
 console.log(__dirname);
 var walkSync = [];
-walkSync = walk.walkSync('videos/nodejs');
+walkSync = walk.walkSync('videos/java');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('view', { 
-    videoTitle: 'Nodejs Videos',
+  res.render('index', { 
+    videoTitle: 'Java Videos',
     videoFiles: walkSync,
-    videoDir: 'Nodejs'
-
+    videoDir: 'Java'
   });
 });
-
-
 
 module.exports = router;
