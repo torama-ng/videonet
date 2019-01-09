@@ -11,7 +11,8 @@ router.get('/', function(req, res, next) {
   res.render('view', { 
     videoTitle: 'Odoo Videos',
     videoFiles: walkSync,
-    videoDir: 'Odoo'
+    videoDir: 'Odoo',
+    name : ' '
 
   });
 });

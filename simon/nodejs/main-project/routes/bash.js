@@ -10,7 +10,8 @@ router.get('/', function(req, res, next) {
   res.render('view', { 
     videoTitle: 'Bash Videos',
     videoFiles: walkSync,
-    videoDir: 'Bash'
+    videoDir: 'Bash',
+    name : ' '
 
   });
 });

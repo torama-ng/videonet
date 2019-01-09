@@ -11,10 +11,22 @@
 <div class="container">
 
 	
+{{#if success }} 
+<h2>registration sucessful</h2>
 
-
-
-	<section id="content">
+{{else}}
+{{#if errors }} 
+<section class="errors">
+	<ul>
+		{{#each errors}} 
+		<li>
+			{{this.msg}}
+		</li>
+		{{/each}}
+	</ul>
+</section>
+{{/if}}
+  <section id="content">
 		<form action="user_reg" method="POST" autocomplete="off">
 		
 			
@@ -47,4 +59,8 @@
 			<a href="/">Torama Video Portal</a>
 		</div><!-- button -->
 	</section><!-- content -->
+{{/if}}
+
+
+	
 </div><!-- container -->

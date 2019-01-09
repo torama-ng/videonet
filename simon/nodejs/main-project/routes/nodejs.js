@@ -10,7 +10,8 @@ router.get('/', function(req, res, next) {
   res.render('view', { 
     videoTitle: 'Nidejs Videos',
     videoFiles: walkSync,
-    videoDir: 'Nodejs'
+    videoDir: 'Nodejs',
+    name : ' '
 
   });
 });

@@ -7,10 +7,19 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const express_validator = require('express-validator');
 const Users = require('../models/users_model');
+const db = require('../models/db');
 
 
 
 let app = express();
+
+
+//var walkSync = walk.walkSync('videos');
+const allVideos = require('../randomFilePicker');
+var videosSync = [];
+videosSync = allVideos.findVideos('videos');
+
+
 
 
 //app.use(express.json());
@@ -21,8 +30,12 @@ app.use(bodyParser.json());
 app.use(express_validator());
 
 
+
+
 router.get('/', function(req, res,next) {
-    res.render( 'user_reg');
+    res.render( 'user_reg',  {
+        
+      });
    
   
 })
@@ -45,15 +58,15 @@ router.get('/', function(req, res,next) {
   req.checkBody('user_country', 'country is required.').notEmpty();
   req.checkBody('user_password', ' invalid password').isLength({min :4}).equals(req.body.user_password2);
 
- let errors = req.validationErrors();
+ let errors = req.validationErrors(); 
   if (errors){
-    res.redirect('user_reg');
-    req.session.errors = null;
+     
       console.log("error in form "+errors);
-    
-
+  
 
   }else{
+
+        
      
     // register user here
     let username = req.body.user_name;
@@ -71,7 +84,17 @@ router.get('/', function(req, res,next) {
             console.log('error saving data :'+ error);
         }
         console.log('user data saved....');
-        res.redirect('/');
+        res.render('home', {
+            
+        videoTitle: 'Torama Video Portal (index)',
+        lessonNumber: 'Lesson 1',
+        videoDir: 'Root (videos)',
+        videoFiles: videosSync,
+        recommended: videosSync[3],
+          name : email,
+          success : false , error : req.session.errors
+        });
+        
         
     })
       

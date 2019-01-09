@@ -24,11 +24,13 @@
 
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         
+        {{#if name}}
           
             <div id="mySidebar" class="sidebar">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
               
-                <a class="nav-link" href="/uploadFiles">Upload Files</a>
+              <a class="nav-link" href="#">My profile</a>
+                <a class="nav-link" href="/uploadFiles">Upload a videos</a>
                 <a class="nav-link" href="/randomVideos">Random Videos</a>
                 <a class="nav-link" href="/bash">Bash </a>
                 <a class="nav-link" href="/html">HTML</a>
@@ -38,23 +40,32 @@
                 <a class="nav-link" href="/odoo">Odoo</a>
                 <a class="nav-link" href="/python">Python</a>
                 <a class="nav-link" href="/java">Java</a>
+                 <a class="nav-link" href="#">Log out</a>
             </div>
             
              <button class="openbtn" onclick="openNav()">☰ </button>  <br />
+
             
+           {{/if}}
             
              <!-- Brand/logo -->
-             <a class="navbar-brand" href="/">
+             <a class="navbar-brand" href="/randomVideos">
               <img src="/images/torlogo.png" alt="logo" style="width:40px;">
             </a>
 
+          
 
+         
             <form class="form-inline mt-2 mt-md-0 ml-auto" method ="POST"action="/searchedVideos">
               <input id="input_text" class="form-control mr-sm-2" type="text" name = "input_text" placeholder="Search" aria-label="Search">
-              <input class="btn btn-outline-success my-2 my-sm-0" type ="submit" name = "btnSubmit" value = "Search"/>
               
+              <input class="btn btn-outline-success my-2 my-sm-0" type ="submit" name = "btnSubmit" value = "Search"/>
+            
             </form>
             </nav>
+             
+
+           
     {{{body}}}
 
     <footer class="footer text-center">
