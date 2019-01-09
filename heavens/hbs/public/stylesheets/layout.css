@@ -65,3 +65,8 @@
     padding: 0px;
     margin: 1px;
 }
+
+.playarea{
+    min-height: 70vh;
+    border: 2px solid red;
+}

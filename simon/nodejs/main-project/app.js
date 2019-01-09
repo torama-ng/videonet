@@ -1,11 +1,13 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var busboy = require('connect-busboy');
 var bodyParser = require('body-parser');
 var cors = require('cors');
+const expressSession = require('express-session');
 var fileUpload = require('express-fileupload');
 var formidable = require('formidable');
 var indexRouter = require('./routes/index');
@@ -23,10 +25,15 @@ var searchedVids = require('./routes/searchedVideos');
 var allVideos = require('./routes/randomVideos');
 var uploadFiles = require('./routes/uploadFiles');
 var userLogin  =  require('./routes/login');
-var user_reg  =  require('./routes/user_reg');
 const expressValidator = require('express-validator');
-const expressSession = require('express-session');
+
 const ejsLint = require('ejs-lint');
+const mongoose = require('mongoose');
+const hbs = require('handlebars');
+var exphbs = require('express-handlebars');
+let db = require('./models/db');
+let  user_reg  =  require('./routes/user_reg');
+let passport  = require('passport');
 
 
 
@@ -35,17 +42,27 @@ const ejsLint = require('ejs-lint');
 var app = express();
 
 
-
-// view engine setup
+// View Engine
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.engine('hbs', exphbs({
+    extname:'hbs',
+    layoutsDir:__dirname+'/views/layouts/',
+    defaultLayout:'layout'
+  }));
+  
+app.set('view engine', 'hbs');
 
+// Handlebars helpers
+hbs.registerHelper('formatMe', function(txt) {
+  txt = path.basename(txt,'.mp4');
+  txt =  decodeURI(txt) ;
+   return txt.substring(0, 45);
 
-
+});
 app.use(bodyParser({defer:true}));
 app.use(bodyParser.json());
 app.use(expressValidator());
-app.use(expressSession({secret : 'max', saveUninitialized : false, resave: false}));
+app.use(expressSession({secret : 'ewetrurifndkedndnkwh', saveUninitialized : true, resave: true}));
 
 
 
@@ -55,12 +72,34 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'videos')));
 
+// Express Validator
+app.use(expressValidator({
+  errorFormatter: function(param, msg, value) {
+      var namespace = param.split('.')
+      , root    = namespace.shift()
+      , formParam = root;
+
+    while(namespace.length) {
+      formParam += '[' + namespace.shift() + ']';
+    }
+    return {
+      param : formParam,
+      msg   : msg,
+      value : value
+    };
+  }
+}));
+
+
+
 // global validator
 app.use(function(req, res, next){
   res.locals.errors = null;
   next();
 
 });
+
+
 
 // Walk Dir
 
@@ -85,9 +124,24 @@ app.use('/user_reg', user_reg);
 
 
 
-
+// render 404 error
 app.use('*', function(req, res) {
    res.sendFile(path.join(__dirname + '/error.html'));
+
+});
+
+// session
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Handlebars helpers
+hbs.registerHelper('formatMe', function(txt) {
+  txt = path.basename(txt,'.mp4');
+  txt =  decodeURI(txt) ;
+  //return txt;
+   return txt.substring(0, 45);
 
 });
 

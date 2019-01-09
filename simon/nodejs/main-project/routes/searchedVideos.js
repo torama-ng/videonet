@@ -55,7 +55,8 @@ router.post('/',(req,res) =>{
           res.render('notFoundView', { 
             title: 'All Videos containing '+ value.input_text ,
             videoFiles: searchSync,
-            videoDir: 'Video Search'
+            videoDir: 'Video Search',
+            name : ' '
         
           });
 
@@ -63,7 +64,8 @@ router.post('/',(req,res) =>{
       res.render('searchView', { 
         videoTitle: 'All Videos containing '+value.input_text ,
         videoFiles: foundVideos,
-        videoDir: 'Video Search'
+        videoDir: 'Video Search',
+        name : ' '
     
       });
     }

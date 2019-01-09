@@ -1,0 +1,52 @@
+
+
+
+
+<h1 style= "color: rgb(64, 36, 226); font-size:18xp;">{{name}} Welcome To Torama Tech </h1>
+
+
+<p>{{videoTitle}}</p>
+
+
+<p > Recommended for you </p>
+
+<video id="rec-video" style="max-width:100%;height:auto;" controls src="{{recommended}}" 
+    type="video/mp4"> 
+</video>
+  <p class="card-text">{{{formatMe recommended}}}</p>
+
+
+ {{!- ((decodeURI(recommended).slice(0,-4)).substr(5,35)) %>}}
+
+
+
+<div class="row justify-content-lg-start justify-content-md-start">
+    {{# each videoFiles }}
+        <div class="col-md-4 col-lg-3 col-sm-12">
+          <div class="card mb-3 shadow-sm">
+            <video class="bd-placeholder-img card-img-top" id="video-{{@index}}"
+            controls onloadeddata="setDuration({{@index}})" src="{{ this}}" 
+                type="video/mp4"> 
+                Your browser does not support video html 5 video tag
+                </video>
+            <div class="card-body">
+              <p class="card-text">{{{formatMe this}}}</p> <!-- formatMe is a custom helper -->
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted" id="vid-{{@index}}"></small>
+              </div>
+            </div>
+          </div>
+        </div>
+            
+            
+    {{/each}}
+     
+</div>
+  <p class="lead">
+        # of Videos {{videoFiles.length}}
+      </p>
+   
