@@ -1,0 +1,126 @@
+.video-fluid {
+    width: 100%;
+    height: auto;
+  }
+
+
+.mycol{
+    border: 1px solid gold;
+    min-height: 25vh;
+}
+.carousel{
+    min-height: 35vh;
+    border: 1px solid yellow;
+}
+
+.newvideo{
+    min-height: 25vh;
+    border: 1px solid yellow;
+}
+.categoryvid{
+    min-height: 50vh;
+    border: 1px solid rgb(156, 156, 144);
+}
+.foo{
+    margin-top: 300px!important;
+}
+
+#fo{
+    margin-left: 140px!important;
+}
+#na{
+    height: 50px!important;
+}
+
+.tor{
+    color: red;
+}
+
+.logo{
+    color: red;
+}
+
+.card {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  }
+
+#sech{
+    width: 40%;
+    height: 4px;
+    margin-left: 100px!important;
+    margin-top: 2px!important;
+    margin-bottom: 20px!important;
+}
+
+#face{
+    list-style: none!important;
+    margin-right: 0px!important;
+    margin-left: 500px!important;
+}
+
+#abot{
+    margin-right: 500px!important;
+    margin-left: 0px!important;
+}
+
+
+
+#copi{
+    justify-items: center!important;
+    margin-right: 100x!important;
+    margin-left: 100px!important;
+}
+
+
+.form-control {
+    padding-left: 2.375rem;
+}
+
+.myhf{
+    border: 1px solid yellow;
+    min-height: 15vh;   
+}
+.myh{
+    border: 2px solid grey;
+    min-height: 10vh;   
+}
+
+.text-white{
+    text-align: center;
+}
+
+.playlist{
+    min-height: 50vh;
+    border: 1px solid yellow;
+}
+.recent{
+    min-height: 50vh;
+    border: 1px solid yellow;
+}
+
+/*@media screen and (min-width:576px){
+    .newvideo{
+        col
+    }
+}
+
+@media screen and (min-width:768px){
+    .newvideo{
+        col
+    }
+}
+
+@media screen and (min-width:992px){
+    .newvideo{
+        col
+    }
+}
+
+@media screen and (min-width:1200px){
+    .newvideo{
+        col
+    }
+}*/
+
+.logo{height: 30px; width: 40px;}
+.margin{margin-top: 90px;}

@@ -5,8 +5,7 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 
 // Load user model
-require('../models/Users');
-const User = mongoose.model('users');
+const User = require('../models/Users');
 
 // getting login page
 router.get('/login', (req, res) => {
@@ -30,6 +29,7 @@ router.post('/login', (req, res, next) => {
 
 // registartion post request, using bcrypt to hash passwords
 router.post('/register', (req, res) => {
+  console.log(req.body);
   let errors = [];
 
   if (req.body.password != req.body.password2) {
