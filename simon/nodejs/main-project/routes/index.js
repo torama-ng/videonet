@@ -8,7 +8,10 @@ const mongoose = require('mongoose');
 const express_validator = require('express-validator');
 const connectFlash = require('connect-flash');
 const passport = require('passport');
+const facebookStrategy = require('passport-facebook');
 const passportLocal = require('passport-local').Strategy;
+const configAuth = require('../models/auth');
+
 
 //const walk = require('../walk.js');
 
@@ -35,6 +38,28 @@ app.use(express_validator({
 }));
 
 
+ // facebook login strategy
+passport.use(new facebookStrategy({
+    clientID: configAuth.facebookAuth.client_id,
+    clientSecret: configAuth.facebookAuth.client_secret,
+    callbackURL: configAuth.facebookAuth.callbackURL
+  },
+  function(accessToken, refreshToken, profile, done) {
+    User.findOrCreate("username", function(err, user) {
+      if (err) { return done(err); }
+      done(null, user);
+    });
+  }
+));
+
+//     /auth/facebook/callback
+router.get('/auth/facebook', passport.authenticate('facebook'));
+// authentication has failed.
+router.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { successRedirect: '/',
+                                      failureRedirect: '/login' }));
+
+
 // express session
 router.use(expressSession({
     secret : 'fererresjcsjhcbkckcjdkkljkllj',
@@ -55,10 +80,8 @@ router.get('/', function(req, res, next){
   if(req.session.user){
     // pass session to object on login form
     useremail = req.session.user.email;
-   
     console.log(' you are already logged in as :'+ useremail);
     res.render('home', {
-        
             videoTitle: 'Torama Video Portal (index)',
             lessonNumber: 'Lesson 1',
             videoDir: 'Root (videos)',
@@ -74,15 +97,10 @@ router.get('/', function(req, res, next){
 });
 
 router.post('/',function(req,res, next){
-  // login details user here
-  
   if(req.session.user){
-  
-        useremail = req.session.user.email;
-       
+        useremail = req.session.user.email; 
         console.log(' you are already logged in as :'+ useremail);
-        res.render('home', {
-            
+        res.render('home', {     
                 videoTitle: 'Torama Video Portal (index)',
                 lessonNumber: 'Lesson 1',
                 videoDir: 'Root (videos)',

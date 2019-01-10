@@ -11,6 +11,7 @@ const db = require('../models/db');
 const connectFlash = require('connect-flash');
 const passport = require('passport');
 const passportLocal = require('passport-local').Strategy;
+const auth = require('../models/auth');
 
 
 
@@ -119,6 +120,9 @@ router.get('/', function(req, res,next) {
             console.log('error saving data :'+ error);
         }
         console.log('user data saved....');
+
+        // flash sucess message....
+       // req.connectFlash('success_message', " thank you for registering...");
         res.render('home', {
             
         videoTitle: 'Torama Video Portal (index)',
