@@ -44,7 +44,7 @@ var app = express();
 
 // ensure authentication...
 function ensureAuthenticated(req, res, next){
-if(req.isAuthentiated()){
+if( !auth){
   return next();
 }else{
   // should send login view
@@ -99,20 +99,20 @@ app.use(function(req, res, next){
 // Walk Dir
 
 app.use('/', indexRouter);
-app.use('/users',ensureAuthenticated,  usersRouter);
+app.use('/users', ensureAuthenticated,  usersRouter);
 app.use('/videos', ensureAuthenticated, videosRouter);
 app.use('/odoo', ensureAuthenticated,  odooRouter);
-app.use('/python', ensureAuthenticated,  pythonRouter);
-app.use('/java', ensureAuthenticated,  javaRouter);
+app.use('/python', ensureAuthenticated, pythonRouter);
+app.use('/java', ensureAuthenticated, javaRouter);
 app.use('/javascript', ensureAuthenticated,  javascriptRouter);
-app.use('/bash', ensureAuthenticated,  bashRouter);
-app.use('/html', ensureAuthenticated,  htmlRouter);
+app.use('/bash', ensureAuthenticated, bashRouter);
+app.use('/html',ensureAuthenticated,  htmlRouter);
 app.use('/nodejs', ensureAuthenticated,  nodejsRouter);
-app.use('/linux', ensureAuthenticated, linuxRouter,);
-app.use('/searchedVideos', ensureAuthenticated,  searchedVids);
-app.use('/randomVideos', ensureAuthenticated, allVideos);
-app.use('/uploadFiles', ensureAuthenticated, uploadFiles);
-app.use('/login', ensureAuthenticated, userLogin);
+app.use('/linux',ensureAuthenticated, linuxRouter,);
+app.use('/searchedVideos',ensureAuthenticated,  searchedVids);
+app.use('/randomVideos',ensureAuthenticated, allVideos);
+app.use('/uploadFiles',ensureAuthenticated, uploadFiles);
+app.use('/login',  ensureAuthenticated, userLogin);
 app.use('/user_reg', ensureAuthenticated, user_reg);
 
 

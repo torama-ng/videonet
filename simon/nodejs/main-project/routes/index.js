@@ -42,7 +42,8 @@ app.use(express_validator({
 passport.use(new facebookStrategy({
     clientID: configAuth.facebookAuth.client_id,
     clientSecret: configAuth.facebookAuth.client_secret,
-    callbackURL: configAuth.facebookAuth.callbackURL
+    callbackURL: configAuth.facebookAuth.call_back_url,
+    
   },
   function(accessToken, refreshToken, profile, done) {
     User.findOrCreate("username", function(err, user) {
@@ -56,8 +57,8 @@ passport.use(new facebookStrategy({
 router.get('/auth/facebook', passport.authenticate('facebook'));
 // authentication has failed.
 router.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { successRedirect: '/',
-                                      failureRedirect: '/login' }));
+  passport.authenticate('facebook', { successRedirect: '/randomVideos',
+                                      failureRedirect: '/' }));
 
 
 // express session
