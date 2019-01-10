@@ -30,11 +30,9 @@ hbs.registerHelper('formatMe', function(txt) {
   txt = path.basename(txt,'.mp4');
   txt =  decodeURI(txt);
 
-  var result = '<a href="/playarea ">' + txt.substring(0, 45) + '</a>';
+  var result = txt.substring(0, 45) ;
   return  new hbs.SafeString(result);
 });
-
-
 
 app.use(logger('dev'));
 app.use(express.json());
