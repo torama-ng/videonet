@@ -3,17 +3,39 @@ const expressSession = require('express-session');
 var router = express.Router();
 const bodyParser = require('body-parser');
 const Cryptr = require('cryptr');
-const cryptr = new Cryptr('myTotalySecretKey');
 const Users = require('../models/users_model');
 const mongoose = require('mongoose');
 const express_validator = require('express-validator');
+const connectFlash = require('connect-flash');
+const passport = require('passport');
+const passportLocal = require('passport-local').Strategy;
+
 //const walk = require('../walk.js');
 
 let app = express();
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended:false}));
 
+// Express Validator
+app.use(express_validator({
+  errorFormatter: function(param, msg, value) {
+      var namespace = param.split('.')
+      , root    = namespace.shift()
+      , formParam = root;
 
+    while(namespace.length) {
+      formParam += '[' + namespace.shift() + ']';
+    }
+    return {
+      param : formParam,
+      msg   : msg,
+      value : value
+    };
+  }
+}));
+
+
+// express session
 router.use(expressSession({
     secret : 'fererresjcsjhcbkckcjdkkljkllj',
     resave : false,
@@ -31,7 +53,7 @@ videosSync = allVideos.findVideos('videos');
 router.get('/', function(req, res, next){
  // check if user already , then redirect back to home page
   if(req.session.user){
-  
+    // pass session to object on login form
     useremail = req.session.user.email;
    
     console.log(' you are already logged in as :'+ useremail);
@@ -70,19 +92,21 @@ router.post('/',function(req,res, next){
         });
 
 }else{
-
+    // get login form details...
     let email = req.body.user_email;
   let password = req.body.user_password;
-
+        //  find user in database...
   Users.findOne({email : email, password : password}, function(error, user){
     if(error){
         console.log(' error logging in. :'+ error);
        
     }
+
+    // if user user not found in database...
     if (!user){
         console.log(' user does not exist..');
     }
-
+    // if user is found, go to home page
     req.session.user = user;
     res.render('home',{ 
         videoTitle: 'Torama Video Portal (index)',
@@ -92,7 +116,7 @@ router.post('/',function(req,res, next){
         recommended: videosSync[3],
           name : email
       });
-      req.session.errors = null;
+//req.session.errors = null;
   })
 }
 });

@@ -8,6 +8,10 @@ const mongoose = require('mongoose');
 const express_validator = require('express-validator');
 const Users = require('../models/users_model');
 const db = require('../models/db');
+const connectFlash = require('connect-flash');
+const passport = require('passport');
+const passportLocal = require('passport-local').Strategy;
+
 
 
 
@@ -29,9 +33,38 @@ app.use(bodyParser.json());
 // express validator middleware
 app.use(express_validator());
 
+// Express Validator
+app.use(express_validator({
+    errorFormatter: function(param, msg, value) {
+        var namespace = param.split('.')
+        , root    = namespace.shift()
+        , formParam = root;
+  
+      while(namespace.length) {
+        formParam += '[' + namespace.shift() + ']';
+      }
+      return {
+        param : formParam,
+        msg   : msg,
+        value : value
+      };
+    }
+  }));
+    // use connect flash
+  app.use(connectFlash());
+
+  //Global varial for flash
+  app.use(function(req, res, nexr){
+           res.locals.success_msg = req.flash('success_msg');
+          res.locals.error_msg = req.flash('error_msg');
+         res.locals.error = req.flash.flash('error');
+         next();
+  })
+  
 
 
 
+  // registration form
 router.get('/', function(req, res,next) {
     res.render( 'user_reg',  {
         
@@ -42,14 +75,14 @@ router.get('/', function(req, res,next) {
 
 
 
-
+        // submit registration form....
  router.post('/', function(req , res , next){
      /// show user details
      console.log(req.body.password);
      // password to object
      let pass = req.body.user_password;
   
-     // hash users password
+     // hash users password , but not used for now ....
      const encrypted_data = cryptr.encrypt(pass);
    
      // check form validation if errors
@@ -60,7 +93,9 @@ router.get('/', function(req, res,next) {
 
  let errors = req.validationErrors(); 
   if (errors){
-     
+     res.render('user_reg', {
+         errors : errors
+     });
       console.log("error in form "+errors);
   
 
@@ -68,12 +103,12 @@ router.get('/', function(req, res,next) {
 
         
      
-    // register user here
+    // if no errors  register user here
     let username = req.body.user_name;
     let email = req.body.user_email;
     let country = req.body.user_country;
     let password = req.body.user_password;
-
+    // create nschema object for new user
     let newUser = new Users();
     newUser.username = username;
     newUser.password = password;
@@ -91,24 +126,15 @@ router.get('/', function(req, res,next) {
         videoDir: 'Root (videos)',
         videoFiles: videosSync,
         recommended: videosSync[3],
-          name : email,
+          name : username,
           success : false , error : req.session.errors
         });
         
         
-    })
+    });
       
-
-       
-
-
       // const decryptedString = cryptr.decrypt(encryptedString);
-
-
-      
-     
-    
-}})
+}});
       
   
 

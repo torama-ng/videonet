@@ -29,7 +29,7 @@ const expressValidator = require('express-validator');
 
 const ejsLint = require('ejs-lint');
 const mongoose = require('mongoose');
-const hbs = require('handlebars');
+const hbs = require('hbs');
 var exphbs = require('express-handlebars');
 let db = require('./models/db');
 let  user_reg  =  require('./routes/user_reg');
@@ -42,15 +42,14 @@ let passport  = require('passport');
 var app = express();
 
 
-// View Engine
+// view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.engine('hbs', exphbs({
-    extname:'hbs',
-    layoutsDir:__dirname+'/views/layouts/',
-    defaultLayout:'layout'
-  }));
-  
 app.set('view engine', 'hbs');
+  
+
+
+// setting handlebars partials
+hbs.registerPartials(__dirname + '/views/partials');
 
 // Handlebars helpers
 hbs.registerHelper('formatMe', function(txt) {
@@ -62,6 +61,7 @@ hbs.registerHelper('formatMe', function(txt) {
 app.use(bodyParser({defer:true}));
 app.use(bodyParser.json());
 app.use(expressValidator());
+// express session at work
 app.use(expressSession({secret : 'ewetrurifndkedndnkwh', saveUninitialized : true, resave: true}));
 
 
@@ -72,23 +72,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'videos')));
 
-// Express Validator
-app.use(expressValidator({
-  errorFormatter: function(param, msg, value) {
-      var namespace = param.split('.')
-      , root    = namespace.shift()
-      , formParam = root;
-
-    while(namespace.length) {
-      formParam += '[' + namespace.shift() + ']';
-    }
-    return {
-      param : formParam,
-      msg   : msg,
-      value : value
-    };
-  }
-}));
 
 
 
@@ -131,8 +114,6 @@ app.use('*', function(req, res) {
 });
 
 // session
-
-
 app.use(passport.initialize());
 app.use(passport.session());
 
