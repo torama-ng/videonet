@@ -8,10 +8,9 @@ const {
 var allVideos = [];
 allVideos = walk.videoSync('videos');
 
-
-
 /* GET home page. */
 router.get('/', ensureAuthenticated, function (req, res, next) {
+  console.group(allVideos);
   res.render('videos', {
     pageTitle: 'Video Files',
     videoList: allVideos,
