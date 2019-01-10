@@ -8,6 +8,7 @@ const createError = require('http-errors'),
   bodyparser = require('body-parser'),
   logger = require('morgan'),
   session = require('express-session'),
+  MongoStore = require('connect-mongo')(session),
   passport = require('passport'),
   mongoose = require('mongoose');
 
@@ -80,6 +81,8 @@ app.use(express.urlencoded({
   extended: false
 }));
 app.use(cookieParser());
+
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'videos')));
 
@@ -96,7 +99,10 @@ app.use(
   session({
     secret: "secret",
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    store: new MongoStore({
+      url: db.mongoURI
+    })
   })
 );
 
