@@ -1,9 +1,13 @@
 
+{{>header}}
+{{> navbar}}
 
 <h1>{{videoTitle}} </h1>
 
+
 <div class="row justify-content-lg-start justify-content-md-start">
-    {{# each videoFiles }}
+    {{#each videoFiles }}
+
         <div class="col-md-4 col-lg-3 col-sm-12">
           <div class="card mb-3 shadow-sm">
             <video class="bd-placeholder-img card-img-top" id="video-{{@index}}"
@@ -24,3 +28,5 @@
             
     {{/each}}
 </div>
+
+{{> footer}}

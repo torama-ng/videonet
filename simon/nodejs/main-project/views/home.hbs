@@ -1,8 +1,10 @@
 
 
+{{>header}}
+{{> navbar}}
 
-<h1 style= "color: rgb(33, 71, 46); font-size:18xp;">{{name}} </h1>
-<h1 style= "color: rgb(33, 71, 46); font-size:18xp;text-alighment : center"> Welcome To Torama Video Portal </h1>
+<h1 style= "color: rgb(33, 71, 46); font-size:18xp; text-align : center">Hello,  {{name}} </h1>
+<h1 style= "color: rgb(33, 71, 46); font-size:18xp;text-align : center"> Welcome To Torama Video Portal </h1>
 
 
 <p>{{videoTitle}}</p>
@@ -47,3 +49,4 @@
         # of Videos {{videoFiles.length}}
       </p>
    
+   {{> footer}}

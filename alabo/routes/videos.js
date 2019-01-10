@@ -8,11 +8,12 @@ walkSync = walk.walkSync('videos');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('videos', { videoTitle: 'Video Files',
-    videoFiles: walkSync,
-    videoDir: 'videos'
+    res.render('videos', {
+        videoTitle: 'Video Files',
+        videoFiles: walkSync,
+        videoDir: 'videos'
 
-  });
+    });
 });
 
 

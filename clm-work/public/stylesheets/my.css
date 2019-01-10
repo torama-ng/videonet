@@ -19,6 +19,16 @@ body {
   }
 
 
+  .video_box{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+
+
+
   /* .row{
     display: inline-flex;
     flex-wrap: wrap;
