@@ -9,8 +9,64 @@ body {
 .banner-text {
     text-align: center;
     font-weight: 300;
-    color: aliceblue;
+    color: #f90;
     background: url(/images/nav.jpg)center/cover fixed no-repeat;
+}
+
+.txt-subtitle {
+    color: red;
+}
+
+.btn-search-img {
+    width: 25px;
+    height: 25px;
+    background: yellow;
+    margin-right: 20px;
+}
+
+.search {
+    width: 400px;
+    height: 25px;
+}
+
+.btn-sign {
+    width: 70px;
+    color: #fff;
+    margin-right: 10px;
+    margin-left: 5px;
+    background: #090;
+    border: 1px solid #000;
+    border-radius: 8px;
+    transition: all 0.5s ease-in-out;
+}
+
+.btn-login {
+    width: 60px;
+    color: red;
+    margin-right: 10px;
+    margin-left: 5px;
+    background: #000;
+    border: 1px solid red;
+    border-radius: 8px;
+    transition: all 0.5s ease-in-out;
+}
+
+.btn-login:hover {
+    transform: scale(1.1);
+}
+
+.btn-sign:hover {
+    transform: scale(1.1);
+}
+
+.login-fields {
+    height: 25px;
+    margin-right: 5px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
 }
 
 .banner-text h2 {
@@ -22,6 +78,15 @@ body {
     background: rgba(0, 0, 0 0.7);
 }
 
+.carousel-inner {
+    height: 300px;
+    border: 1px solid #fff;
+}
+
+.ca {
+    height: 43px;
+}
+
 .mycol {
     border: 2px solid gold;
     min-height: vh;
@@ -29,17 +94,17 @@ body {
 
 .carousel {
     min-height: 45vh;
-    border: 2px solid red;
+    border: 2px solid;
 }
 
 .newvideo {
     min-height: 25vh;
-    border: 2px solid red;
+    border: 2px;
 }
 
 .categoryvid {
     min-height: 40vh;
-    border: 2px solid red;
+    border: 2px;
 }
 
 .myhf {
@@ -54,12 +119,12 @@ body {
 
 .playlist {
     min-height: 50vh;
-    border: 2px solid red;
+    border: 2px solid;
 }
 
 .recent {
     min-height: 50vh;
-    border: 2px solid red;
+    border: 2px solid;
 }
 
 .logo {
@@ -98,4 +163,18 @@ body {
     height: 200px;
     padding: 0px;
     margin: 1px;
+}
+
+@media only screen and (max-width:576px) {
+    .login-fields {
+        display: none;
+    }
+    .search {
+        display: inline;
+    }
+    .btn-search-img {
+        position: fixed;
+        left: 315px;
+        top: 65px;
+    }
 }
