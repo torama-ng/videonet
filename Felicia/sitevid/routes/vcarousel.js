@@ -4,16 +4,16 @@ const walk = require('../walk.js');
 console.log(__dirname);
 
 var walkSync = [];
-walkSync = walk.walkSync('videos');
+walkSync = walk.walkSync('vcarousel');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('videos', {
-        videoTitle: 'Video Files',
-        videoFiles: walkSync,
-        videoDir: 'videos'
+  res.render('view', { 
+    videoTitle: 'Carousel Videos',
+    videoFiles: walkSync,
+    videoDir: 'vcarousel'
 
-    });
+  });
 });
 
 

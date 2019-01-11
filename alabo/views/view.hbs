@@ -1,27 +1,24 @@
-  
- <div class="video-title">
-  <h3>{{ videoTitle }}</h3>
-<p >Number of Videos {{{videoFiles.length }}} </p>
-</div> 
+<div class="video-title">
+    <h3>{{ videoTitle }}</h3>
+    <p>Number of Videos {{{videoFiles.length }}} </p>
+</div>
 <div class="row justify-content-lg-start justify-content-md-start">
     {{#each videoFiles }}
-        <div class="col-md-4 col-lg-3 col-sm-12">
-          <div class="card mb-3 shadow-sm">
-            <video id = "play" class="bd-placeholder-img card-img-top" id="video-{{@index}}"
-            controls onloadeddata="setDuration({{@index}})" src="{{this}}" 
-                type="video/mp4"> 
+    <div class="col-md-4 col-lg-3 col-sm-12">
+        <div class="card mb-3 shadow-sm">
+            <video id="play" class="bd-placeholder-img card-img-top" id="video-{{@index}}" controls onloadeddata="setDuration({{@index}})" src="{{this}}" type="video/mp4">
                 Your browser does not support video html 5 video tag
-                </video>
+            </video>
             <div class="card-body bg-warning">
-              <p class="card-text"> {{formatMe this}} </p>
-               <!-- formatMe is a custom helper -->
-              <div class="d-flex justify-content-between align-items-center">
-                
-                <small class="text-muted" id="vid-{{@index}}"></small>
-              </div>
+                <p class="card-text"> {{formatMe this}} </p>
+                <!-- formatMe is a custom helper -->
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <small class="text-muted" id="vid-{{@index}}"></small>
+                </div>
             </div>
-          </div>
         </div>
-            
+    </div>
+
     {{/each}}
 </div>
