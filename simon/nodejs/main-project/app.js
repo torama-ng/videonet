@@ -1,7 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-
+// const expressSession = require('express-session');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var busboy = require('connect-busboy');
@@ -11,7 +11,7 @@ const expressSession = require('express-session');
 var fileUpload = require('express-fileupload');
 var formidable = require('formidable');
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+//var usersRouter = require('./routes/users');
 var videosRouter = require('./routes/videos');
 var odooRouter = require('./routes/odoo');
 var pythonRouter = require('./routes/python');
@@ -26,14 +26,15 @@ var allVideos = require('./routes/randomVideos');
 var uploadFiles = require('./routes/uploadFiles');
 var userLogin  =  require('./routes/login');
 const expressValidator = require('express-validator');
-
 const ejsLint = require('ejs-lint');
 const mongoose = require('mongoose');
-const hbs = require('handlebars');
+const hbs = require('hbs');
 var exphbs = require('express-handlebars');
 let db = require('./models/db');
-let  user_reg  =  require('./routes/user_reg');
 let passport  = require('passport');
+const facebookStrategy = require('passport-facebook').Strategy;
+const auth = require('./models/auth');
+const user_reg = require('./models/user_reg');
 
 
 
@@ -42,15 +43,27 @@ let passport  = require('passport');
 var app = express();
 
 
-// View Engine
+// ensure authentication...
+
+function ensureAuthenticated(req, res, next){
+if( name){
+  return next();
+}else{
+  // should send login view
+  console.log('message :   you are not logged in ...');
+  res.redirect('/');
+}
+}
+
+
+// view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.engine('hbs', exphbs({
-    extname:'hbs',
-    layoutsDir:__dirname+'/views/layouts/',
-    defaultLayout:'layout'
-  }));
-  
 app.set('view engine', 'hbs');
+  
+
+
+// setting handlebars partials
+hbs.registerPartials(__dirname + '/views/partials');
 
 // Handlebars helpers
 hbs.registerHelper('formatMe', function(txt) {
@@ -62,6 +75,7 @@ hbs.registerHelper('formatMe', function(txt) {
 app.use(bodyParser({defer:true}));
 app.use(bodyParser.json());
 app.use(expressValidator());
+// express session at work
 app.use(expressSession({secret : 'ewetrurifndkedndnkwh', saveUninitialized : true, resave: true}));
 
 
@@ -72,23 +86,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'videos')));
 
-// Express Validator
-app.use(expressValidator({
-  errorFormatter: function(param, msg, value) {
-      var namespace = param.split('.')
-      , root    = namespace.shift()
-      , formParam = root;
-
-    while(namespace.length) {
-      formParam += '[' + namespace.shift() + ']';
-    }
-    return {
-      param : formParam,
-      msg   : msg,
-      value : value
-    };
-  }
-}));
 
 
 
@@ -104,21 +101,23 @@ app.use(function(req, res, next){
 // Walk Dir
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/videos', videosRouter);
-app.use('/odoo', odooRouter);
-app.use('/python', pythonRouter);
-app.use('/java', javaRouter);
-app.use('/javascript', javascriptRouter);
-app.use('/bash', bashRouter);
+// app.use('/users', ensureAuthenticated,  usersRouter);
+app.use('/videos',  videosRouter);
+app.use('/odoo',   odooRouter);
+app.use('/python',  pythonRouter);
+app.use('/java',  javaRouter);
+app.use('/javascript',  javascriptRouter);
+app.use('/bash',  bashRouter);
 app.use('/html', htmlRouter);
-app.use('/nodejs', nodejsRouter);
-app.use('/linux', linuxRouter);
-app.use('/searchedVideos', searchedVids);
+app.use('/nodejs',   nodejsRouter);
+app.use('/linux', linuxRouter,);
+app.use('/searchedVideos',  searchedVids);
 app.use('/randomVideos', allVideos);
 app.use('/uploadFiles', uploadFiles);
-app.use('/login', userLogin);
-app.use('/user_reg', user_reg);
+app.use('/login',   userLogin);
+app.use('/user_reg',  user_reg);
+
+
 
 
 
@@ -131,8 +130,6 @@ app.use('*', function(req, res) {
 });
 
 // session
-
-
 app.use(passport.initialize());
 app.use(passport.session());
 

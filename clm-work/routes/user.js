@@ -27,6 +27,12 @@ var UserDataSchema = new Schema({
     email: { type: String, required: true },
     password: { type: String, required: true },
     image: { type: String, required: false },
+    playlist: { 
+        vid_name: String,
+        vid_duration: String,
+        vid_url: String,
+        vid_views: Number
+    }
 });
 
 // Creating a collection
@@ -42,6 +48,8 @@ const mkdirSync = function (dirPath) {
 }
 
 router.use(fileUpload());
+//router.use(sendgrid());
+
 /*
 
 The user sign up page is rendered
@@ -57,7 +65,7 @@ router.get('/sign_up', function (req, response, next) {
     } else {
         response.render('user_sign_up', {
             regText: 'Register Now',
-            user:""
+            user: ""
         });
     }
 });
@@ -75,7 +83,7 @@ router.get('/login', (req, res, next) => {
         });
     } else {
         res.render('login', {
-            user:""
+            user: ""
         });
     }
 
@@ -86,23 +94,23 @@ router.get('/login', (req, res, next) => {
 When user is logged in, his profile is shown
 
 */
-router.get('/profile', (req,res,next)=>{
-    if(req.session.user){
-        if(req.session.user.image){
+router.get('/profile', (req, res, next) => {
+    if (req.session.user) {
+        if (req.session.user.image) {
             res.render('loggedin_view', {
                 userData: req.session.user,
                 token: "token____urhfhdvhbhvbhbhbbmn",
                 user: req.session.user
             });
-        }else{
+        } else {
             res.render('loggedin_view', {
                 userData: req.session.user,
                 token: "token____urhfhdvhbhvbhbhbbmn",
-                user:""
-        })
-       
+                user: ""
+            })
+
+        }
     }
-}
 })
 
 
@@ -130,10 +138,33 @@ router.post('/sign_up', (req, res, next) => {
     var data = new userData(items);
     data.save();
 
+    var helper = require('sendgrid').mail;
+    var fromEmail = new helper.Email('info@torama.ng');
+    var toEmail = new helper.Email('ctonclem@gmail.com');
+    var subject = 'Sending with SendGrid is Fun';
+    var content = new helper.Content('text/plain', 'and easy to do anywhere, even with Node.js');
+    var mail = new helper.Mail(fromEmail, subject, toEmail, content);
+     
+    var sg = require('sendgrid')("tonclem");
+    var request = sg.emptyRequest({
+      method: 'POST',
+      path: '/v3/mail/send',
+      body: mail.toJSON()
+    });
+     
+    sg.API(request, function (error, response) {
+      if (error) {
+        console.log('Error response received');
+      }
+      console.log(response.statusCode);
+      console.log(response.body);
+      console.log(response.headers);
+    });
+
     res.render('signedup_view', {
         username: data.name,
         password: password,
-        user:""
+        user: ""
     })
 });
 
@@ -153,7 +184,7 @@ router.post('/login', (req, res, next) => {
             // Email is not found in database
             res.render('email_not_found', {
                 error: 'User with the provided email, not found',
-                user:""
+                user: ""
             })
             console.log('No Value found that matches');
 
@@ -168,7 +199,7 @@ router.post('/login', (req, res, next) => {
                 res.render('loggedin_view', {
                     userData: req.session.user,
                     token: "token____urhfhdvhbhvbhbhbbmn",
-                    user:""
+                    user: ""
                 });
             } else {
 
@@ -178,7 +209,7 @@ router.post('/login', (req, res, next) => {
                 res.render('forgot_password', {
                     userData: doc,
                     error: 'Wrong Password, Forgot your password?',
-                    user:""
+                    user: ""
                 })
 
             }
@@ -213,7 +244,7 @@ router.post('/upload_image', (req, res, next) => {
                     res.render('loggedin_view', {
                         userData: doc,
                         token: "token____urhfhdvhbhvbhbhbbmn",
-                        user:doc
+                        user: doc
                     });
 
                 })
@@ -228,12 +259,120 @@ router.post('/upload_image', (req, res, next) => {
 User logout request
 */
 
-router.get('/logout',(req,res,next)=>{
-    if(req.session.user){
-        req.session.destroy((err)=>{
-            if(err) throw err;
+router.get('/logout', (req, res, next) => {
+    if (req.session.user) {
+        req.session.destroy((err) => {
+            if (err) throw err;
         })
         res.redirect('/');
+    }
+});
+
+// Render the user creating playlist view
+router.get('/create_playlist', (req, res, next) => {
+    res.render('create_playlist', {})
+});
+
+
+
+router.post('/create_playlist', (req, res, next) => {
+    if (req.session.user) {
+
+        if (req.files) {
+            var videofile = req.files.video, filename = videofile.name;
+
+            var vid_name = req.body.vid_name;
+            var vid_duration = req.body.vid_duration;
+            var vid_views = 0;
+            var vid_url = "/upload/" + filename;
+
+            // var items = {
+            //     name: req.session.user.name,
+            //     phone: req.session.user.phone,
+            //     email: req.session.user.email,
+            //     password: req.session.user.password,
+            //     image: req.session.user.image,
+            //     playlist: {
+            //         vid_name: vid_name,
+            //         vid_duration: vid_duration,
+            //         vid_url: vid_url,
+            //         vid_views: vid_views
+            //     }
+            // };
+
+
+            var playlist_items =  {
+                vid_name: vid_name,
+                vid_duration: vid_duration,
+                vid_url: vid_url,
+                vid_views: vid_views
+            };
+
+            // Check if code is working properly
+            userData.findOneAndUpdate({ email: req.session.user.email },
+                {
+                    $push: {
+                        "playlist": playlist_items
+                    }
+                },
+
+                {
+                    new: true
+                },
+
+                function (err, user) {
+                    if(err) throw err;
+                    console.log(user);
+
+                    videofile.mv('videos/upload/' + filename, (error) => {
+                        if (error) throw error;
+                       
+                        //console.log(doc);
+                    })
+                });
+
+        } else {
+            // Request is not a file 
+
+        }
+
+    } else {
+
+    }
+
+});
+
+router.get('/user_playlist',(req,res,next)=>{
+    if(req.session.user){
+        userData.findOne({email:req.session.user.email},(err,doc)=>{
+            if(err) throw error;
+            //Check if user have added videos to playlist
+            var playlist = doc.playlist;
+            if(playlist.length == 0){
+                console.log('Nothing in playlist');
+            }else{
+               
+              
+                var first = [ { vid_name: 'Tyomich Ocean Cover',
+                vid_duration: '12:32',
+                vid_url:
+                 '/upload/Tyomich - Ocean (John Butler cover, rehearsal recording)(360p).MP4',
+                vid_views: 0 },
+              { vid_name: 'Ocean Tutorials',
+                vid_duration: '5:43',
+                vid_url: '/upload/John Butler- Ocean Tutorial Part 14(360p).MP4',
+                vid_views: 0 } ];
+                
+                console.log(playlist);
+
+                res.render('user_playlist',{
+                    list:first,
+                    user: req.session.user
+                })
+            }
+        });
+    }else{
+
     }
 });
 

@@ -46,6 +46,7 @@ let videoSync = function (dir, videoList) {
     });
   });
   return videoList;
+
 };
 
 module.exports = {
