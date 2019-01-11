@@ -134,6 +134,14 @@ router.post('/',function(req,res, next){
         videoFiles: videosSync,
         recommended: videosSync[3],
           name : email
+
+        
+      });
+      router.get('/logout', function(request, response){
+        
+        request.session.destroy();
+       // request.flash('thank you for using torama video portal');
+        response.redirect('/');
       });
 //req.session.errors = null;
   })

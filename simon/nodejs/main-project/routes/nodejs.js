@@ -8,7 +8,7 @@ walkSync = walk.walkSync('videos/nodejs');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('view', { 
-    videoTitle: 'Nidejs Videos',
+    videoTitle: 'Nodejs Videos',
     videoFiles: walkSync,
     videoDir: 'Nodejs',
     name : ' '

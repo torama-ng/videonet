@@ -44,9 +44,8 @@ var app = express();
 
 
 // ensure authentication...
-
 function ensureAuthenticated(req, res, next){
-if( name){
+if( req.session.user){
   return next();
 }else{
   // should send login view
@@ -102,18 +101,18 @@ app.use(function(req, res, next){
 
 app.use('/', indexRouter);
 // app.use('/users', ensureAuthenticated,  usersRouter);
-app.use('/videos',  videosRouter);
-app.use('/odoo',   odooRouter);
-app.use('/python',  pythonRouter);
+app.use('/videos', ensureAuthenticated, videosRouter);
+app.use('/odoo', ensureAuthenticated,  odooRouter);
+app.use('/python', ensureAuthenticated, pythonRouter);
 app.use('/java',  javaRouter);
-app.use('/javascript',  javascriptRouter);
-app.use('/bash',  bashRouter);
-app.use('/html', htmlRouter);
-app.use('/nodejs',   nodejsRouter);
-app.use('/linux', linuxRouter,);
-app.use('/searchedVideos',  searchedVids);
-app.use('/randomVideos', allVideos);
-app.use('/uploadFiles', uploadFiles);
+app.use('/javascript',ensureAuthenticated,  javascriptRouter);
+app.use('/bash', ensureAuthenticated, bashRouter);
+app.use('/html', ensureAuthenticated, htmlRouter);
+app.use('/nodejs', ensureAuthenticated,  nodejsRouter);
+app.use('/linux', ensureAuthenticated, linuxRouter,);
+app.use('/searchedVideos',ensureAuthenticated,  searchedVids);
+app.use('/randomVideos',ensureAuthenticated, allVideos);
+app.use('/uploadFiles',ensureAuthenticated, uploadFiles);
 app.use('/login',   userLogin);
 app.use('/user_reg',  user_reg);
 

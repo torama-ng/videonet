@@ -49,36 +49,6 @@ router.post('/',function(req,res){
         console.log('Not a file');
     }
 
-    // let videoFile = req.files.filetoupload;
-    
-    // videoFile.mv(`./videos/java/${req.files.fileUpload.name}`,function(error){
-    //     if(error) {
-    //         return res.send(500,error);
-    //     }
-    //     else{
-    //         res.json({file:`./videos/java/${req.files.fileUpload.name}`});
-    //     }
-    // } );
-    
-       
-//     if(error) throw error;
-//         response.send(200,'<h1 style="color:green"> File Uploaded </>');
-//         console.log(req.file);
-// });
-
-// var form = new formidable.IncomingForm();
-// form.parse(req, function (err, fields, file) {
-
-//     var oldpath = file.filetoupload.path;
-//       var newpath = './videos/java/' + file.filetoupload.name;
-//       fs.rename(oldpath, newpath, function (err) {
-//         if (err) throw err;
-//         res.write('File uploaded and moved!');
-//         res.end();
-//       });
-
-// });
-
 
 });
 
