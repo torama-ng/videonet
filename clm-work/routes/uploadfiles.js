@@ -48,22 +48,16 @@ router.post('/',function(req,res){
               })
           }
           else{
-            
             res.render('uploadview',{
                 file:filename,
                 status:200
             })
           }
       })
-    
     }
     else{
         console.log('Not a file');
     }
-
-
-
-
 });
 
 module.exports = router;

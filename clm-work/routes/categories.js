@@ -34,6 +34,7 @@ router.get('/html', function (req, res, next) {
     }
 });
 
+
 router.get('/java', function (req, res, next) {
     if (req.session.user) {
         res.render('view', {

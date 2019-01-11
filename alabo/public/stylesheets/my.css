@@ -11,9 +11,10 @@ body {
     border-radius: 10px;
 }
 
-.topnav {
-    overflow: hidden;
-    background-color: rgb(92, 88, 88);
+#main-navbar {
+    display: flex;
+    flex-wrap: wrap;
+    background: rgba(0, 0, 0, 0.3);
 }
 
 .topnav #myLinks {

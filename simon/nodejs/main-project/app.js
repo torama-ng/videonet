@@ -11,7 +11,7 @@ const expressSession = require('express-session');
 var fileUpload = require('express-fileupload');
 var formidable = require('formidable');
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+//var usersRouter = require('./routes/users');
 var videosRouter = require('./routes/videos');
 var odooRouter = require('./routes/odoo');
 var pythonRouter = require('./routes/python');
@@ -26,20 +26,33 @@ var allVideos = require('./routes/randomVideos');
 var uploadFiles = require('./routes/uploadFiles');
 var userLogin  =  require('./routes/login');
 const expressValidator = require('express-validator');
-
 const ejsLint = require('ejs-lint');
 const mongoose = require('mongoose');
 const hbs = require('hbs');
 var exphbs = require('express-handlebars');
 let db = require('./models/db');
-let  user_reg  =  require('./routes/user_reg');
 let passport  = require('passport');
+const facebookStrategy = require('passport-facebook').Strategy;
+const auth = require('./models/auth');
+const user_reg = require('./models/user_reg');
 
 
 
 
 
 var app = express();
+
+
+// ensure authentication...
+function ensureAuthenticated(req, res, next){
+if( req.session.user){
+  return next();
+}else{
+  // should send login view
+  console.log('message :   you are not logged in ...');
+  res.redirect('/');
+}
+}
 
 
 // view engine setup
@@ -87,21 +100,23 @@ app.use(function(req, res, next){
 // Walk Dir
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/videos', videosRouter);
-app.use('/odoo', odooRouter);
-app.use('/python', pythonRouter);
-app.use('/java', javaRouter);
-app.use('/javascript', javascriptRouter);
-app.use('/bash', bashRouter);
-app.use('/html', htmlRouter);
-app.use('/nodejs', nodejsRouter);
-app.use('/linux', linuxRouter);
-app.use('/searchedVideos', searchedVids);
-app.use('/randomVideos', allVideos);
-app.use('/uploadFiles', uploadFiles);
-app.use('/login', userLogin);
-app.use('/user_reg', user_reg);
+// app.use('/users', ensureAuthenticated,  usersRouter);
+app.use('/videos', ensureAuthenticated, videosRouter);
+app.use('/odoo', ensureAuthenticated,  odooRouter);
+app.use('/python', ensureAuthenticated, pythonRouter);
+app.use('/java',  javaRouter);
+app.use('/javascript',ensureAuthenticated,  javascriptRouter);
+app.use('/bash', ensureAuthenticated, bashRouter);
+app.use('/html', ensureAuthenticated, htmlRouter);
+app.use('/nodejs', ensureAuthenticated,  nodejsRouter);
+app.use('/linux', ensureAuthenticated, linuxRouter,);
+app.use('/searchedVideos',ensureAuthenticated,  searchedVids);
+app.use('/randomVideos',ensureAuthenticated, allVideos);
+app.use('/uploadFiles',ensureAuthenticated, uploadFiles);
+app.use('/login',   userLogin);
+app.use('/user_reg',  user_reg);
+
+
 
 
 

@@ -19,6 +19,7 @@ var bashRouter = require('./routes/bash');
 var htmlRouter = require('./routes/html');
 var linuxRouter = require('./routes/linux');
 var nodejsRouter = require('./routes/nodejs');
+var javascRouter = require('./routes/javasc');
 
 var app = express();
 
@@ -64,6 +65,8 @@ app.use('/bash', bashRouter);
 app.use('/html', htmlRouter);
 app.use('/nodejs', nodejsRouter);
 app.use('/linux', linuxRouter);
+app.use('videos/javascript', javascRouter);
+
 
 app.use('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/index.html'))

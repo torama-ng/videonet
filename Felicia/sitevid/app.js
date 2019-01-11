@@ -36,7 +36,7 @@ const react = require('./routes/react');
 const vue = require('./routes/vue');
 const angular = require('./routes/angular');
 const bash = require('./routes/bash'); 
-
+const vcarousel = require('./routes/vcarousel');
 // Init App
 var app = express();
 
@@ -130,5 +130,6 @@ app.use('/angular', angular);
 app.use('/vue', vue);
 app.use('/linux', linux);
 app.use('/bash', bash);
+app.use('/vcarousel', vcarousel);
 
 module.exports = app;

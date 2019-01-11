@@ -8,7 +8,10 @@ const mongoose = require('mongoose');
 const express_validator = require('express-validator');
 const connectFlash = require('connect-flash');
 const passport = require('passport');
+const facebookStrategy = require('passport-facebook');
 const passportLocal = require('passport-local').Strategy;
+const configAuth = require('../models/auth');
+
 
 //const walk = require('../walk.js');
 
@@ -35,6 +38,29 @@ app.use(express_validator({
 }));
 
 
+ // facebook login strategy
+passport.use(new facebookStrategy({
+    clientID: configAuth.facebookAuth.client_id,
+    clientSecret: configAuth.facebookAuth.client_secret,
+    callbackURL: configAuth.facebookAuth.call_back_url,
+    
+  },
+  function(accessToken, refreshToken, profile, done) {
+    User.findOrCreate("username", function(err, user) {
+      if (err) { return done(err); }
+      done(null, user);
+    });
+  }
+));
+
+//     /auth/facebook/callback
+router.get('/auth/facebook', passport.authenticate('facebook'));
+// authentication has failed.
+router.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { successRedirect: '/randomVideos',
+                                      failureRedirect: '/' }));
+
+
 // express session
 router.use(expressSession({
     secret : 'fererresjcsjhcbkckcjdkkljkllj',
@@ -55,10 +81,8 @@ router.get('/', function(req, res, next){
   if(req.session.user){
     // pass session to object on login form
     useremail = req.session.user.email;
-   
     console.log(' you are already logged in as :'+ useremail);
     res.render('home', {
-        
             videoTitle: 'Torama Video Portal (index)',
             lessonNumber: 'Lesson 1',
             videoDir: 'Root (videos)',
@@ -74,15 +98,10 @@ router.get('/', function(req, res, next){
 });
 
 router.post('/',function(req,res, next){
-  // login details user here
-  
   if(req.session.user){
-  
-        useremail = req.session.user.email;
-       
+        useremail = req.session.user.email; 
         console.log(' you are already logged in as :'+ useremail);
-        res.render('home', {
-            
+        res.render('home', {     
                 videoTitle: 'Torama Video Portal (index)',
                 lessonNumber: 'Lesson 1',
                 videoDir: 'Root (videos)',
@@ -115,6 +134,14 @@ router.post('/',function(req,res, next){
         videoFiles: videosSync,
         recommended: videosSync[3],
           name : email
+
+        
+      });
+      router.get('/logout', function(request, response){
+        
+        request.session.destroy();
+       // request.flash('thank you for using torama video portal');
+        response.redirect('/');
       });
 //req.session.errors = null;
   })
