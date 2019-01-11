@@ -12,14 +12,14 @@
     </video>
     </br>
     <h5 class="card-title">{{vid_name}}</h5>
+    <h5 >Duration - {{vid_duration}}</h5>
+    <a href="" >views - {{vid_views}}</a>
     </br>
-    <h5 class="card-text">Duration - {{vid_duration}}</h5>
-    </br>
-    <a href="#" class="btn btn-primary">views - {{vid_views}}</a>
+    <a href="/viewer/view{{vid_url}}" >View Video</a>
+
 </div>
 
 {{/each}}
 </div>
-
 
 {{> footer}}

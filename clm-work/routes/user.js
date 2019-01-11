@@ -175,6 +175,7 @@ Post request for login
 */
 router.post('/login', (req, res, next) => {
 
+    
     var email = req.body.email;
     var password = req.body.password;
 
@@ -226,6 +227,8 @@ The user can upload a profile image and change it at request
 router.post('/upload_image', (req, res, next) => {
     if (req.session.user) {
         if (req.files) {
+
+            if(req.files.image){
             var images = req.files.image, filename = images.name;
 
             images.mv('profile_pics/user_images/' + filename, (err) => {
@@ -249,8 +252,11 @@ router.post('/upload_image', (req, res, next) => {
 
                 })
             })
+        }else{
+            res.redirect('/user/profile');
+        }
         } else {
-            console.log('Not a file');
+            
         }
     }
 });
@@ -327,7 +333,7 @@ router.post('/create_playlist', (req, res, next) => {
                     videofile.mv('videos/upload/' + filename, (error) => {
                         if (error) throw error;
                        
-                        //console.log(doc);
+                        res.redirect('/user/user_playlist');
                     })
                 });
 
@@ -352,7 +358,6 @@ router.get('/user_playlist',(req,res,next)=>{
                 console.log('Nothing in playlist');
             }else{
                
-              
                 var first = [ { vid_name: 'Tyomich Ocean Cover',
                 vid_duration: '12:32',
                 vid_url:
@@ -363,7 +368,10 @@ router.get('/user_playlist',(req,res,next)=>{
                 vid_url: '/upload/John Butler- Ocean Tutorial Part 14(360p).MP4',
                 vid_views: 0 } ];
                 
-                console.log(playlist);
+            //var first = JSON.stringify(playlist);
+            
+            //var first = first1.toJSON;
+               // console.log( JSON.parse(text,));
 
                 res.render('user_playlist',{
                     list:first,
@@ -372,7 +380,7 @@ router.get('/user_playlist',(req,res,next)=>{
             }
         });
     }else{
-
+        
     }
 });
 
