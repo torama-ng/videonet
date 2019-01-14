@@ -35,6 +35,7 @@ let passport  = require('passport');
 const facebookStrategy = require('passport-facebook').Strategy;
 const auth = require('./models/auth');
 const user_reg = require('./models/user_reg');
+const profile = require('./models/profile');
 
 
 
@@ -104,7 +105,7 @@ app.use('/', indexRouter);
 app.use('/videos', ensureAuthenticated, videosRouter);
 app.use('/odoo', ensureAuthenticated,  odooRouter);
 app.use('/python', ensureAuthenticated, pythonRouter);
-app.use('/java',  javaRouter);
+app.use('/java',ensureAuthenticated,  javaRouter);
 app.use('/javascript',ensureAuthenticated,  javascriptRouter);
 app.use('/bash', ensureAuthenticated, bashRouter);
 app.use('/html', ensureAuthenticated, htmlRouter);
@@ -115,6 +116,7 @@ app.use('/randomVideos',ensureAuthenticated, allVideos);
 app.use('/uploadFiles',ensureAuthenticated, uploadFiles);
 app.use('/login',   userLogin);
 app.use('/user_reg',  user_reg);
+app.use('/profile', profile );
 
 
 

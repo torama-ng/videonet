@@ -11,6 +11,11 @@ const passport = require('passport');
 const facebookStrategy = require('passport-facebook');
 const passportLocal = require('passport-local').Strategy;
 const configAuth = require('../models/auth');
+const twitterAuth = require('../models/twitter_keys');
+const TwitterStrategy = require('passport-twitter').Strategy;
+const GoogleStrategy = require('passport-google-oauth20');
+
+
 
 
 //const walk = require('../walk.js');
@@ -46,12 +51,14 @@ passport.use(new facebookStrategy({
     
   },
   function(accessToken, refreshToken, profile, done) {
-    User.findOrCreate("username", function(err, user) {
+    User.findOrCreate("user", function(err, user) {
       if (err) { return done(err); }
       done(null, user);
     });
   }
 ));
+
+
 
 //     /auth/facebook/callback
 router.get('/auth/facebook', passport.authenticate('facebook'));
@@ -59,6 +66,44 @@ router.get('/auth/facebook', passport.authenticate('facebook'));
 router.get('/auth/facebook/callback',
   passport.authenticate('facebook', { successRedirect: '/randomVideos',
                                       failureRedirect: '/' }));
+
+
+
+// twiiter login
+passport.use(new TwitterStrategy({
+  consumerKey: twitterAuth.twitterKey.TWITTER_CONSUMER_KEY,
+  consumerSecret: twitterAuth.twitterKey.TWITTER_CONSUMER_SECRET,
+  callbackURL: "http://127.0.0.1:5500/auth/twitter/callback"
+},
+function(token, tokenSecret, profile, done) {
+  User.findOrCreate( 'user', function(err, user) {
+    if (err) { return done(err); }
+    done(null, user);
+  });
+}
+));
+
+ //   /auth/twitter/callback
+router.get('/auth/twitter', passport.authenticate('twitter'));
+ // twitter redirect after authentication
+router.get('/auth/twitter/callback',
+  passport.authenticate('twitter', { successRedirect: '/randomVideos',
+                                     failureRedirect: '/' }));
+
+
+// google login authentication
+router.get('/google/auth/',passport.authenticate('google',{
+  scope : ['profile']
+}));
+
+passport.use( new GoogleStrategy({
+  // options for google strategies
+ 
+},function(){
+  // passport callback function
+
+} )
+)
 
 
 // express session
@@ -73,6 +118,7 @@ router.use(expressSession({
 const allVideos = require('../randomFilePicker');
 var videosSync = [];
 videosSync = allVideos.findVideos('videos');
+
 
 
 /* GET home page. */
