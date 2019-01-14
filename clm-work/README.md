@@ -37,3 +37,4 @@ New Features added
 4. Video views are updated anytime user views any video. A video id is tracked and the vid_views is updated by the initial views + 1.
 5. All videos are now loaded from mongodb database and not from list any more
 6. User can now add comments to a particular video.
+7. Facebook login is included user can now login with facebook.
