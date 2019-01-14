@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+const nodemailer = require('nodemailer');
 
 // Load user model
 const User = require('../models/Users');
@@ -29,7 +30,6 @@ router.post('/login', (req, res, next) => {
 
 // registartion post request, using bcrypt to hash passwords
 router.post('/register', (req, res) => {
-  console.log(req.body);
   let errors = [];
 
   if (req.body.password != req.body.password2) {
@@ -74,13 +74,42 @@ router.post('/register', (req, res) => {
               newUser.save()
                 .then(user => {
                   req.flash('success_msg', 'Registration successful, Login now!');
-                  res.redirect('/users/login');
                 })
                 .catch(err => {
                   console.log(err);
                   return;
                 });
             });
+          });
+
+
+          // create reusable transporter object using the default SMTP transport
+          let transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: 'your gmail',
+              pass: 'your password'
+            }
+          });
+
+          // setup email data with unicode symbols
+          let mailOptions = {
+            from: '"WELCOME TO </>TORAMA" <your gmail>', // sender address
+            to: `${req.body.email}`, // list of receivers
+            subject: `Hello ${req.body.name}`, // Subject line
+            text: "Hello world?", // plain text body
+            html: "<p>Thank you for choosing Torama Tech.</p>" // html body
+          };
+
+          transporter.sendMail(mailOptions, function (err, info) {
+            if (err) {
+              console.log(err)
+            } else {
+              console.log(info);
+            }
+
+            res.redirect('/users/login');
+
           });
         }
       });

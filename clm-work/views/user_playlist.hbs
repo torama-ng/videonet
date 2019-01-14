@@ -2,8 +2,10 @@
 {{> navbar}}
 
 
-
+<h5> My playlist</h5>
+<h5 style="color:green">#{{list.length}} videos in my playlist</h5>
 <div class="top_cont" style="display:flex;flex-wrap:wrap">
+
 {{#each list}}
 
 
@@ -12,14 +14,14 @@
     </video>
     </br>
     <h5 class="card-title">{{vid_name}}</h5>
+    <h5 >Duration - {{vid_duration}}</h5>
+    <a href="" >views - {{vid_views}}</a>
     </br>
-    <h5 class="card-text">Duration - {{vid_duration}}</h5>
-    </br>
-    <a href="#" class="btn btn-primary">views - {{vid_views}}</a>
+    <a href="/viewer/playlist{{vid_url}}" >View Video</a>
+
 </div>
 
 {{/each}}
 </div>
-
 
 {{> footer}}

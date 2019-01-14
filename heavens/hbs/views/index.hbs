@@ -1,40 +1,48 @@
 {{!-- <h1>{{title}}</h1>
 <p>Welcome to {{title}}</p> --}}
-<div class="container-fluid bg-dark " >
+<div class="container-fluid bg-white " >
       <div class=" row justify-content-between">
           <div class="col-sm-9 ml-0 pr-0 ">
             <!--carousal-->
             <div class="col d-flex flex-column flex-sm-row  ">
-                    <div class="col carousel p-0 mr-1 mt-1 bg-warning text-white">Play Area </div>
+                    <div class="col carousel p-0 mr-1 mt-1  text-white">
+                      <video src="/dak.1.mp4" controls type="video/mp4" width="100%" height="100%" ></video>    
+                    </div>
                     <div class="col carousel p-0 mt-1 bg-warning text-white">carousel</div>
             </div>
             
             <!-- categoryvideos-->
-            <div class="col text-white">Java</div>
+            <div class="col text-dark">Java</div>
             
             <div id="slide" class="col d-flex my-1 p-0  slide newvideo " >
-            <div  class="col carousel-inner d-flex  bg-dark justify-content-lg-start justify-content-md-start mt-2 flex-nowrap ">
+            <div  class="col carousel-inner d-flex  bg-white justify-content-lg-start justify-content-md-start mt-2 flex-nowrap ">
                 {{#each videoFiles }}
-                    <div class="col-md-4 col-lg-3 col-sm-12 ">
+                    
+                    <div class="col-md-4 col-lg-3 col-sm-12 " > 
                         <div class="card mb-3 shadow-sm ">
                         <video class="bd-placeholder-img card-img-top " id="video-{{@index}}"
                         controls onloadeddata="setDuration({{@index}})" src="{{this}}" 
                             type="video/mp4"> 
                             Your browser does not support video html 5 video tag
                             </video>
+
+                            
                         <div class="card-body bg-warning">
-                            <p class="card-text"> {{formatMe this}} </p> <!-- formatMe is a custom helper -->
+
+                            <p class="card-text">{{formatMe this}}</p> <!-- formatMe is a custom helper -->
                             <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                <button  type="button" class="btn btn-sm btn-outline-secondary"><a href="/playarea/{{this}}">View</a></button>
                                 <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+
+
                             </div>
                             <small class="text-muted" id="vid-{{@index}}"></small>
-                            </div>
-
+                         </div>
                         </div>
                         </div>
-                    </div>                     
+                    </div> 
+                                     
                 {{/each}}
                 </div>  
                  <a href="#slide" class="carousel-control-prev p-0 mx-0" data-slide="prev">
@@ -46,22 +54,23 @@
             </div>
 
             
-            <div class="col text-white">Python</div>
+            <div class="col text-dark">Python</div>
             <div id="slide" class="col d-flex my-1 p-0 carousel slide newvideo " data-ride="carousel">
-            <div  class="col carousel-inner  d-flex  bg-dark justify-content-lg-start justify-content-md-start mt-2 flex-nowrap ">
+            <div  class="col carousel-inner  d-flex  bg-white justify-content-lg-start justify-content-md-start mt-2 flex-nowrap ">
                 {{#each videoFiles }}
                     <div class="col-md-4 col-lg-3 col-sm-12 ">
                         <div class="card mb-3 shadow-sm ">
                         <video class="bd-placeholder-img card-img-top " id="video-{{@index}}"
                         controls onloadeddata="setDuration({{@index}})" src="{{this}}" 
                             type="video/mp4"> 
+                            
                             Your browser does not support video html 5 video tag
                             </video>
                         <div class="card-body bg-warning">
                             <p class="card-text"> {{formatMe this}} </p> <!-- formatMe is a custom helper -->
                             <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="/playarea/{{this}}">View</a></button>
                                 <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                             </div>
                             <small class="text-muted" id="vid-{{@index}}"></small>
@@ -80,9 +89,9 @@
                  </a>              
             </div>
 
-            <div class="col text-white">Node js</div>
+            <div class="col text-dark">Node js</div>
             <div id="slide" class="col d-flex my-1 p-0 carousel slide newvideo " data-ride="carousel">
-            <div  class="col carousel-inner  d-flex  bg-dark justify-content-lg-start justify-content-md-start mt-2 flex-nowrap ">
+            <div  class="col carousel-inner  d-flex  bg-white justify-content-lg-start justify-content-md-start mt-2 flex-nowrap ">
                 {{#each videoFiles }}
                     <div class="col-md-4 col-lg-3 col-sm-12 ">
                         <div class="card mb-3 shadow-sm ">
@@ -95,7 +104,8 @@
                             <p class="card-text"> {{formatMe this}} </p> <!-- formatMe is a custom helper -->
                             <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                 <a href="/playarea?v={{this}}"></a>
+                                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="/playarea/{{this}}">View</a></button>
                                 <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                             </div>
                             <small class="text-muted" id="vid-{{@index}}"></small>
@@ -115,9 +125,9 @@
                 </a>              
             </div>
 
-            <div class="col text-white">Javascript</div>
+            <div class="col text-dark">Javascript</div>
             <div id="slide" class="col d-flex my-1 p-0 carousel slide newvideo " data-ride="carousel">
-            <div  class="col carousel-inner  d-flex  bg-dark justify-content-lg-start justify-content-md-start mt-2 flex-nowrap ">
+            <div  class="col carousel-inner  d-flex  bg-white justify-content-lg-start justify-content-md-start mt-2 flex-nowrap ">
                 {{#each videoFiles }}
                     <div class="col-md-4 col-lg-3 col-sm-12 ">
                         <div class="card mb-3 shadow-sm ">
@@ -130,7 +140,8 @@
                             <p class="card-text"> {{formatMe this}} </p> <!-- formatMe is a custom helper -->
                             <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                 
+                                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="/playarea/{{this}}">View</a></button>
                                 <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                             </div>
                             <small class="text-muted" id="vid-{{@index}}"></small>
@@ -150,10 +161,10 @@
             </div>
             
       </div>
-          <div class="col-sm-2 p-0 bg-dark mr-2 ">
+          <div class="col-sm-2 p-0 bg-white mr-2 ">
             <div class="col playlist bg-warning "></div>
            <!-- New videos-->
-            <div class="col text-white">New </div>
+            <div class="col text-dark">New </div>
             <div class="col recent mt-1 bg-warning "></div>    
           </div>
       </div>

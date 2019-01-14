@@ -4,20 +4,20 @@
 }
 .carousel{
     min-height: 45vh;
-    border: 2px solid red;
+    border: 2px solid  rgb(253, 242, 242);;
 }
 
 .newvideo{
     min-height: 25vh;
-    border: 2px solid red;
+    border: 2px solid  rgb(253, 242, 242);;
 }
 .categoryvid{
     min-height: 40vh;
-    border: 2px solid red;
+    border: 2px solid  rgb(253, 242, 242);;
 }
 
 .myhf{
-    border: 2px solid red;
+    border: 2px solid  rgb(253, 242, 242);;
     min-height: 15vh;   
 }
 .myh{
@@ -27,11 +27,11 @@
 
 .playlist{
     min-height: 50vh;
-    border: 2px solid red;
+    border: 2px solid  rgb(253, 242, 242);;
 }
 .recent{
     min-height: 50vh;
-    border: 2px solid red;
+    border: 2px solid  rgb(253, 242, 242);red;
 }
 .logo{
     height: 30px; width: 40px;
@@ -67,6 +67,6 @@
 }
 
 .playarea{
-    min-height: 70vh;
-    border: 2px solid red;
+    min-height: 50vh;
+    border: 2px solid rgb(253, 242, 242);
 }

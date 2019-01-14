@@ -41,9 +41,6 @@ function closeNav() {
   //alert('cool');
 }
 
-var clickedText = new Object();
-clickedText['name'] = 'Otonye Clement';
-
 
 function getTexter(message){
 
@@ -52,18 +49,6 @@ function getTexter(message){
 }
 
 
-
-
-const EventEmitter = require('events');
-
-class Logger extends EventEmitter{
-  
-  log(message){
-
-    this.emit('textReceived',{data:1,name:'King'});
-    
-  }
-}
 
 function searchVideos() {
 
