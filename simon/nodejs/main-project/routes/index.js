@@ -4,16 +4,37 @@ var router = express.Router();
 const bodyParser = require('body-parser');
 const Cryptr = require('cryptr');
 const Users = require('../models/users_model');
-const mongoose = require('mongoose');
 const express_validator = require('express-validator');
 const connectFlash = require('connect-flash');
 const passport = require('passport');
 const facebookStrategy = require('passport-facebook');
-const passportLocal = require('passport-local').Strategy;
 const configAuth = require('../models/auth');
 const twitterAuth = require('../models/twitter_keys');
 const TwitterStrategy = require('passport-twitter').Strategy;
+ const googlePassport = require('../social_auth/passport_google');
 const GoogleStrategy = require('passport-google-oauth20');
+const googleKeys = require('../models/googleKey');
+const mongoose = require('mongoose');
+const User = require('../models/userModel');
+
+
+// connect my mongodb
+mongoose.connect(googleKeys.mongodb.dbURL, () =>{
+ 
+});
+
+
+passport.serializeUser((user, done) =>{
+  done(null, user.id); 
+});
+
+
+passport.deserializeUser((id, done) =>{
+  User.findById(id).then((user)=>{
+    done(null, user); 
+  });
+
+});
 
 
 
@@ -30,7 +51,6 @@ app.use(express_validator({
       var namespace = param.split('.')
       , root    = namespace.shift()
       , formParam = root;
-
     while(namespace.length) {
       formParam += '[' + namespace.shift() + ']';
     }
@@ -62,7 +82,6 @@ passport.use(new facebookStrategy({
 
 //     /auth/facebook/callback
 router.get('/auth/facebook', passport.authenticate('facebook'));
-// authentication has failed.
 router.get('/auth/facebook/callback',
   passport.authenticate('facebook', { successRedirect: '/randomVideos',
                                       failureRedirect: '/' }));
@@ -85,27 +104,51 @@ function(token, tokenSecret, profile, done) {
 
  //   /auth/twitter/callback
 router.get('/auth/twitter', passport.authenticate('twitter'));
- // twitter redirect after authentication
 router.get('/auth/twitter/callback',
   passport.authenticate('twitter', { successRedirect: '/randomVideos',
                                      failureRedirect: '/' }));
+                passport.use( new GoogleStrategy({
+                  clientID: googleKeys.keys.ClientID,
+                      clientSecret: googleKeys.keys.client_secret,
+                      callbackURL: "	/auth/google/randomVideos"
+                }, function(accessToken,refreshToken,profile,done){
+                  // check if usr already exist
+                  User.findOne({google_id : profile.id}).then((currentUser)=>{
+                    if(currentUser){
+                      // alredy have the user
+                      done(null, currentUser);
+                      console.log('user  already in db '+ currentUser);
+                    }else{
+                      // if not create user in our db
+                      new User({
+                        username : profile.displayName,
+                        google_id : profile.id
+                      }).save().then((newUser) =>{
+                        console.log('new google user  '+ newUser);
+                        done(null, newUser);
+                      });
+                    }
+                  });
+
+                  
+                }));
+                
+
+                 
 
 
-// google login authentication
-router.get('/google/auth/',passport.authenticate('google',{
-  scope : ['profile']
-}));
+          router.get('/auth/google',
+            passport.authenticate('google', { scope: ['profile'] }));
+          // failed authentication redirect
 
-passport.use( new GoogleStrategy({
-  // options for google strategies
- 
-},function(){
-  // passport callback function
-
-} )
-)
-
-
+          router.get('/auth/google/randomVideos', 
+            passport.authenticate('google', { failureRedirect: '/' }),
+            function(req, res) {
+              // Successful authentication, redirect.
+              //res.send('you just logged in from google');
+                res.redirect('/randomVideos');
+            });
+                  
 // express session
 router.use(expressSession({
     secret : 'fererresjcsjhcbkckcjdkkljkllj',
@@ -189,7 +232,7 @@ router.post('/',function(req,res, next){
        // request.flash('thank you for using torama video portal');
         response.redirect('/');
       });
-//req.session.errors = null;
+
   })
 }
 });
