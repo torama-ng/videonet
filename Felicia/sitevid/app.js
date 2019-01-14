@@ -37,6 +37,7 @@ const vue = require('./routes/vue');
 const angular = require('./routes/angular');
 const bash = require('./routes/bash'); 
 const vcarousel = require('./routes/vcarousel');
+const playarea = require('./routes/playarea');
 // Init App
 var app = express();
 
@@ -131,5 +132,6 @@ app.use('/vue', vue);
 app.use('/linux', linux);
 app.use('/bash', bash);
 app.use('/vcarousel', vcarousel);
+app.use('/playarea', playarea);
 
 module.exports = app;
