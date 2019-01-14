@@ -24,5 +24,4 @@ var VideoSchema = new Schema({
 // Creating a collection
 var videoData = mongoose.model(_collectionname, VideoSchema);
 
-
 module.exports = videoData;
