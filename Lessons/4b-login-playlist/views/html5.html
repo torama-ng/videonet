@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML5 TEST</title>
+    <style> 
+    .body{ margin:0; }
+    .container {
+        display:flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        
+    }
+    .container .header,.nav,.main,.footer,.aside {
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 5px;
+        margin-bottom: 3px;
+        border-color: grey;
+        border-bottom-width: 2px
+    }
+    .container .header {
+        flex-basis:100%;
+        order: 0;
+        height:100px;
+    }
+    
+    
+    .navbar {
+        text-align: center;
+        overflow: hidden;
+        
+        
+    }
+    .navbar ul {
+        list-style-type: none;  /* Remove Bullets in Navbar list */
+        
+        margin: 0;
+        padding: 0;
+    }
+
+    .navbar li a {
+        text-decoration: none; /* remove the underline from navbar*/
+        float: left;  /* makes navbar horizontal */
+        text-align: center;
+        padding: 5px;
+        background-color: red;
+        color:white;
+        margin:1px;
+        
+    }
+
+    .container .nav {
+        flex-basis:15%;
+        order:1;
+        height: auto;
+        border-radius: 5px;
+    }
+    .container .main {
+        flex-basis:58%;
+        order:2;
+        height: 400px;
+        
+    }
+    
+    .container .aside {
+        flex-basis: 25%;
+        order: 3;
+        
+    }
+
+    .container .footer {
+        flex-basis: 100%;
+        order:4;
+        height: 150px;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            HEADER
+            <div class="navbar">
+                <ul>
+                    <li>
+                        <a href="#">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">Categories</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact us</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="nav">NAVIGATION</div>
+        
+        <div class="aside">ASIDE</div>
+        <div class="main">MAIN</div>
+        <div class="footer">FOOTER</div>
+
+    </div> <!-- End of Container DIV-->
+</body>
+</html>
