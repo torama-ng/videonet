@@ -27,3 +27,13 @@ Videos Used for MongoDb Database Management
 https://www.youtube.com/watch?v=Do_Hsb_Hs3c&t=24s
 Node JS MongoDB Tutorials by Derek Banas
 
+
+
+New Features added
+
+1. Playlist is added, user can now add videos to their playlist.
+2. The playlist is added as a nested object inside of the user data
+3. A videos collection is created in Mongodb using mongoose, to track comments of videos and to to give room for video viewers collection.
+4. Video views are updated anytime user views any video. A video id is tracked and the vid_views is updated by the initial views + 1.
+5. All videos are now loaded from mongodb database and not from list any more
+6. User can now add comments to a particular video.
