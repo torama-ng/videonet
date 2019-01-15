@@ -26,8 +26,10 @@ let profileSchema = new mongoose.Schema({
 });
 
 
-router.get('/' , function(req, res){
-    res.render('profile');
+router.get('/:username' , function(req, res){
+  
+    var name = req.params.username;
+    res.render('profile',{username :name});
 })
 
 module.exports = router;

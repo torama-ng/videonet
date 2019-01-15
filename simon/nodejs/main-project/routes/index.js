@@ -1,5 +1,4 @@
 var express = require('express');
-const expressSession = require('express-session');
 var router = express.Router();
 const bodyParser = require('body-parser');
 const Cryptr = require('cryptr');
@@ -13,9 +12,10 @@ const twitterAuth = require('../models/twitter_keys');
 const TwitterStrategy = require('passport-twitter').Strategy;
  const googlePassport = require('../social_auth/passport_google');
 const GoogleStrategy = require('passport-google-oauth20');
-const googleKeys = require('../models/googleKey');
+const googleKeys = require('../models/appKeys');
 const mongoose = require('mongoose');
 const User = require('../models/userModel');
+
 
 
 // connect my mongodb
@@ -23,12 +23,10 @@ mongoose.connect(googleKeys.mongodb.dbURL, () =>{
  
 });
 
-
+// serialize user
 passport.serializeUser((user, done) =>{
   done(null, user.id); 
 });
-
-
 passport.deserializeUser((id, done) =>{
   User.findById(id).then((user)=>{
     done(null, user); 
@@ -37,13 +35,12 @@ passport.deserializeUser((id, done) =>{
 });
 
 
-
-
 //const walk = require('../walk.js');
-
 let app = express();
+router.use(passport.initialize());
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended:false}));
+
 
 // Express Validator
 app.use(express_validator({
@@ -117,17 +114,23 @@ router.get('/auth/twitter/callback',
                     if(currentUser){
                       // alredy have the user
                       done(null, currentUser);
-                      console.log('user  already in db '+ currentUser);
+                      console.log('user  already a user  = '+ currentUser.username);
+                    
                     }else{
                       // if not create user in our db
                       new User({
                         username : profile.displayName,
-                        google_id : profile.id
+                        google_id : profile.id,
+
+      
                       }).save().then((newUser) =>{
                         console.log('new google user  '+ newUser);
                         done(null, newUser);
                       });
                     }
+
+                   
+                    
                   });
 
                   
@@ -144,18 +147,15 @@ router.get('/auth/twitter/callback',
           router.get('/auth/google/randomVideos', 
             passport.authenticate('google', { failureRedirect: '/' }),
             function(req, res) {
-              // Successful authentication, redirect.
-              //res.send('you just logged in from google');
-                res.redirect('/randomVideos');
+             
+              // Successful authentication, redirect
+              req.session.user = User;
+             res.redirect(`/profile/${req.user.username}`);
+              // res.redirect('/profile');
+                
             });
                   
-// express session
-router.use(expressSession({
-    secret : 'fererresjcsjhcbkckcjdkkljkllj',
-    resave : false,
-    saveUninitialized : false,
-    // cookie : {secure : true}
-  }));
+
 
 //var walkSync = walk.walkSync('videos');
 const allVideos = require('../randomFilePicker');
@@ -166,18 +166,18 @@ videosSync = allVideos.findVideos('videos');
 
 /* GET home page. */
 router.get('/', function(req, res, next){
- // check if user already , then redirect back to home page
+ // check if user already logged in , then redirect back to home page
   if(req.session.user){
     // pass session to object on login form
-    useremail = req.session.user.email;
-    console.log(' you are already logged in as :'+ useremail);
+    username = req.session.user.username;
+    console.log(' you are already logged in as :'+ username);
     res.render('home', {
             videoTitle: 'Torama Video Portal (index)',
             lessonNumber: 'Lesson 1',
             videoDir: 'Root (videos)',
             videoFiles: videosSync,
             recommended: videosSync[3],
-              name : "welcome back : "+useremail
+              name : "welcome back  "+username
     });
 
 }else{ 
@@ -188,7 +188,7 @@ router.get('/', function(req, res, next){
 
 router.post('/',function(req,res, next){
   if(req.session.user){
-        useremail = req.session.user.email; 
+        useremail = req.session.user.username; 
         console.log(' you are already logged in as :'+ useremail);
         res.render('home', {     
                 videoTitle: 'Torama Video Portal (index)',
@@ -213,6 +213,7 @@ router.post('/',function(req,res, next){
     // if user user not found in database...
     if (!user){
         console.log(' user does not exist..');
+        res.render('login_view');
     }
     // if user is found, go to home page
     req.session.user = user;
@@ -227,7 +228,6 @@ router.post('/',function(req,res, next){
         
       });
       router.get('/logout', function(request, response){
-        
         request.session.destroy();
        // request.flash('thank you for using torama video portal');
         response.redirect('/');
@@ -237,7 +237,6 @@ router.post('/',function(req,res, next){
 }
 });
 
-
+            
 
 module.exports = router;
-

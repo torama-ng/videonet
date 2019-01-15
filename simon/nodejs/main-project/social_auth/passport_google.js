@@ -1,6 +1,6 @@
 const GoogleStrategy = require('passport-google-oauth20');
 //var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-const googleKeys = require('../models/googleKey');
+const googleKeys = require('../models/appKeys');
 const passport = require('passport');
 var express = require('express');
 var router = express.Router();
