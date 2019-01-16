@@ -31,13 +31,13 @@ var findVideos = function (dir, fileList) {
                     //Get all Videos and store their thumbnails in a folder
 
                 
-                     new ffmpeg("/"+fileElements + "/" + video)
-                        .takeScreenshots({
-                            count: 1,
-                            timemarks: ['600'] // number of seconds
-                        }, `/thumbnails/${video}`, function (err) {
-                            console.log('screenshots were saved')
-                        });
+                    //  new ffmpeg("/"+fileElements + "/" + video)
+                    //     .takeScreenshots({
+                    //         count: 1,
+                    //         timemarks: ['600'] // number of seconds
+                    //     }, `/thumbnails/${video}`, function (err) {
+                    //         console.log('screenshots were saved')
+                    //     });
 
                     // ffmpeg(`/${fileElements}/${video}`)
                     //     .on('end', function () {
