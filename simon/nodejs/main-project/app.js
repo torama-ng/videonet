@@ -3,13 +3,8 @@ var express = require('express');
 var path = require('path');
 // const expressSession = require('express-session');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var busboy = require('connect-busboy');
 var bodyParser = require('body-parser');
-var cors = require('cors');
 const expressSession = require('express-session');
-var fileUpload = require('express-fileupload');
-var formidable = require('formidable');
 var indexRouter = require('./routes/index');
 //var usersRouter = require('./routes/users');
 var videosRouter = require('./routes/videos');
@@ -26,15 +21,12 @@ var allVideos = require('./routes/randomVideos');
 var uploadFiles = require('./routes/uploadFiles');
 var userLogin  =  require('./routes/login');
 const expressValidator = require('express-validator');
-const ejsLint = require('ejs-lint');
-const mongoose = require('mongoose');
 const hbs = require('hbs');
-var exphbs = require('express-handlebars');
-let db = require('./models/db');
 let passport  = require('passport');
-const facebookStrategy = require('passport-facebook').Strategy;
-const auth = require('./models/auth');
 const user_reg = require('./models/user_reg');
+const profile = require('./models/profile');
+const cookieSession = require('cookie-session');
+const projectKeys  = require('./models/appKeys');
 
 
 
@@ -75,7 +67,7 @@ app.use(bodyParser({defer:true}));
 app.use(bodyParser.json());
 app.use(expressValidator());
 // express session at work
-app.use(expressSession({secret : 'ewetrurifndkedndnkwh', saveUninitialized : true, resave: true}));
+app.use(expressSession({secret : projectKeys.session.sessionKeys, saveUninitialized : true, resave: true}));
 
 
 
@@ -104,17 +96,18 @@ app.use('/', indexRouter);
 app.use('/videos', ensureAuthenticated, videosRouter);
 app.use('/odoo', ensureAuthenticated,  odooRouter);
 app.use('/python', ensureAuthenticated, pythonRouter);
-app.use('/java',  javaRouter);
+app.use('/java',ensureAuthenticated,  javaRouter);
 app.use('/javascript',ensureAuthenticated,  javascriptRouter);
 app.use('/bash', ensureAuthenticated, bashRouter);
 app.use('/html', ensureAuthenticated, htmlRouter);
 app.use('/nodejs', ensureAuthenticated,  nodejsRouter);
 app.use('/linux', ensureAuthenticated, linuxRouter,);
 app.use('/searchedVideos',ensureAuthenticated,  searchedVids);
-app.use('/randomVideos',ensureAuthenticated, allVideos);
+app.use('/randomVideos', allVideos);
 app.use('/uploadFiles',ensureAuthenticated, uploadFiles);
 app.use('/login',   userLogin);
 app.use('/user_reg',  user_reg);
+app.use('/profile', profile );
 
 
 
@@ -131,6 +124,10 @@ app.use('*', function(req, res) {
 // session
 app.use(passport.initialize());
 app.use(passport.session());
+// app.use(cookieSession({
+//   maxAge : 24 * 60 * 60 * 1000,
+//   keys : [projectKeys.session.sessionKeys]
+// }))
 
 // Handlebars helpers
 hbs.registerHelper('formatMe', function(txt) {

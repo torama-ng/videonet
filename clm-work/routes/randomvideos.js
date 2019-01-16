@@ -21,13 +21,11 @@ router.get('/', (req, res, next) => {
             recommended: url,
             user: req.session.user
         });
+    }else{
+        res.redirect('/user/login');
     }
 
 });
 
-router.post('/', (req, response, next) => {
-
-    res.send('You just posted now !!');
-});
 
 module.exports = router;

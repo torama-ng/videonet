@@ -10,7 +10,8 @@ const createError = require("http-errors"),
   session = require("express-session"),
   MongoStore = require("connect-mongo")(session),
   passport = require("passport"),
-  mongoose = require("mongoose");
+  nodemailer = require('nodemailer');
+mongoose = require("mongoose");
 
 // loading routes
 const indexRouter = require("./routes/index"),

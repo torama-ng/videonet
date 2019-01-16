@@ -43,21 +43,19 @@ body {
 	-webkit-transition: all 0.3s ease-in-out;
 }
 
-h1,h2,h3,h4,h5,h6{
+p{
 	margin: 0;
 	padding: 0;
   white-space: nowrap;
   overflow: hidden;
-	text-overflow: ellipsis;
+  text-overflow: ellipsis;
 }
 
 .card-text{
-  margin: 0;
-	padding: 0;
-  white-space: nowrap;
-  overflow: hidden;
-	text-overflow: ellipsis;
+  max-width:200px;
+
 }
+
 
 #sech{
   width: 40%;

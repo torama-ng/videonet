@@ -3,11 +3,17 @@
     height: 400px;
     margin-top:-23px!important;
   }
-.video-fluid src{
+.video-fluid {
    width: 500px!important;
    height: 300px!important;
 }
 
+.playarea{
+    margin-top: 15px!important;
+    height: 200px!important;
+    min-height: 50vh;
+    border: 2px solid rgb(253, 242, 242);
+}
 
 
 .mycol{
