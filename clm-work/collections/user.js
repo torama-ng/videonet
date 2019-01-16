@@ -27,5 +27,4 @@ var UserDataSchema = new Schema({
 // Creating a collection
 var userData = mongoose.model(_collectionname, UserDataSchema);
 
-
 module.exports = userData;

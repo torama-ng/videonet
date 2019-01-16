@@ -38,3 +38,4 @@ New Features added
 5. All videos are now loaded from mongodb database and not from list any more
 6. User can now add comments to a particular video.
 7. Facebook login is included user can now login with facebook.
+8. Viewer collections is added to check if a user had already viewed the video previously.
