@@ -1,0 +1,34 @@
+ <div class="col text-dark">Javascript</div>
+            <div id="slide" class="col d-flex my-1 p-0 carousel slide newvideo " data-ride="carousel">
+            <div  class="col carousel-inner  d-flex  bg-white justify-content-lg-start justify-content-md-start mt-2 flex-nowrap ">
+                {{#each videoFiles }}
+                    <div class="col-md-4 col-lg-3 col-sm-12 ">
+                        <div class="card mb-3 shadow-sm ">
+                        <video class="bd-placeholder-img card-img-top " id="video-{{@index}}"
+                        controls onloadeddata="setDuration({{@index}})" src="{{this}}" 
+                            type="video/mp4"> 
+                            Your browser does not support video html 5 video tag
+                            </video>
+                        <div class="card-body bg-warning">
+                            <p class="card-text"> {{formatMe this}} </p> <!-- formatMe is a custom helper -->
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                 
+                                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="/playarea/{{this}}">View</a></button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                            </div>
+                            <small class="text-muted" id="vid-{{@index}}"></small>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                     
+                {{/each}}
+                </div>  
+                 <a href="#slide" class="carousel-control-prev p-0 mx-0" data-slide="prev">
+                    <span class="carousel-control-prev-icon "></span>
+                </a> 
+                <a href="#slide" class="carousel-control-next" data-slide="next">
+                     <span class="carousel-control-next-icon"></span>
+                </a>              
+            </div>

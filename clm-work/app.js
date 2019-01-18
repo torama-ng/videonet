@@ -36,6 +36,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'videos')));
 app.use(express.static(path.join(__dirname, 'profile_pics')));
 
+
+
 app.use('/', indexRouter);
 app.use('/categories',categories);
 app.use('/user',user);
@@ -63,6 +65,13 @@ hbs.registerHelper('Get_Name', function(txt) {
 hbs.registerHelper('formatMe', function(txt) {
   txt = path.basename(txt,'.mp4');
   txt =  decodeURI(txt) ;
+  return txt;
+  //return txt.substring(0, 45);
+
+});
+
+hbs.registerHelper('GetFirstName', function(txt) {
+  txt = txt.charAt(0);
   return txt;
   //return txt.substring(0, 45);
 
