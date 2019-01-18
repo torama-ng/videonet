@@ -1,0 +1,26 @@
+<div class="container-fluid bg-white " >
+  <div class=" row justify-content-between">
+     <div class="col-sm-9 mx-3 pr-0 ">
+            <div class="col playarea bg-primary ">
+               <video class="bd-placeholder-img card-img-top" id="video-{{@index}}"
+                 controls onloadeddata="setDuration({{@index}})" src="{{ this}}" 
+                type="video/mp4"> 
+                Your browser does not support video html 5 video tag
+                </video>
+              <!--<video controls type="video/mp4" width="100%" max-height="400%" src="/{{url}}"></video>-->
+            </div>
+     </div>
+    
+     <div class="col-sm-2 p-0 bg-dark mr-2 ">
+         {{!-- next --}}
+         <div class="col text-white">Next</div>
+         <div class="col playlist bg-primary "></div>
+           <!-- recommeded-->
+         <div class="col text-white">Recommeded</div>
+         <div class="col recent mt-1 bg-primary "></div>    
+    </div>
+    </div>
+</div>
+
+
+      

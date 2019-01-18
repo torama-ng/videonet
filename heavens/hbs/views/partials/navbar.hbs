@@ -1,0 +1,42 @@
+ <div class="container-fluid  bg-dark ">
+  <div class="row ">
+      <nav  class=" col navbar navbar-dark myh bg-dark py-2 navbar-expand-sm fixed-top">
+            <a href="#" class="navbar-brand text-uppercase" >&lt;/&gt;Torama </a>
+      
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarlinks"> <span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navbarlinks">
+          <ul class="navbar-nav ">
+            <li class="nav-item">    
+                  <a href="#"  class="nav-link active">Home</a>
+            </li>
+            <li  class="nav-item">    
+              <a href="#"  class="nav-link">Trending</a>
+            </li>
+            <li class="nav-item dropdown">    
+              <sa href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Category <span class="caret"></span></a>
+              <ul class="dropdown-menu bg-dark">
+                <li class="mx-2"><a href="/java">Java</a></li>
+                <li class="mx-2"><a href="/nodejs">Node js</a></li>
+                <li class="mx-2"><a href="/javascript">JavaScript</a></li>
+                <li class="mx-2"><a href="/python">Python</a></li>
+              </ul>
+            </li> 
+            
+             <form action="/search" method="get" class="form-inline mt-2 mt-md-0 ml-auto d-none d-lg-block d-xl-block">
+               <input name="searchInput" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" required>
+              <button class="btn btn-outline-warning my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+             </form>  
+       </div>
+     
+       {{#if register}}
+        <li class="nav-item">
+        <a href="/users/login" class="nav-link">Login</a>
+       </li>
+       {{else}}
+       <ul class="nav navbar-nav navbar-right">
+          <li class="mx-2"><a href="/users/register">Sign up</a> </li>
+       </ul> 
+       {{/if}}
+      </nav>    
+ </div>
+ </div>

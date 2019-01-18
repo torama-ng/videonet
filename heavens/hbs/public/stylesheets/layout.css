@@ -4,20 +4,20 @@
 }
 .carousel{
     min-height: 45vh;
-    border: 2px solid red;
+    border: 2px solid  rgb(253, 242, 242);
 }
 
 .newvideo{
     min-height: 25vh;
-    border: 2px solid red;
+    border: 2px solid  rgb(253, 242, 242);
 }
 .categoryvid{
     min-height: 40vh;
-    border: 2px solid red;
+    border: 2px solid  rgb(253, 242, 242);
 }
 
 .myhf{
-    border: 2px solid red;
+    border: 2px solid  rgb(253, 242, 242);
     min-height: 15vh;   
 }
 .myh{
@@ -27,11 +27,11 @@
 
 .playlist{
     min-height: 50vh;
-    border: 2px solid red;
+    border: 2px solid  rgb(253, 242, 242);
 }
 .recent{
     min-height: 50vh;
-    border: 2px solid red;
+    border: 2px solid  rgb(253, 242, 242);
 }
 .logo{
     height: 30px; width: 40px;
@@ -67,6 +67,28 @@
 }
 
 .playarea{
-    min-height: 70vh;
-    border: 2px solid red;
+    
+    /* height: 60%;
+    width: 75%; */
+    border: 2px solid rgb(253, 242, 242);
+}
+
+.vid:hover {
+	background-color: rgb(27, 27, 21);
+	color: #e21725;
+	border: 1px solid #e91e2f;
+	text-decoration: none;
+	transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-webkit-transition: all 0.3s ease-in-out;
+}
+
+p{
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

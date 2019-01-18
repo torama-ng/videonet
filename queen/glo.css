@@ -1,0 +1,185 @@
+body{
+    background-color:white;
+    border:1px solid black;
+} 
+
+
+
+.all{
+    padding-left: 9px;
+}
+
+.un{
+    margin-top: 0px;
+}
+
+  
+
+h1::after{
+    content: "The Unrivalled Big Boss of Data";
+    font-size: 14px;
+    display: block;
+}
+/* .bar{
+
+} */
+
+h3::before{
+   content: "";
+   color: #7fff00;
+   display: block;
+   background-color:#7fff00;
+   border:1px solid lightgreen;
+   z-index: 10;
+   width:100%;
+   height:20px;
+  /* margin-left: -5px; */
+   transform: rotate(-6deg);
+   /* clip-path: polygon(0 0, 100% 0, 100% calc(100% - 5vw),0 100%); */
+   }
+
+   h3{
+       text-align: end;
+       padding-right:9px;
+       /* margin-right:20px; */
+   }
+
+.also{
+    color:#228b22;
+    padding-top:20px;
+    font-size:20px;
+}
+
+
+
+/*LOGO*/
+.go{
+    background-color:green;
+    position:relative;
+    box-shadow:-5px 6px 9px rgba(0,0,0,.5);
+    width:40px;
+    height:40px;
+    border-radius:55%;
+    font-size:25px;
+    text-align: center;
+    padding-top:16px;
+    padding-left:5px;
+    margin-bottom:50px;
+    color:#fff;
+}
+
+.go::after{
+   content:"Unlimited";
+   font-size:16px;
+   padding-left:9px;
+   font-weight: 100;
+   color:black;
+
+}
+
+.date{
+    float:right;
+}
+
+/*CONTAINER FOR THREE RIBBONS*/
+
+.container{
+    float: right;
+    margin-top: -100px;
+    width:  350px;
+    height: 100px;
+    background: #fff;
+    box-shadow: 0 0 10px #fff;
+    position: relative;
+}
+
+.ribbon{
+    position: absolute;
+}
+.ribbon-1{
+    width: 50px;
+    height: 80px;
+    background: #7fff00;;
+    top: -2px;
+    right: 130px;
+    text-align:center;
+    padding-top:5px;
+
+   } 
+
+
+ .ribbon-1:after{
+       content: "";
+       position:absolute;
+       bottom: 0;
+       left: 0;
+       border-left: 25px solid transparent;
+       border-right: 25px solid transparent;
+       border-top: 25px solid transparent;
+       border-bottom: 25px solid #fff;
+   }
+    
+
+
+.ribbon-2{
+   width: 50px;
+   height: 80px;
+   background: darkgreen;
+   top: -2px;
+   right: 70px;
+   text-align:center;
+   padding-top:5px;
+   color:#fff;
+   
+}
+
+.ribbon-2:after{
+   content: "";
+   position:absolute;
+   bottom: 0;
+   left: 0;
+   border-left: 25px solid transparent;
+   border-right: 25px solid transparent;
+   border-top: 25px solid transparent;
+   border-bottom: 25px solid #fff;
+}
+
+
+
+.ribbon-3{
+   width: 50px;
+   height: 80px;
+   background: #7fff00;
+   top: -2px;
+   right: 10px;
+   text-align:center;
+   padding-top:5px;
+}
+
+.ribbon-3:after{
+   content: "";
+   position:absolute;
+   bottom: 0;
+   left: 0;
+   border-left: 25px solid transparent;
+   border-right: 25px solid transparent;
+   border-top: 25px solid transparent;
+   border-bottom: 25px solid #fff;
+}
+
+.but{
+   border-radius:50px;
+   float:right;
+   background-color:greenyellow;
+   margin-top:150px;
+   height:30px;
+   width:140px;
+   margin-right:2px;
+ }
+ 
+ 
+
+
+
+
+

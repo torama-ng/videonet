@@ -1,15 +1,10 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-// const expressSession = require('express-session');
+const flash = require('connect-flash');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var busboy = require('connect-busboy');
 var bodyParser = require('body-parser');
-var cors = require('cors');
 const expressSession = require('express-session');
-var fileUpload = require('express-fileupload');
-var formidable = require('formidable');
 var indexRouter = require('./routes/index');
 //var usersRouter = require('./routes/users');
 var videosRouter = require('./routes/videos');
@@ -26,15 +21,15 @@ var allVideos = require('./routes/randomVideos');
 var uploadFiles = require('./routes/uploadFiles');
 var userLogin  =  require('./routes/login');
 const expressValidator = require('express-validator');
-const ejsLint = require('ejs-lint');
-const mongoose = require('mongoose');
 const hbs = require('hbs');
-var exphbs = require('express-handlebars');
-let db = require('./models/db');
 let passport  = require('passport');
-const facebookStrategy = require('passport-facebook').Strategy;
-const auth = require('./models/auth');
 const user_reg = require('./models/user_reg');
+const profile = require('./models/profile');
+const cookieSession = require('cookie-session');
+const projectKeys  = require('./models/appKeys');
+const index_pro  = require('./routes/index_pro');
+const torplay = require('./routes/toyplay');
+const videoRoutes = require('./routes/videoroutes');
 
 
 
@@ -42,18 +37,6 @@ const user_reg = require('./models/user_reg');
 
 var app = express();
 
-
-// ensure authentication...
-
-function ensureAuthenticated(req, res, next){
-if( name){
-  return next();
-}else{
-  // should send login view
-  console.log('message :   you are not logged in ...');
-  res.redirect('/');
-}
-}
 
 
 // view engine setup
@@ -76,8 +59,19 @@ app.use(bodyParser({defer:true}));
 app.use(bodyParser.json());
 app.use(expressValidator());
 // express session at work
-app.use(expressSession({secret : 'ewetrurifndkedndnkwh', saveUninitialized : true, resave: true}));
+app.use(expressSession({secret : projectKeys.session.sessionKeys, saveUninitialized : true, resave: true}));
+app.use(flash());
 
+
+// Global Vars
+app.use(function (req, res, next) {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  res.locals.user = req.user || null;
+  res.locals.title = "</>Torama Videonet"
+  next();
+});
 
 
 app.use(express.json());
@@ -102,44 +96,60 @@ app.use(function(req, res, next){
 
 app.use('/', indexRouter);
 // app.use('/users', ensureAuthenticated,  usersRouter);
-app.use('/videos',  videosRouter);
-app.use('/odoo',   odooRouter);
-app.use('/python',  pythonRouter);
-app.use('/java',  javaRouter);
-app.use('/javascript',  javascriptRouter);
-app.use('/bash',  bashRouter);
-app.use('/html', htmlRouter);
-app.use('/nodejs',   nodejsRouter);
-app.use('/linux', linuxRouter,);
-app.use('/searchedVideos',  searchedVids);
-app.use('/randomVideos', allVideos);
-app.use('/uploadFiles', uploadFiles);
+app.use('/videos', ensureAuthenticated, videosRouter);
+app.use('/odoo', ensureAuthenticated,  odooRouter);
+app.use('/python', ensureAuthenticated, pythonRouter);
+app.use('/java',ensureAuthenticated,  javaRouter);
+app.use('/javascript',ensureAuthenticated,  javascriptRouter);
+app.use('/bash', ensureAuthenticated, bashRouter);
+app.use('/html', ensureAuthenticated, htmlRouter);
+app.use('/nodejs', ensureAuthenticated,  nodejsRouter);
+app.use('/linux', ensureAuthenticated, linuxRouter,);
+app.use('/searchedVideos',ensureAuthenticated,  searchedVids);
+app.use('/randomVideos',ensureAuthenticated, allVideos);
+app.use('/uploadFiles',ensureAuthenticated, uploadFiles);
 app.use('/login',   userLogin);
 app.use('/user_reg',  user_reg);
+app.use('/profile',ensureAuthenticated, profile );
+app.use('/index_pro',ensureAuthenticated,  index_pro);
 
-
+// Routes
+app.use('/api/videos',videoRoutes);
+app.use('/torplay',torplay);
 
 
 
 
 
 // render 404 error
-app.use('*', function(req, res) {
-   res.sendFile(path.join(__dirname + '/error.html'));
+// app.use('*', function(req, res) {
+//    res.sendFile(path.join(__dirname + '/error.html'));
 
-});
+// });
 
 // session
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session( { cookie: { maxAge: 60000 }}));
+// app.use(cookieSession({
+//   maxAge : 24 * 60 * 60 * 1000,
+//   keys : [projectKeys.session.sessionKeys]
+// }))
 
 // Handlebars helpers
 hbs.registerHelper('formatMe', function(txt) {
   txt = path.basename(txt,'.mp4');
   txt =  decodeURI(txt) ;
-  //return txt;
    return txt.substring(0, 45);
 
+});
+
+// Handlebars helpers
+hbs.registerHelper('if_eq', function(a, b, opts) {
+  if (a == b) {
+    return opts.fn(this);
+  } else {
+    return opts.inverse(this);
+  }
 });
 
 // catch 404 and forward to error handler
@@ -149,13 +159,23 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
   res.status(err.status || 500);
   res.render('error');
 });
+
+
+// ensure authentication...
+function ensureAuthenticated(req, res, next){
+  if( req.session.user){
+    return next();
+  }else{
+    console.log('message :   you are not logged in ...');
+    req.flash('you are not logged in');
+    res.redirect('/');
+  }
+  }
+  
 
 module.exports = app;

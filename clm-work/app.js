@@ -9,6 +9,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var user = require('./routes/user');
+var viewer = require('./routes/viewer');
+var auth = require('./routes/auth');
 var categories = require('./routes/categories');
 var randomvideos = require('./routes/randomvideos');
 var searchedvideos = require('./routes/searchedvideos');
@@ -34,9 +36,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'videos')));
 app.use(express.static(path.join(__dirname, 'profile_pics')));
 
+
+
 app.use('/', indexRouter);
 app.use('/categories',categories);
 app.use('/user',user);
+app.use('/viewer',viewer);
+app.use('/auth',auth);
 app.use('/randomvideos', randomvideos);
 app.use('/searchedvideos', searchedvideos);
 app.use('/uploadfiles', uploadfiles);
@@ -48,6 +54,29 @@ app.use('/videos', videos);
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+hbs.registerHelper('Get_Name', function(txt) {
+  var url = txt.split('/upload/');
+  var name = url[1];
+  return name;
+
+});
+
+hbs.registerHelper('formatMe', function(txt) {
+  txt = path.basename(txt,'.mp4');
+  txt =  decodeURI(txt) ;
+  return txt;
+  //return txt.substring(0, 45);
+
+});
+
+hbs.registerHelper('GetFirstName', function(txt) {
+  txt = txt.charAt(0);
+  return txt;
+  //return txt.substring(0, 45);
+
+});
+
 
 // error handler
 app.use(function(err, req, res, next) {

@@ -3,40 +3,17 @@ var fileUpload = require('express-fileupload');
 const router = express.Router();
 const fs = require('fs');
 const session = require('express-session');
-const mongoose = require('mongoose');
-
 
 router.use(session({ secret: "_ajjvnjjcbvhbhvLiveNow", resave: false, saveUninitialized: true }));
+
+
+// Load and call the user collections from the collections folder
+const userData = require('../collections/user');
 
 // Encryption 
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr('myTotalySecretKey');
 
-// DB constants 
-const url = "mongodb://localhost:27017/Toramadb";
-const _collectionname = "torama_users";
-
-//Connect to the database using mongoose
-mongoose.connect(url);
-var Schema = mongoose.Schema;
-
-//Defining a data representation
-var UserDataSchema = new Schema({
-    name: { type: String, required: true },
-    phone: { type: String, required: true },
-    email: { type: String, required: true },
-    password: { type: String, required: true },
-    image: { type: String, required: false },
-    playlist: { 
-        vid_name: String,
-        vid_duration: String,
-        vid_url: String,
-        vid_views: Number
-    }
-});
-
-// Creating a collection
-var userData = mongoose.model(_collectionname, UserDataSchema);
 
 // mkdir if not exits
 const mkdirSync = function (dirPath) {
@@ -110,6 +87,8 @@ router.get('/profile', (req, res, next) => {
             })
 
         }
+    } else {
+        res.redirect('/user/login');
     }
 })
 
@@ -135,37 +114,50 @@ router.post('/sign_up', (req, res, next) => {
     //Make the dir if not exists
     mkdirSync("profile_pics/user_images/");
 
-    var data = new userData(items);
-    data.save();
+    userData.find({ email: req.body.email }, (err, doc) => {
+        if(err) throw err;
+        if (doc) {
+            res.render("forgot_password",{
+                userData:items,
+                error:"User with this email already exists"
+            });
+        } else {
+            var data = new userData(items);
+            data.save();
 
-    var helper = require('sendgrid').mail;
-    var fromEmail = new helper.Email('info@torama.ng');
-    var toEmail = new helper.Email('ctonclem@gmail.com');
-    var subject = 'Sending with SendGrid is Fun';
-    var content = new helper.Content('text/plain', 'and easy to do anywhere, even with Node.js');
-    var mail = new helper.Mail(fromEmail, subject, toEmail, content);
-     
-    var sg = require('sendgrid')("tonclem");
-    var request = sg.emptyRequest({
-      method: 'POST',
-      path: '/v3/mail/send',
-      body: mail.toJSON()
-    });
-     
-    sg.API(request, function (error, response) {
-      if (error) {
-        console.log('Error response received');
-      }
-      console.log(response.statusCode);
-      console.log(response.body);
-      console.log(response.headers);
+            res.render('signedup_view', {
+                username: data.name,
+                password: password,
+                user: ""
+            })
+        }
     });
 
-    res.render('signedup_view', {
-        username: data.name,
-        password: password,
-        user: ""
-    })
+
+    // var helper = require('sendgrid').mail;
+    // var fromEmail = new helper.Email('info@torama.ng');
+    // var toEmail = new helper.Email('ctonclem@gmail.com');
+    // var subject = 'Sending with SendGrid is Fun';
+    // var content = new helper.Content('text/plain', 'and easy to do anywhere, even with Node.js');
+    // var mail = new helper.Mail(fromEmail, subject, toEmail, content);
+
+    // var sg = require('sendgrid')("tonclem");
+    // var request = sg.emptyRequest({
+    //     method: 'POST',
+    //     path: '/v3/mail/send',
+    //     body: mail.toJSON()
+    // });
+
+    // sg.API(request, function (error, response) {
+    //     if (error) {
+    //         console.log('Error response received');
+    //     }
+    //     console.log(response.statusCode);
+    //     console.log(response.body);
+    //     console.log(response.headers);
+    // });
+
+   
 });
 
 /*
@@ -226,31 +218,36 @@ The user can upload a profile image and change it at request
 router.post('/upload_image', (req, res, next) => {
     if (req.session.user) {
         if (req.files) {
-            var images = req.files.image, filename = images.name;
 
-            images.mv('profile_pics/user_images/' + filename, (err) => {
-                if (err) throw err;
-                userData.findOne({ email: req.session.user.email }, (error, doc) => {
-                    if (error) throw error;
+            if (req.files.image) {
+                var images = req.files.image, filename = images.name;
 
-                    doc.name = req.session.user.name;
-                    doc.email = req.session.user.email;
-                    doc.password = req.session.user.password;
-                    doc.phone = req.session.user.phone;
-                    doc.image = 'user_images/' + filename;
+                images.mv('profile_pics/user_images/' + filename, (err) => {
+                    if (err) throw err;
+                    userData.findOne({ email: req.session.user.email }, (error, doc) => {
+                        if (error) throw error;
 
-                    doc.save();
-                    req.session.user = doc;
-                    res.render('loggedin_view', {
-                        userData: doc,
-                        token: "token____urhfhdvhbhvbhbhbbmn",
-                        user: doc
-                    });
+                        doc.name = req.session.user.name;
+                        doc.email = req.session.user.email;
+                        doc.password = req.session.user.password;
+                        doc.phone = req.session.user.phone;
+                        doc.image = 'user_images/' + filename;
 
+                        doc.save();
+                        req.session.user = doc;
+                        res.render('loggedin_view', {
+                            userData: doc,
+                            token: "token____urhfhdvhbhvbhbhbbmn",
+                            user: doc
+                        });
+
+                    })
                 })
-            })
+            } else {
+                res.redirect('/user/profile');
+            }
         } else {
-            console.log('Not a file');
+            res.redirect('/user/login');
         }
     }
 });
@@ -265,12 +262,16 @@ router.get('/logout', (req, res, next) => {
             if (err) throw err;
         })
         res.redirect('/');
+    } else {
+        res.redirect('/user/login');
     }
 });
 
 // Render the user creating playlist view
 router.get('/create_playlist', (req, res, next) => {
-    res.render('create_playlist', {})
+    if (req.session.user) {
+        res.render('create_playlist', {})
+    } else { res.redirect('/user/login'); }
 });
 
 
@@ -286,22 +287,9 @@ router.post('/create_playlist', (req, res, next) => {
             var vid_views = 0;
             var vid_url = "/upload/" + filename;
 
-            // var items = {
-            //     name: req.session.user.name,
-            //     phone: req.session.user.phone,
-            //     email: req.session.user.email,
-            //     password: req.session.user.password,
-            //     image: req.session.user.image,
-            //     playlist: {
-            //         vid_name: vid_name,
-            //         vid_duration: vid_duration,
-            //         vid_url: vid_url,
-            //         vid_views: vid_views
-            //     }
-            // };
 
 
-            var playlist_items =  {
+            var playlist_items = {
                 vid_name: vid_name,
                 vid_duration: vid_duration,
                 vid_url: vid_url,
@@ -321,13 +309,13 @@ router.post('/create_playlist', (req, res, next) => {
                 },
 
                 function (err, user) {
-                    if(err) throw err;
+                    if (err) throw err;
                     console.log(user);
 
                     videofile.mv('videos/upload/' + filename, (error) => {
                         if (error) throw error;
-                       
-                        //console.log(doc);
+
+                        res.redirect('/user/user_playlist');
                     })
                 });
 
@@ -337,42 +325,51 @@ router.post('/create_playlist', (req, res, next) => {
         }
 
     } else {
-
+        res.redirect('/user/login');
     }
 
 });
 
-router.get('/user_playlist',(req,res,next)=>{
-    if(req.session.user){
-        userData.findOne({email:req.session.user.email},(err,doc)=>{
-            if(err) throw error;
+router.get('/user_playlist', (req, res, next) => {
+    if (req.session.user) {
+        userData.findOne({ email: req.session.user.email }, (err, doc) => {
+            if (err) throw error;
             //Check if user have added videos to playlist
             var playlist = doc.playlist;
-            if(playlist.length == 0){
+            if (playlist.length == 0) {
                 console.log('Nothing in playlist');
-            }else{
-               
-              
-                var first = [ { vid_name: 'Tyomich Ocean Cover',
-                vid_duration: '12:32',
-                vid_url:
-                 '/upload/Tyomich - Ocean (John Butler cover, rehearsal recording)(360p).MP4',
-                vid_views: 0 },
-              { vid_name: 'Ocean Tutorials',
-                vid_duration: '5:43',
-                vid_url: '/upload/John Butler- Ocean Tutorial Part 14(360p).MP4',
-                vid_views: 0 } ];
-                
-                console.log(playlist);
+            } else {
 
-                res.render('user_playlist',{
-                    list:first,
-                    user: req.session.user
-                })
+                var playlist = doc.playlist;
+                var list = [];
+
+                /* The doc variable is a outer list of a 
+                sublist so we have to loop through all the list
+                
+                vid_name, vid_url, vid_durations and vid_views are all arrays
+                */
+                if (playlist.vid_name) {
+                    for (var i = 0; i < playlist.vid_name.length; i++) {
+                        var items = {
+                            vid_name: playlist.vid_name[i],
+                            vid_url: playlist.vid_url[i],
+                            vid_duration: playlist.vid_duration[i],
+                            vid_views: playlist.vid_views[i]
+                        }
+                        list.push(items);
+                    }
+                    res.render('user_playlist', {
+                        list,
+                        user: req.session.user
+                    })
+                } else {
+                    res.redirect('/user/create_playlist');
+                }
+
             }
         });
-    }else{
-
+    } else {
+        res.redirect('/user/login');
     }
 });
 

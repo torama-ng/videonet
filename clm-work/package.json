@@ -12,6 +12,8 @@
     "express": "~4.16.0",
     "express-fileupload": "^1.1.1-alpha.1",
     "express-session": "^1.15.6",
+    "ffmpeg": "0.0.4",
+    "fluent-ffmpeg": "^2.1.2",
     "hbs": "^4.0.1",
     "http-errors": "~1.6.2",
     "joi": "^14.3.1",
@@ -19,6 +21,8 @@
     "mongodb": "^3.1.10",
     "mongoose": "^5.4.2",
     "morgan": "~1.9.0",
+    "passport": "^0.4.0",
+    "passport-facebook": "^2.1.1",
     "sendgrid": "^5.2.3"
   }
 }

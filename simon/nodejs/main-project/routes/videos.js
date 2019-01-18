@@ -10,7 +10,8 @@ walkSync = walk.walkSync('videos');
 router.get('/', function(req, res, next) {
   res.render('videos', { videoTitle: 'Video Files',
     videoFiles: walkSync,
-    videoDir: 'videos'
+    videoDir: 'videos',
+    name : ''
 
   });
 });
