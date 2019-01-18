@@ -1,36 +1,44 @@
-const hbs = require('handlebars');
+// const hbs = require('handlebars');
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var exphbs = require('express-handlebars');
+// var exphbs = require('express-handlebars');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const walk = require('./walk.js');
+const hbs = require('hbs');
+var mongoose = require('mongoose');
+var session = require('express-session');
+var passport = require('passport');
+var bodyParser = require('body-parser');
+mongoose.connect('mongodb://localhost:27017/toramaDb');
 
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var videosRouter = require('./routes/videos');
-var odooRouter = require('./routes/odoo');
-var pythonRouter = require('./routes/python');
-var javaRouter = require('./routes/java');
-var javascriptRouter = require('./routes/javascript');
-var bashRouter = require('./routes/bash');
-var htmlRouter = require('./routes/html');
-var linuxRouter = require('./routes/linux');
-var nodejsRouter = require('./routes/nodejs');
-var javascRouter = require('./routes/javasc');
+var menuRouter = require('./routes/menu');
+var userloggedinRouter = require('./routes/userloggedin');
+var userregRouter = require('./routes/userreg');
+var auth = require('./routes/auth')(passport);
+var creator = require('./routes/creator');
+
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
+//view engine set up
+app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'hbs');
-app.engine('hbs', exphbs({
-    extname: 'hbs',
-    layoutsDir: __dirname + '/views/',
-    defaultLayout: 'layout'
-}));
+
+hbs.registerPartials(__dirname + '/views/partials');
+
+// // view engine setup
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'hbs');
+// app.engine('hbs', exphbs({
+//     extname: 'hbs',
+//     layoutsDir: __dirname + '/views/',
+//     defaultLayout: 'layout'
+// }));
 
 
 
@@ -47,25 +55,28 @@ hbs.registerHelper('formatMe', function(txt) {
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+    extended: false
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'videos')));
+app.use(session({
+    secret: 'thesecret',
+    saveUninitialized: false,
+    resave: false
+}));
+app.use(bodyParser.json());
+app.use('/auth', auth)
 
 // Walk Dir
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/videos', videosRouter);
-app.use('/odoo', odooRouter);
-app.use('/python', pythonRouter);
-app.use('/java', javaRouter);
-app.use('/javascript', javascriptRouter);
-app.use('/bash', bashRouter);
-app.use('/html', htmlRouter);
-app.use('/nodejs', nodejsRouter);
-app.use('/linux', linuxRouter);
-app.use('videos/javascript', javascRouter);
+app.use('/menu', menuRouter);
+app.use('/userloggedin', userloggedinRouter);
+app.use('/userreg', userregRouter);
+app.use('/creator', creator);
 
 
 app.use('/', function(req, res) {

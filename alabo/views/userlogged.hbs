@@ -1,6 +1,7 @@
-
 {{>header}}
-{{>navbar}}
+{{>loggedin}}
+<title>{{pagetitle}}</title>
+
 
 <div class="banner-text">
     <h1> Welcome to TORAMA video Portal</h1>
@@ -15,21 +16,17 @@
     </div>
 </div>
 
-<div class="container-fluid bg-dark ">
-    <div class=" row justify-content-between">
-        <div class="col-sm-9 ml-0 pr-0 ">
-            <!--Video play-->
-
+<div class="container-fluid bg-white " >
+      <div class=" row justify-content-between">
+          <div class="col-sm-9 ml-0 pr-0 ">
+            <!--carousal-->
             <div class="col d-flex flex-column flex-sm-row  ">
-                <div id="vid-play" class="col carousel p-0 mr-1 mt-1 bg-warning text-white">
-                    <video width="100%" height="100vh" controls>
-
-                        <source src="/toramaengr.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <!--Carousal-->
-                <div class="col carousel p-0 mt-1 bg-warning text-white">
-                    <div id="car" class="carousel slide" data-ride='carousel'>
+                    <div class="col carousel p-0 mt-1 bg-warning text-white">
+                      <video src="/toramaengr.mp4" controls type="video/mp4" width="100%"  ></video>    
+                    </div>
+                    <div class="col carousel p-0 mt-1 bg-warning text-white">
+                        
+<div id="car" class="carousel slide" data-ride='carousel'>
                         <!--indicators-->
                         <ul class="carousel-indicators">
                             <li data-target="#car" data-slide-to='0' class="active"></li>
@@ -65,10 +62,9 @@
                         </a>
                     </div>
 
-                </div>
+                    </div>
             </div>
-
-
+            
             <!-- categoryvideos-->
             <div class="col text-white ">Java</div>
             <div class="col d-flex my-1 p-0 newvideo">
@@ -166,4 +162,5 @@
         </div>
     </div>
 </div>
+
 {{>footer}}

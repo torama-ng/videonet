@@ -24,7 +24,9 @@ function startTime() {
 }
 
 function checkTime(i) {
-    if (i < 10) { i = "0" + i }; // add zero in front of numbers < 10
+    if (i < 10) {
+        i = "0" + i
+    }; // add zero in front of numbers < 10
     return i;
 }
 
@@ -44,4 +46,23 @@ function closeNav() {
 
 
 
-// SEARCH MENU
+
+// User profile toggle
+
+let toggleStatus = true;
+
+function toggleUser() {
+    let userdp = document.getElementById("dp");
+
+    if (toggleStatus === true) {
+
+        userdp.style.height = "500px";
+
+        toggleStatus = false;
+    } else if (toggleStatus === false) {
+        userdp.style.height = "0";
+
+        toggleStatus = true;
+    }
+
+}

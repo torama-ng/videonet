@@ -1,180 +1,150 @@
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-}
-
-.banner-text {
-    text-align: center;
-    font-weight: 300;
-    color: #f90;
-    background: url(/images/nav.jpg)center/cover fixed no-repeat;
-}
-
-.txt-subtitle {
-    color: red;
-}
-
-.btn-search-img {
-    width: 25px;
-    height: 25px;
-    background: yellow;
-    margin-right: 20px;
-}
-
-.search {
-    width: 400px;
-    height: 25px;
-}
-
-.btn-sign {
-    width: 70px;
-    color: #fff;
-    margin-right: 10px;
-    margin-left: 5px;
-    background: #090;
-    border: 1px solid #000;
-    border-radius: 8px;
-    transition: all 0.5s ease-in-out;
-}
-
-.btn-login {
-    width: 60px;
-    color: red;
-    margin-right: 10px;
-    margin-left: 5px;
-    background: #000;
-    border: 1px solid red;
-    border-radius: 8px;
-    transition: all 0.5s ease-in-out;
-}
-
-.btn-login:hover {
-    transform: scale(1.1);
-}
-
-.btn-sign:hover {
-    transform: scale(1.1);
-}
-
-.login-fields {
-    height: 25px;
-    margin-right: 5px;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-}
-
-.banner-text h2 {
-    margin-top: -30px;
-}
-
-.video-title {
-    text-align: center;
-    background: rgba(0, 0, 0 0.7);
-}
-
-.carousel-inner {
-    height: 300px;
-    border: 1px solid #fff;
-}
-
-.ca {
-    height: 43px;
-}
-
-.mycol {
-    border: 2px solid gold;
-    min-height: vh;
-}
-
-.carousel {
-    min-height: 45vh;
-    border: 2px solid;
-}
-
-.newvideo {
-    min-height: 25vh;
-    border: 2px;
-}
-
-.categoryvid {
-    min-height: 40vh;
-    border: 2px;
-}
-
-.myhf {
-    border: 2px solid red;
-    min-height: 15vh;
-}
-
-.myh {
-    border: 2px solid grey;
-    min-height: 10vh;
-}
-
-.playlist {
-    min-height: 50vh;
-    border: 2px solid;
-}
-
-.recent {
-    min-height: 50vh;
-    border: 2px solid;
-}
-
-.logo {
-    height: 30px;
-    width: 40px;
-}
-
-.margin {
-    margin-top: 90px;
-}
-
-.title-area {
-    color: black;
-    font-size: 10px;
-    padding: 0px;
-}
-
-.video-col {
-    background: yellow;
-    border-radius: 1px;
-    width: 220px;
-    height: 200px;
-    padding: 0px;
-    margin: 1px;
-}
-
-.active {
-    background-color: rgb(252, 236, 8);
-    color: white;
-}
-
-.video-view {
-    background: yellow;
-    border-radius: 2px;
-    width: 280px;
-    height: 200px;
-    padding: 0px;
-    margin: 1px;
-}
-
-@media only screen and (max-width:576px) {
-    .login-fields {
-        display: none;
-    }
-    .search {
-        display: inline;
-    }
-    .btn-search-img {
-        position: fixed;
-        left: 315px;
-        top: 65px;
-    }
-}
+                                            * {
+                                                box-sizing: border-box;
+                                            }
+                                            
+                                            .banner-text {
+                                                text-align: center;
+                                                font-weight: 300;
+                                                color: #f90;
+                                                background: url(/images/nav.jpg)center/cover fixed no-repeat;
+                                            }
+                                            
+                                            .txt-subtitle {
+                                                color: red;
+                                            }
+                                            
+                                            .banner-text h2 {
+                                                margin-top: -30px;
+                                            }
+                                            
+                                            .video-title {
+                                                text-align: center;
+                                                background: rgba(0, 0, 0 0.7);
+                                            }
+                                            
+                                            .carousel {
+                                                min-height: 45vh;
+                                                border: 2px solid rgb(253, 242, 242);
+                                                ;
+                                            }
+                                            
+                                            .carousel-inner {
+                                                border: 1px solid #fff;
+                                            }
+                                            
+                                            .mycol {
+                                                border: 2px solid red;
+                                                min-height: vh;
+                                            }
+                                            
+                                            .newvideo {
+                                                min-height: 25vh;
+                                                border: 2px;
+                                            }
+                                            
+                                            .categoryvid {
+                                                min-height: 40vh;
+                                                border: 1px;
+                                            }
+                                            
+                                            .myhf {
+                                                border: 2px solid red;
+                                                min-height: 15vh;
+                                            }
+                                            
+                                            .myh {
+                                                border: 2px solid grey;
+                                                min-height: 10vh;
+                                            }
+                                            
+                                            .playlist {
+                                                min-height: 50vh;
+                                                border: 2px solid;
+                                            }
+                                            
+                                            .recent {
+                                                min-height: 50vh;
+                                                border: 1px solid;
+                                            }
+                                            
+                                            .margin {
+                                                margin-top: 90px;
+                                            }
+                                            
+                                            .title-area {
+                                                color: black;
+                                                font-size: 10px;
+                                                padding: 0px;
+                                            }
+                                            
+                                            .video-col {
+                                                background: rgba(0, 0, 0, 0.5);
+                                                border-radius: 1px;
+                                                -webkit-border-radius: 1px;
+                                                -moz-border-radius: 1px;
+                                                -ms-border-radius: 1px;
+                                                -o-border-radius: 1px;
+                                            }
+                                            
+                                            .active {
+                                                background-color: rgb(252, 236, 8);
+                                                color: white;
+                                            }
+                                            
+                                            .video-view {
+                                                background: yellow;
+                                                border-radius: 2px;
+                                                -webkit-border-radius: 2px;
+                                                -moz-border-radius: 2px;
+                                                -ms-border-radius: 2px;
+                                                -o-border-radius: 2px;
+                                            }
+                                            /*User profile icon and page style */
+                                            /*Form  style on user registration page*/
+                                            
+                                            .signup-form {
+                                                width: 100%;
+                                                height: 80%;
+                                                display: flex;
+                                                flex-wrap: wrap;
+                                                flex-direction: column;
+                                                justify-content: center;
+                                                align-items: center;
+                                                background: url(/images/car.jpeg)center/cover fixed no-repeat;
+                                            }
+                                            
+                                            .form-reg {
+                                                width: 400px;
+                                                background: rgba(0, 0, 0, 0.6);
+                                                margin-top: -90px;
+                                            }
+                                            
+                                            .form-control {
+                                                padding: 5px;
+                                                margin-top: 5px;
+                                            }
+                                            /* User registration style ends */
+                                            /*Footer style from partials*/
+                                            
+                                            .footer-container {
+                                                background: #000;
+                                                text-align: center;
+                                            }
+                                            
+                                            .footer-container p {
+                                                color: aliceblue
+                                            }
+                                            
+                                            .bottom-footer {
+                                                width: 100%;
+                                                display: flex;
+                                                flex-wrap: wrap;
+                                                justify-content: space-around;
+                                                align-items: center;
+                                                opacity: 0.9;
+                                            }
+                                            
+                                            .footer-headtxt {
+                                                color: white;
+                                                font-size: 20px;
+                                            }

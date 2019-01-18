@@ -1,0 +1,67 @@
+
+    <nav id="main-navbar">
+        <div class="toggle-logo">
+            <div id="mySidebar" class="sidebar">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+                <a class="nav-link" href="/menu/bash">Bash Programming</a>
+                <a class="nav-link" href="/menu/html">HTML</a>
+                <a class="nav-link" href="/menu/linux">Linux</a>
+                <a class="nav-link" href="/menu/javascript">javascript</a>
+                <a class="nav-link" href="/menu/nodejs">Nodejs</a>
+                <a class="nav-link" href="/menu/odoo">Odoo</a>
+                <a class="nav-link" href="/menu/python">Python</a>
+                <a class="nav-link" href="/menu/java">Java</a>
+            </div>
+
+
+            <button class="openbtn" onclick="openNav()">☰ </button>
+
+
+            <!-- Brand/logo -->
+            <a class="navbar-brand" href="/">
+                <img class="torlogo" src="/images/torlogo.png" alt="logo">
+            </a>
+
+        </div>
+
+
+        <div class="btn-search-container">
+            <input class="search-field" type="text"><button class="btn-search"><i class="btn-i fa fa-search"></i></button>
+        </div>
+        <img src=" img/search-icon.png" class="fa-search">
+
+        <!--User profile Section-->
+        <div class="login-container">
+            <div id="user-profile">
+                <img onclick="toggleUser()" src="/images/aa.gif" class="userdp" alt="user profile">
+                <p class="username">Alabosoft</p><br>
+
+                <!--User profile drop down section-->
+                <div class="userprofile-menu" id="dp">
+
+                    
+                        <div class="details">
+                            <p class="welcometext">Welcome Back...alabosofft</p>
+                            <h5 class="details-head">The folllowing are your details </h5><br>
+                            <p class="user-details">Name: ...............</p>
+                            <p class="user-details">E-mail: ...............</p>
+                            <p class="user-details">Phone: ...............</p>
+                        </div>
+
+                        <div class="profile-area dp-pic">
+                            <h5>You can change your profile picture below</h5><br>
+                            <input type="file" name="userdp">
+                            <button>Upload profile pic</button>
+                        </div>
+
+                        <div class="profile-area dp-links">
+                            <a href="#">Cha</a>
+                            <a href="#">My playlist</a>
+                            <a href="#">Create playlist</a>
+                            <a href="#">Log Out</a>
+                        </div>
+
+
+                </div>
+            </div>
+    </nav>

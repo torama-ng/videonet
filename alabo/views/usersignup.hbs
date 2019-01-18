@@ -1,0 +1,23 @@
+{{>header}}
+{{>navbar}}
+<div class="signup-form">
+    <div class="form-reg">
+    <h3 class="form-control">Register here</h3><br>
+    <form  action="/auth/usersignup" method="post">
+
+ <input type="text"  class="form-control"  name="username" placeholder="Username"> 
+ <input type="text"  class="form-control"  name="fullname" placeholder="FullName">    
+ <input type="email" class="form-control"  name="email" placeholder="john@domain.com">
+ <input type="text"  class=" form-control" name="password" placeholder="Password">
+ <input type="text"  class="form-control"  name="repassword" placeholder="Repeat password">
+ <input type="button" class="form-control btn btn-primary" value="Sign up">
+
+    </form>
+
+<i class="fa fa-facebook-f" style="font-size:35px; color:blue"></i>
+<i class="fa fa-twitter" style="font-size:35px; color:cadetblue;"></i>
+
+</div>
+</div>
+
+{{>footer}}

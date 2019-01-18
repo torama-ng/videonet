@@ -14,4 +14,14 @@ router.get('/', function(req, res, next) {
     });
 });
 
+router.get('/', function(req, res, next) {
+    res.render('index')
+});
+
+router.get('/usersignup', function(req, res, next) {
+    res.render('usersignup')
+
+});
+
+
 module.exports = router;
