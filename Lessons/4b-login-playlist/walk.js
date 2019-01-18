@@ -13,6 +13,7 @@ const mkdirSync = function (dirPath) {
 }
 mkdirSync('./videos');
 mkdirSync('./videos/upload');
+
 var walkSync = function (dir, filelist) {
   filelist = [];
   const fullPath = path.join(__dirname, 'videos',dir);

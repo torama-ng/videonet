@@ -3,8 +3,10 @@ var router = express.Router();
 const fs = require("fs");
 const path = require("path");
 
-const videosPath = path.join(__dirname, '../videos');
+const walk = require('../walk.js');
 
+//mkdirSync('./videos');
+const videosPath = path.join(__dirname, '../videos');
 
 // Function to list folders in videos dir
 var folders = fs.readdirSync(videosPath);
@@ -14,6 +16,7 @@ var folders = fs.readdirSync(videosPath);
 // for each category, get all the mp4 files
 catObj = [];  //store all folders and their mp4files
 let mtime = 0;
+
 folders.forEach(function (folder,index){
 	fpath = path.join(__dirname, '../videos',folder);
 	
@@ -34,8 +37,7 @@ router.get('/', ensureAuthenticated, function(req, res){
 	  res.render('index', { 
 		videoTitle: 'Dashboard',
 		videoGroup: catObj,
-		videoDir: 'Dashboard',
-		
+		videoDir: 'Dashboard',		
 	
 	  });
 });
@@ -47,6 +49,6 @@ function ensureAuthenticated(req, res, next){
 		//req.flash('error_msg','You are not logged in');
 		res.redirect('/users/login');
 	}
-}
+};
 
 module.exports = router;

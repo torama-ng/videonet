@@ -50,6 +50,7 @@
     </div>
 
     {{#each allList}}
+    <div class="vids" onclick="playcVideo('{{this}}')">
     <video style="max-height:100%;max-width:100%;" src="/{{vid_url}}" type="video/mp4" controls="" alt="{{vid_name}}">
     </video>
     <h5 style="max-width:80%;color:black;font-size:15px"> {{formatMe vid_name}}</h5>
@@ -57,7 +58,7 @@
     <a style="max-width:60%;font-size:17px;border:green solid 1px; padding:5px; color:green; border-radius:0.6rem;margin-bottom:5px;"
       href="/viewer/view/{{vid_url}}/{{_id}}">View
       Video</a>
-
+</div>
     {{/each}}
 
   </div>

@@ -39,3 +39,5 @@ New Features added
 6. User can now add comments to a particular video.
 7. Facebook login is included user can now login with facebook.
 8. Viewer collections is added to check if a user had already viewed the video previously.
+9. Video thumbnails can be dynamically gotten from a video using the built in module called "child_process" and ffmpeg
+   NOTE -You need a ffmpeg installed on your system

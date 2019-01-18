@@ -1,7 +1,10 @@
 const fs = require('fs');
 //var ffmpeg = require('fluent-ffmpeg');
-var ffmpeg = require('ffmpeg');
 var path = require('path');
+
+
+
+
 
 //app.use(express.static(path.join(__dirname, 'ffmpeg')));
 
@@ -27,31 +30,23 @@ var findVideos = function (dir, fileList) {
                     fileList.push({ url: encodeURI(fileElements + '/' + video), name: fileElements });
                     //  }
 
-                    console.log("File -- " + fileElements + '/' + video)
+                    //console.log("File -- " + fileElements + '/' + video)
                     //Get all Videos and store their thumbnails in a folder
 
-                
-                    //  new ffmpeg("/"+fileElements + "/" + video)
-                    //     .takeScreenshots({
-                    //         count: 1,
-                    //         timemarks: ['600'] // number of seconds
-                    //     }, `/thumbnails/${video}`, function (err) {
-                    //         console.log('screenshots were saved')
-                    //     });
+                    //var path = require('path'), // Default node module
 
-                    // ffmpeg(`/${fileElements}/${video}`)
-                    //     .on('end', function () {
-                    //         console.log('Screenshots taken');
-                    //     })
-                    //     .on('error', function (err) {
-                    //         console.error(err);
-                    //     })
-                    //     .screenshots({
-                    //         // Will take screenshots at 20%, 40%, 60% and 80% of the video
-                    //         count: 4,
-                    //         folder: `/thumbnails/${video}`
-                    //     });
+                    splitpath = video.split(".");
+                    snapshot = splitpath[0];
+                    
+                    pathToFile = path.join(__dirname, "videos", fileElements, video);
+                    pathToSnapshot = path.join(__dirname, "thumbnails", `${snapshot}.jpg`);
+                    
+                    // Also a default node module
+                    require('child_process').exec(('ffmpeg -ss 00:00:25 -i ' + pathToFile + ' -vframes 1 -q:v 2 ' + pathToSnapshot), function () {
+                        console.log('Saved the thumb to:', pathToSnapshot);
 
+                    });
+                   
                 });
 
             });
@@ -64,5 +59,13 @@ var findVideos = function (dir, fileList) {
     return fileList;
 
 };
+
+function formatTxt(txt) {
+    txt = path.basename(txt, '.mp4');
+    txt = decodeURI(txt);
+    return txt;
+    //return txt.substring(0, 45);
+
+}
 
 module.exports = { findVideos };

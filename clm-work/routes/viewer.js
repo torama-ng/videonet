@@ -30,25 +30,25 @@ router.get('/view/:folder/:name/:_id', (req, res, next) => {
                     //User has already viewed this video before, so do nothing.
                     console.log(Viewed);
 
+                    
                     // Find the video and get the vid_views 
                     videoData.findOne({ _id: _id }, (errFind, doc) => {
                         if (errFind) throw errFind;
 
                         // Find Similar videos and limit 6
-                        videoData.find({}, (findErr, doc2) => {
+                        videoData.find({}).limit(6).exec(function(findErr, doc2) {
                             if (findErr) throw findErr;
                             // console.log("DOX -- "+doc2[0].vid_url);
 
                             // Loop through all the videos
                             allList = [];
-                            for (var j = 0; j < 6; j++) {
+                            for (var j = 0; j <doc2.length; j++) {
 
                                 var vids = {
                                     _id: doc2[j]._id,
                                     vid_url: doc2[j].vid_url,
                                     vid_name: doc2[j].vid_name,
                                     vid_views: doc2[j].vid_views
-
                                 }
                                 allList.push(vids);
                             }
@@ -90,7 +90,7 @@ router.get('/view/:folder/:name/:_id', (req, res, next) => {
 
                         })
 
-                    }).limit(6);
+                    });
                 } else {
 
                     //Add viewer to viewer database
@@ -105,13 +105,13 @@ router.get('/view/:folder/:name/:_id', (req, res, next) => {
                         if (errFind) throw errFind;
 
                         // Find Similar videos and limit 6
-                        videoData.find({}, (findErr, doc2) => {
+                        videoData.find({}).limit(6).exec(function(findErr,doc2){
                             if (findErr) throw findErr;
                             // console.log("DOX -- "+doc2[0].vid_url);
 
                             // Loop through all the videos
                             allList = [];
-                            for (var j = 0; j < 6; j++) {
+                            for (var j = 0; j < doc2.length; j++) {
 
                                 var vids = {
                                     _id: doc2[j]._id,
@@ -173,7 +173,7 @@ router.get('/view/:folder/:name/:_id', (req, res, next) => {
                                 });
                         })
 
-                    }).limit(6);
+                    });
 
                 }
             });
