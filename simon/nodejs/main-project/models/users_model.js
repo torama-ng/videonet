@@ -12,7 +12,14 @@ let userSchema = new mongoose.Schema({
     },
     password : {
         type : String
-    }
+    },
+    image : {
+        type : String , required : false ,
+    },
+    date: {
+        type: Date,
+        default: Date.now
+      }
 });
 
  let user = mongoose.model('user_details', userSchema);

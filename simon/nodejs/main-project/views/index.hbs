@@ -3,16 +3,47 @@
 {{> navbar}}
 
 
+ 
 
-    <h1 style="color:darkgreen;font-family: Verdana;font-size: 22px;"> Welcome to Torama Innovation Hub</h1>
-    
-<p style="color:black;font-family: Verdana;font-size: 19px;">  About Us </p>  <br />
+    <div class="row container-fluid">
+        <div class="col w70">
+            Play Area
+        </div>
+        <div class="col w30">
+            Select area
+        </div>
+    </div>
+    <h4>Available Course Video Categories</h4>
+    <div class="row container-fluid  " >    
+      
+        <!-- Place all category items in a Card-->
+        <!-- Category Photo and name and number of items in category-->
+        {{#each videoGroup}}
 
-<div><p style="color:black;font-family: Verdana;font-size: 14px;">  The innovation rules here, we are the world leading software development company. Changing and touching lives in Africa and the world. </p>  <br /></div>
-    <div><p style="color:black;font-family: Verdana;font-size: 14px;">  Click on the menu and get started now. </p>  <br /></div>
+            <div class="card icard bg-light ml-1 px-1 mb-1   ">
+                <a class="card-link" href="/torplay/{{this.category}}">
+                    <img class="card-img" src="/images/thumbnails/{{this.category}}.jpg" alt="Card image">
+                 
+                    <div class="card_text">
+                        <h5 class="card_title">{{this.category}}</h5>
+                        <small class="card_text  text-truncate">Last updated: 
+                            <span class="text-muted">{{this.mtime}} days ago </span></small>
+                    </div>      
+                    {{#if_eq this.files.length 1}}
+                        <small class="card-text nvd text-muted ">{{this.files.length}} Video</small>
+                  
+                        <small class="card-text nvd text-muted">{{this.files.length}} Videos</small>
+                    {{/if_eq}}
+                </a> 
+                      
+            </div>
+
+            {{/each}}
+      
+    </div>
+        
 
 
-</main>  
 
 
 {{> footer}}

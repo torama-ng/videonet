@@ -3,7 +3,7 @@ var model = require('./users_model');
 
 console.log("Model - "+model);
 
-mongoose.connect('mongodb://localhost:27017/simon_data', { useNewUrlParser : true}, function(err){
+mongoose.connect('mongodb://localhost:27017/simon_data', function(err){
     if (!err){
         console.log(' database  connection sucessful');
     }else{

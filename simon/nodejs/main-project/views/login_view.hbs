@@ -2,10 +2,18 @@
 {{>header}}
 
 
-
    
 
-<h1 style="color:blue; text-align: center; text-emphasis: shadow 3px;">TORAMA VIDEOS PORTAL</h1>
+<h1 style="color:rgb(115, 121, 156); text-align: center; text-emphasis: shadow 3px;">TORAMA VIDEOS PORTAL</h1>
+
+{{#if info }} 
+	<h3 style="color:rgb(9, 212, 87); text-align: center; text-emphasis: shadow 3px;">{{info}} </h3>
+
+  
+{{/if}}
+{{#if user_error }} 
+	<h3 style="color:rgb(231, 26, 26); text-align: center; text-emphasis: shadow 3px;">{{user_error}} </h3> 
+{{/if}}
 
 
 
@@ -15,7 +23,7 @@
 		<form action="" method="POST" >
 			<h1>Login </h1>
 			<div>
-				<input type="text" placeholder="Email" required="" id="username" name="user_email" />
+				<input type="text" placeholder="Email" required="" id="email" name="user_email" />
 			</div>
 			<div>
 				<input type="password" placeholder="Password" required="" id="password" name="user_password" />
@@ -42,6 +50,37 @@
 		</div><!-- button -->
 	</section><!-- content -->
 </div><!-- container -->
+
+
+
+ <div class="row container-fluid  " >    
+      
+        <!-- Place all category items in a Card-->
+        <!-- Category Photo and name and number of items in category-->
+        {{#each videoGroup}}
+
+            <div class="card icard bg-light ml-1 px-1 mb-1   ">
+                <a class="card-link" href="/torplay/{{this.category}}">
+                    <img class="card-img" src="/images/thumbnails/{{this.category}}.jpg" alt="Card image">
+                 
+                    <div class="card_text">
+                        <h5 class="card_title">{{this.category}}</h5>
+                        <small class="card_text  text-truncate">Last updated: 
+                            <span class="text-muted">{{this.mtime}} days ago </span></small>
+                    </div>      
+                    {{#if_eq this.files.length 1}}
+                        <small class="card-text nvd text-muted ">{{this.files.length}} Video</small>
+                    {{else}}
+                        <small class="card-text nvd text-muted">{{this.files.length}} Videos</small>
+                    {{/if_eq}}
+                </a> 
+                      
+            </div>
+        {{/each}}
+    </div>
+
+
+
 
 {{> footer}}
 

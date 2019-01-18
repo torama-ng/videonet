@@ -30,9 +30,10 @@ router.get('/:username' , function(req, res){
   
     var name = req.params.username;
     res.render('profile',{username :name});
-})
+});
+
+router.get('/', function(req, res){
+    res.render('profile');
+});
 
 module.exports = router;
-
-
-
